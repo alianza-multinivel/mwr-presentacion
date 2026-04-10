@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MWR Life × Travel Advantage — Tu Vida, Tu Viaje</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   DESIGN TOKENS — PRO TRAVEL EDITION
+   ═══════════════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:       #060B24;
+  --navy-2:     #0C1340;
+  --purple:     #2D1B8E;
+  --purple-2:   #4834D4;
+  --blue:       #1E5BFF;
+  --blue-2:     #5B86E5;
+  --cyan:       #00C6FF;
+  --gold:       #F5A623;
+  --gold-2:     #FFD700;
+  --amber:      #FF9F1C;
+  --white:      #FFFFFF;
+  --white-90:   rgba(255,255,255,.9);
+  --white-70:   rgba(255,255,255,.7);
+  --white-50:   rgba(255,255,255,.5);
+  --white-20:   rgba(255,255,255,.2);
+  --white-10:   rgba(255,255,255,.1);
+  --white-05:   rgba(255,255,255,.05);
+  --grad-hero:  linear-gradient(135deg, #0a0e27 0%, #1a1060 40%, #2d1b8e 70%, #4834d4 100%);
+  --grad-blue:  linear-gradient(135deg, #0a0e27 0%, #0C1340 50%, #1E5BFF 100%);
+  --grad-gold:  linear-gradient(135deg, #F5A623 0%, #FFD700 50%, #FF9F1C 100%);
+  --grad-dark:  linear-gradient(180deg, rgba(6,11,36,.95) 0%, rgba(6,11,36,.6) 50%, rgba(6,11,36,.95) 100%);
+  --grad-bottom:linear-gradient(0deg, rgba(6,11,36,.97) 0%, transparent 100%);
+  --sh-glow:    0 0 60px rgba(30,91,255,.3), 0 0 120px rgba(75,52,212,.15);
+  --sh-gold:    0 0 40px rgba(245,166,35,.4), 0 0 80px rgba(245,166,35,.15);
+  --sh-card:    0 20px 60px -15px rgba(0,0,0,.5);
+  --sh-btn:     0 8px 30px rgba(30,91,255,.35);
+  --glass:      rgba(255,255,255,.08);
+  --glass-2:    rgba(255,255,255,.12);
+  --glass-border: rgba(255,255,255,.15);
+  --radius:     16px;
+  --radius-lg:  24px;
+  --radius-xl:  32px;
+}
+
+html, body {
+  width: 100%; height: 100%; overflow: hidden;
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'Inter', -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   DECK & SLIDES
+   ═══════════════════════════════════════════════════════════════════════ */
+.deck { position: relative; width: 100vw; height: 100vh; z-index: 1; }
+.slide {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity .9s cubic-bezier(.22,1,.36,1),
+              transform .9s cubic-bezier(.22,1,.36,1);
+  pointer-events: none;
+  overflow: hidden;
+}
+.slide.active {
+  opacity: 1; transform: scale(1);
+  pointer-events: auto;
+}
+.slide.exiting {
+  opacity: 0; transform: scale(.98);
+}
+
+/* Full-bleed background photos */
+.slide-bg {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+.slide-bg::after {
+  content: "";
+  position: absolute; inset: 0;
+}
+.slide-overlay {
+  position: absolute; inset: 0;
+  z-index: 1;
+}
+.slide > .content { position: relative; z-index: 2; width: 100%; max-width: 1400px; }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   NAV
+   ═══════════════════════════════════════════════════════════════════════ */
+.nav {
+  position: fixed;
+  bottom: 32px; right: 36px;
+  display: flex; gap: 12px;
+  z-index: 100;
+}
+.nav button {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  border: 2px solid var(--white-20);
+  background: rgba(6,11,36,.7);
+  backdrop-filter: blur(20px);
+  color: var(--white);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .4s cubic-bezier(.22,1,.36,1);
+  font-family: 'Inter', sans-serif;
+}
+.nav button:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+  transform: translateY(-3px);
+  box-shadow: var(--sh-btn);
+}
+
+.counter {
+  position: fixed;
+  bottom: 44px; right: 160px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  z-index: 100;
+  color: var(--white-50);
+  font-weight: 600;
+}
+.counter b {
+  color: var(--gold);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--blue), var(--purple-2), var(--gold));
+  background-size: 200% 100%;
+  z-index: 100;
+  transition: width .8s cubic-bezier(.22,1,.36,1);
+  animation: shift 4s linear infinite;
+}
+@keyframes shift { 0%{background-position:0% 50%;} 100%{background-position:200% 50%;} }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════════════════════════════════ */
+.eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  letter-spacing: 5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.eyebrow::before {
+  content: "";
+  width: 40px; height: 2px;
+  background: var(--gold);
+}
+
+.h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(42px, 5.8vw, 88px);
+  font-weight: 900;
+  line-height: .95;
+  letter-spacing: -.03em;
+  text-transform: uppercase;
+}
+.h1 em {
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  color: var(--gold);
+}
+.h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(30px, 3.5vw, 52px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+}
+.h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(22px, 2vw, 32px);
+  font-weight: 700;
+  line-height: 1.15;
+}
+.lead {
+  font-size: clamp(15px, 1.1vw, 18px);
+  color: var(--white-70);
+  font-weight: 400;
+  line-height: 1.75;
+  max-width: 640px;
+}
+.gold { color: var(--gold); }
+.cyan { color: var(--cyan); }
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
+.slide.active .reveal { opacity: 1; transform: translateY(0); }
+.slide.active .reveal.d1 { transition-delay: .15s; }
+.slide.active .reveal.d2 { transition-delay: .3s; }
+.slide.active .reveal.d3 { transition-delay: .45s; }
+.slide.active .reveal.d4 { transition-delay: .6s; }
+.slide.active .reveal.d5 { transition-delay: .75s; }
+.slide.active .reveal.d6 { transition-delay: .9s; }
+.slide.active .reveal.d7 { transition-delay: 1.05s; }
+.slide.active .reveal.d8 { transition-delay: 1.2s; }
+
+/* Glass card */
+.glass-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  padding: 36px;
+}
+.glass-card:hover {
+  background: var(--glass-2);
+  border-color: rgba(255,255,255,.25);
+}
+
+/* Photo card */
+.photo-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--sh-card);
+}
+.photo-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.photo-card .overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(6,11,36,.8) 0%, transparent 60%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+}
+
+/* Gold badge */
+.badge-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--grad-gold);
+  color: var(--navy);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  padding: 8px 18px;
+  border-radius: 50px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDE 1 — HERO OPENING
+   ═══════════════════════════════════════════════════════════════════════ */
+#s1 .slide-bg {
+  background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80&auto=format&fit=crop');
+}
+#s1 .slide-bg::after {
+  background: linear-gradient(135deg, rgba(6,11,36,.85) 0%, rgba(45,27,142,.7) 50%, rgba(30,91,255,.5) 100%);
+}
+#s1 .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 40px;
+  gap: 28px;
+}
+#s1 .hero-question {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(38px, 5vw, 80px);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow: 0 4px 30px rgba(0,0,0,.5);
+}
+#s1 .hero-question .accent {
+  display: block;
+  background: linear-gradient(90deg, var(--gold), var(--amber));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#s1 .hero-sub {
+  font-size: clamp(16px, 1.3vw, 22px);
+  color: var(--white-70);
+  font-weight: 300;
+  letter-spacing: .5px;
+  max-width: 600px;
+}
+#s1 .scroll-hint {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--white-50);
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 600;
+  animation: float 2.5s ease-in-out infinite;
+}
+@keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDE 2 — IMPACT STATS
+   ═══════════════════════════════════════════════════════════════════════ */
+#s2 { background: var(--grad-hero); }
+#s2 .content {
+  padding: 0 60px;
+}
+#s2 .top-section {
+  text-align: center;
+  margin-bottom: 50px;
+}
+#s2 .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.stat-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  height: 320px;
+  transition: transform .5s cubic-bezier(.22,1,.36,1);
+}
+.stat-card:hover { transform: translateY(-8px); }
+.stat-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.stat-card .card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(6,11,36,.9) 0%, rgba(6,11,36,.3) 50%, rgba(6,11,36,.1) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 28px;
+}
+.stat-card .stat-number {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+}
+.stat-card .stat-label {
+  font-size: 14px;
+  color: var(--white-70);
+  margin-top: 6px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.stat-card .stat-icon {
+  position: absolute;
+  top: 20px; right: 20px;
+  width: 44px; height: 44px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(12px);
+  color: var(--gold);
+  font-size: 22px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDE 3 — WHAT IF
+   ═══════════════════════════════════════════════════════════════════════ */
+#s3 .slide-bg {
+  background-image: url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1920&q=80&auto=format&fit=crop');
+}
+#s3 .slide-bg::after {
+  background: linear-gradient(135deg, rgba(6,11,36,.88) 0%, rgba(45,27,142,.75) 60%, rgba(6,11,36,.85) 100%);
+}
+#s3 .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 40px;
+  gap: 32px;
+}
+#s3 .big-question {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(36px, 4.5vw, 72px);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+}
+#s3 .gold-circle {
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #FFE58A, #F5A623 50%, #A17A1A);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--sh-gold);
+  position: relative;
+}
+#s3 .gold-circle::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent, rgba(255,215,0,.5), transparent, rgba(255,215,0,.3), transparent);
+  animation: spin 8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+#s3 .gold-circle iconify-icon {
+  font-size: 64px;
+  color: var(--navy);
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDE 4 — DESTINATIONS VIDEO
+   ═══════════════════════════════════════════════════════════════════════ */
+#s4 { background: var(--navy); }
+#s4 .content {
+  position: relative;
+  width: 100%; height: 100%;
+  max-width: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#s4 video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transition: opacity 1.2s ease;
+}
+#s4 .video-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(6,11,36,.85) 0%, rgba(6,11,36,.2) 40%, rgba(6,11,36,.2) 60%, rgba(6,11,36,.7) 100%);
+  z-index: 1;
+}
+#s4 .dest-info {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+#s4 .dest-country {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(52px, 7vw, 110px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  text-shadow: 0 4px 40px rgba(0,0,0,.6);
+  line-height: 1;
+  transition: opacity .6s, transform .6s;
+}
+#s4 .dest-tagline {
+  font-size: 18px;
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+#s4 .dots {
+  position: absolute;
+  bottom: 100px;
+  z-index: 3;
+  display: flex;
+  gap: 10px;
+}
+#s4 .dots span {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--white-20);
+  transition: all .4s;
+}
+#s4 .dots span.active {
+  background: var(--gold);
+  width: 30px;
+  border-radius: 5px;
+}
+#s4 .music-btn {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  z-index: 3;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--white-20);
+  background: rgba(6,11,36,.6);
+  backdrop-filter: blur(12px);
+  color: var(--white);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .3s;
+}
+#s4 .music-btn:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDE 5 — LOGOS
+   ═══════════════════════════════════════════════════════════════════════ */
+#s5 .slide-bg {
+  background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80&auto=format&fit=crop');
+}
+#s5 .slide-bg::after {
+  background: linear-gradient(180deg, rgba(6,11,36,.92) 0%, rgba(6,11,36,.85) 100%);
+}
+#s5 .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 50px;
+  padding: 0 40px;
+}
+#s5 .logos-row {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+.logo-box {
+  width: 260px;
+  height: 130px;
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--white-20);
+  background: rgba(6,11,36,.6);
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: all .6s cubic-bezier(.22,1,.36,1);
+}
+.logo-box::before {
+  content: "";
+  position: absolute; inset: -2px;
+  border-radius: var(--radius-lg);
+  background: conic-gradient(from 0deg, var(--blue), var(--purple-2), var(--gold), var(--blue));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity .6s;
+}
+.logo-box:hover::before { opacity: 1; }
+.logo-box:hover {
+  border-color: transparent;
+  box-shadow: var(--sh-glow);
+  transform: translateY(-4px);
+}
+.logo-box .logo-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+}
+.logo-box .logo-text .life {
+  font-weight: 300;
+  font-style: italic;
+}
+#s5 .connector {
+  font-size: 28px;
+  color: var(--gold);
+  font-weight: 300;
+}
+#s5 .tagline {
+  font-size: 18px;
+  color: var(--white-70);
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDE 6 — INTERACTIVE EARTH
+   ═══════════════════════════════════════════════════════════════════════ */
+#s6 { background: var(--grad-hero); }
+#s6 .content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  padding: 0 80px;
+}
+#s6 .earth-wrap {
+  flex-shrink: 0;
+  width: 340px; height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #1a5fb4 0%, #0a1f6e 50%, #060B24 100%);
+  box-shadow: 0 0 80px rgba(30,91,255,.3), 0 0 160px rgba(30,91,255,.15), inset 0 0 60px rgba(30,91,255,.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all .6s cubic-bezier(.22,1,.36,1);
+  overflow: hidden;
+}
+#s6 .earth-wrap:hover {
+  box-shadow: 0 0 100px rgba(30,91,255,.5), 0 0 200px rgba(30,91,255,.25);
+  transform: scale(1.03);
+}
+#s6 .earth-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent, rgba(30,91,255,.4), transparent 33%, transparent, rgba(245,166,35,.3), transparent 66%);
+  animation: spin 12s linear infinite;
+}
+#s6 .earth-svg {
+  width: 280px; height: 280px;
+  position: relative;
+  z-index: 1;
+}
+#s6 .earth-info {
+  flex: 1;
+}
+#s6 .earth-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.earth-stat {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 30px;
+  border-radius: var(--radius-lg);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: all .4s cubic-bezier(.22,1,.36,1);
+}
+.earth-stat:hover {
+  background: var(--glass-2);
+  transform: translateX(6px);
+}
+.earth-stat.active {
+  background: rgba(30,91,255,.15);
+  border-color: rgba(30,91,255,.4);
+  box-shadow: 0 0 30px rgba(30,91,255,.15);
+}
+.earth-stat .stat-ico {
+  width: 56px; height: 56px;
+  border-radius: 16px;
+  background: var(--grad-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: var(--navy);
+  flex-shrink: 0;
+}
+.earth-stat .stat-val {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1;
+}
+.earth-stat .stat-desc {
+  font-size: 14px;
+  color: var(--white-70);
+  margin-top: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDE 7 — #1 AWARD
+   ═══════════════════════════════════════════════════════════════════════ */
+#s7 .slide-bg {
+  background-image: url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1920&q=80&auto=format&fit=crop');
+}
+#s7 .slide-bg::after {
+  background: radial-gradient(ellipse at center, rgba(6,11,36,.75) 0%, rgba(6,11,36,.92) 100%);
+}
+#s7 .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 30px;
+  padding: 0 40px;
+}
+#s7 .medal {
+  width: 200px; height: 200px;
+  position: relative;
+}
+#s7 .medal-circle {
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #FFE58A, #F5A623 50%, #A17A1A);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--sh-gold);
+  position: relative;
+}
+#s7 .medal-circle::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 3px solid rgba(245,166,35,.3);
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+@keyframes pulse-ring {
+  0%,100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.08); opacity: .5; }
+}
+#s7 .medal-number {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 90px;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1;
+  text-shadow: 0 2px 4px rgba(0,0,0,.15);
+}
+#s7 .medal-hash {
+  font-size: 40px;
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDE 8 — WORLD MAP
+   ═══════════════════════════════════════════════════════════════════════ */
+#s8 { background: var(--navy); }
+#s8 .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 40px;
+  padding: 20px 60px 80px;
+  max-width: 1200px;
+}
+#s8 .map-container {
+  width: 100%;
+  max-width: 900px;
+  position: relative;
+}
+#s8 .map-container svg {
+  width: 100%;
+  height: auto;
+}
+.hq-dot {
+  fill: var(--gold);
+  filter: drop-shadow(0 0 8px rgba(245,166,35,.6));
+}
+.hq-dot-ring {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: .5;
+  opacity: .4;
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+.map-path {
+  fill: rgba(30,91,255,.2);
+  stroke: rgba(30,91,255,.3);
+  stroke-width: .5;
+}
+#s8 .hq-list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.hq-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  backdrop-filter: blur(8px);
+}
+.hq-tag .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDE 9 — CLUB 5.0
+   ═══════════════════════════════════════════════════════════════════════ */
+#s9 { background: var(--grad-hero); }
+#s9 .content {
+  padding: 0 60px;
+}
+#s9 .top-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+#s9 .club-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+.club-card {
+  border-radius: var(--radius);
+  padding: 24px 16px;
+  text-align: center;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  transition: all .5s cubic-bezier(.22,1,.36,1);
+  position: relative;
+  overflow: hidden;
+}
+.club-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .5s;
+  z-index: 0;
+}
+.club-card:hover::before { opacity: 1; }
+.club-card:hover {
+  transform: translateY(-6px);
+  border-color: transparent;
+}
+.club-card:nth-child(1)::before { background: linear-gradient(135deg, #CD7F32 0%, #A0522D 100%); }
+.club-card:nth-child(2)::before { background: linear-gradient(135deg, #C0C0C0 0%, #808080 100%); }
+.club-card:nth-child(3)::before { background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%); }
+.club-card:nth-child(4)::before { background: linear-gradient(135deg, #E5E4E2 0%, #B0C4DE 100%); }
+.club-card:nth-child(5)::before { background: linear-gradient(135deg, #2D1B8E 0%, #4834D4 100%); }
+.club-card:nth-child(6)::before { background: linear-gradient(135deg, #000000 0%, #2C2C2C 100%); }
+.club-card:nth-child(7)::before { background: linear-gradient(135deg, #FFD700 0%, #FF4500 100%); }
+.club-card:nth-child(8)::before { background: linear-gradient(135deg, #4169E1 0%, #00BFFF 100%); }
+.club-card:nth-child(9)::before { background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%); }
+.club-card:nth-child(10)::before { background: linear-gradient(135deg, #228B22 0%, #006400 100%); }
+.club-card:nth-child(11)::before { background: linear-gradient(135deg, #FF69B4 0%, #C71585 100%); }
+.club-card:nth-child(12)::before { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
+.club-card > * { position: relative; z-index: 1; }
+.club-card .club-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-top: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.club-card iconify-icon {
+  font-size: 30px;
+  color: var(--gold);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDE 10 — PACKAGES
+   ═══════════════════════════════════════════════════════════════════════ */
+#s10 .slide-bg {
+  background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=80&auto=format&fit=crop');
+}
+#s10 .slide-bg::after {
+  background: linear-gradient(135deg, rgba(6,11,36,.93) 0%, rgba(45,27,142,.85) 100%);
+}
+#s10 .content {
+  padding: 0 60px;
+}
+#s10 .top-section {
+  text-align: center;
+  margin-bottom: 44px;
+}
+#s10 .pkg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.pkg-card {
+  border-radius: var(--radius-xl);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(24px);
+  padding: 36px 28px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all .5s cubic-bezier(.22,1,.36,1);
+}
+.pkg-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--sh-glow);
+}
+.pkg-card.featured {
+  border: 2px solid var(--gold);
+  background: rgba(245,166,35,.08);
+}
+.pkg-card.featured::before {
+  content: "POPULAR";
+  position: absolute;
+  top: 16px; right: -30px;
+  background: var(--grad-gold);
+  color: var(--navy);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  padding: 5px 40px;
+  transform: rotate(45deg);
+}
+.pkg-card .pkg-icon {
+  width: 70px; height: 70px;
+  border-radius: 20px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+}
+.pkg-card:nth-child(1) .pkg-icon { background: linear-gradient(135deg, #C0C0C0, #808080); color: var(--white); }
+.pkg-card:nth-child(2) .pkg-icon { background: linear-gradient(135deg, #B76EF5, #7B2FBE); color: var(--white); }
+.pkg-card:nth-child(3) .pkg-icon { background: var(--grad-gold); color: var(--navy); }
+.pkg-card .pkg-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.pkg-card .pkg-price {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--gold);
+  margin: 12px 0;
+  line-height: 1;
+}
+.pkg-card .pkg-price span {
+  font-size: 18px;
+  color: var(--white-50);
+  font-weight: 500;
+}
+.pkg-card .pkg-features {
+  list-style: none;
+  text-align: left;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.pkg-card .pkg-features li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--white-70);
+}
+.pkg-card .pkg-features li iconify-icon {
+  color: var(--gold);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDE 11 — TIMELINE AIRPLANE
+   ═══════════════════════════════════════════════════════════════════════ */
+#s11 { background: var(--grad-hero); }
+#s11 .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 40px;
+  padding: 0 60px;
+}
+#s11 .timeline {
+  width: 100%;
+  max-width: 1100px;
+  position: relative;
+  padding: 30px 0;
+}
+#s11 .timeline-track {
+  width: 100%;
+  height: 4px;
+  background: var(--white-10);
+  border-radius: 2px;
+  position: relative;
+}
+#s11 .timeline-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--gold));
+  width: 0%;
+  transition: width 2s cubic-bezier(.22,1,.36,1);
+}
+.slide.active #s11-fill, #s11.active .timeline-fill {
+  width: 100%;
+}
+#s11 .timeline-plane {
+  position: absolute;
+  top: -20px;
+  left: 0%;
+  font-size: 36px;
+  color: var(--gold);
+  transition: left 2s cubic-bezier(.22,1,.36,1);
+  filter: drop-shadow(0 0 12px rgba(245,166,35,.5));
+}
+#s11.active .timeline-plane {
+  left: calc(100% - 36px);
+}
+#s11 .months {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+  width: 100%;
+  max-width: 1100px;
+}
+#s11 .month {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: .4;
+  transition: all .5s;
+}
+#s11.active .month { opacity: 1; }
+#s11 .month .m-num {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--white);
+}
+#s11 .month .m-reward {
+  font-size: 11px;
+  color: var(--gold);
+  font-weight: 600;
+}
+#s11 .month:nth-child(12) .m-num {
+  color: var(--gold);
+  font-size: 18px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDE 12 — NETWORK / LIDER CLUB
+   ═══════════════════════════════════════════════════════════════════════ */
+#s12 .slide-bg {
+  background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1920&q=80&auto=format&fit=crop');
+}
+#s12 .slide-bg::after {
+  background: linear-gradient(135deg, rgba(6,11,36,.93) 0%, rgba(45,27,142,.85) 100%);
+}
+#s12 .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 40px;
+  padding: 0 60px;
+}
+#s12 .network-visual {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.person-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.person-avatar {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  position: relative;
+}
+.person-avatar.you {
+  background: var(--grad-gold);
+  color: var(--navy);
+  box-shadow: var(--sh-gold);
+}
+.person-avatar.team {
+  background: var(--glass);
+  border: 2px solid var(--blue);
+  color: var(--blue-2);
+}
+.person-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.network-connector {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.connector-line {
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--blue));
+}
+.connector-plus {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--white-50);
+  padding: 0 12px;
+}
+#s12 .result-box {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 40px;
+  border-radius: var(--radius-lg);
+  background: rgba(245,166,35,.1);
+  border: 2px solid var(--gold);
+  backdrop-filter: blur(12px);
+}
+#s12 .result-box iconify-icon {
+  font-size: 36px;
+  color: var(--gold);
+}
+#s12 .result-box .result-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: left;
+}
+#s12 .result-box .result-text .gold {
+  font-size: 22px;
+  font-weight: 900;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   KEYBOARD HINT
+   ═══════════════════════════════════════════════════════════════════════ */
+.keys-hint {
+  position: fixed;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  color: var(--white-20);
+  letter-spacing: 2px;
+  z-index: 100;
+  font-weight: 500;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════ PROGRESS BAR ═══════════ -->
+<div class="progress" id="progressBar"></div>
+
+<!-- ═══════════ SLIDE DECK ═══════════ -->
+<div class="deck" id="deck">
+
+  <!-- ────────── SLIDE 1: HERO QUESTION ────────── -->
+  <div class="slide active" id="s1">
+    <div class="slide-bg"></div>
+    <div class="content">
+      <div class="eyebrow reveal">MWR Life × Travel Advantage</div>
+      <div class="hero-question reveal d1">
+        ¿Cuándo fue la última vez<br>
+        <span class="accent">que viajaste con tu familia?</span>
+      </div>
+      <p class="hero-sub reveal d2">Millones de personas sueñan con viajar. Muy pocas descubren cómo hacerlo realidad cada año.</p>
+      <div class="scroll-hint reveal d3">
+        <iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
+        Continuar
+      </div>
+    </div>
+  </div>
+
+  <!-- ────────── SLIDE 2: IMPACT ────────── -->
+  <div class="slide" id="s2">
+    <div class="content">
+      <div class="top-section">
+        <div class="eyebrow reveal">El Impacto de Viajar</div>
+        <h2 class="h2 reveal d1">Viajar transforma<br><span class="gold">familias enteras</span></h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card reveal d2">
+          <img src="https://images.unsplash.com/photo-1602002418816-5c0aeef426aa?w=600&q=80&auto=format&fit=crop" alt="Familia viajando">
+          <div class="card-overlay">
+            <div class="stat-number">78%</div>
+            <div class="stat-label">de las familias que viajan juntas reportan mayor conexión emocional</div>
+          </div>
+          <div class="stat-icon"><iconify-icon icon="ph:heart-duotone"></iconify-icon></div>
+        </div>
+        <div class="stat-card reveal d3">
+          <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&q=80&auto=format&fit=crop" alt="Experiencias">
+          <div class="card-overlay">
+            <div class="stat-number">2.5x</div>
+            <div class="stat-label">más felicidad reportada por experiencias vs posesiones materiales</div>
+          </div>
+          <div class="stat-icon"><iconify-icon icon="ph:smiley-duotone"></iconify-icon></div>
+        </div>
+        <div class="stat-card reveal d4">
+          <img src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=600&q=80&auto=format&fit=crop" alt="Memorias">
+          <div class="card-overlay">
+            <div class="stat-number">94%</div>
+            <div class="stat-label">de las personas valoran los recuerdos de viaje como su mayor tesoro</div>
+          </div>
+          <div class="stat-icon"><iconify-icon icon="ph:camera-duotone"></iconify-icon></div>
+        </div>
+        <div class="stat-card reveal d5">
+          <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80&auto=format&fit=crop" alt="Crecimiento">
+          <div class="card-overlay">
+            <div class="stat-number">$8.8T</div>
+            <div class="stat-label">industria global del turismo — crecimiento imparable cada año</div>
+          </div>
+          <div class="stat-icon"><iconify-icon icon="ph:trend-up-duotone"></iconify-icon></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ────────── SLIDE 3: WHAT IF ────────── -->
+  <div class="slide" id="s3">
+    <div class="slide-bg"></div>
+    <div class="content">
+      <div class="eyebrow reveal">La Gran Pregunta</div>
+      <div class="big-question reveal d1">¿Y si el viaje<br><span class="gold">se pagara solo?</span></div>
+      <div class="gold-circle reveal d2">
+        <iconify-icon icon="ph:coin-vertical-duotone"></iconify-icon>
+      </div>
+      <p class="lead reveal d3" style="color:var(--white-70); text-align:center;">
+        Existe un modelo donde viajar no es un gasto — es una inversión que genera ingresos. Así funciona Travel Advantage.
+      </p>
+    </div>
+  </div>
+
+  <!-- ────────── SLIDE 4: DESTINATIONS VIDEO ────────── -->
+  <div class="slide" id="s4">
+    <div class="content">
+      <video id="destVideo" muted playsinline></video>
+      <div class="video-overlay"></div>
+      <div class="dest-info">
+        <div class="dest-tagline" id="destTagline">Explora el mundo</div>
+        <div class="dest-country" id="destCountry">PUNTA CANA</div>
+      </div>
+      <div class="dots" id="destDots"></div>
+      <button class="music-btn" id="musicBtn" aria-label="Toggle music">
+        <iconify-icon icon="ph:speaker-simple-x-duotone" id="musicIcon"></iconify-icon>
+      </button>
+      <audio id="bgMusic" loop preload="none">
+        <source src="https://cdn.pixabay.com/audio/2022/10/14/audio_2fb4093695.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </div>
+
+  <!-- ────────── SLIDE 5: LOGOS ────────── -->
+  <div class="slide" id="s5">
+    <div class="slide-bg"></div>
+    <div class="content">
+      <div class="eyebrow reveal">Dos Marcas, Una Misión</div>
+      <h2 class="h2 reveal d1">Viaja. Gana. <span class="gold">Repite.</span></h2>
+      <div class="logos-row reveal d2">
+        <div class="logo-box">
+          <div class="logo-text">MWR <span class="life">Life</span></div>
+        </div>
+        <span class="connector">×</span>
+        <div class="logo-box">
+          <div class="logo-text" style="font-size:22px;">Travel<br><span style="font-weight:400;font-size:16px;">Advantage</span></div>
+        </div>
+      </div>
+      <p class="tagline reveal d3">La plataforma de viajes que te paga por compartirla</p>
+    </div>
+  </div>
+
+  <!-- ────────── SLIDE 6: EARTH / FACTS ────────── -->
+  <div class="slide" id="s6">
+    <div class="content">
+      <div class="earth-wrap reveal" id="earthWrap">
+        <svg class="earth-svg" viewBox="0 0 200 200">
+          <defs>
+            <radialGradient id="earthGrad" cx="40%" cy="35%">
+              <stop offset="0%" stop-color="#1a5fb4"/>
+              <stop offset="60%" stop-color="#0a1f6e"/>
+              <stop offset="100%" stop-color="#060B24"/>
+            </radialGradient>
+            <radialGradient id="landGrad">
+              <stop offset="0%" stop-color="#2ecc71" stop-opacity=".5"/>
+              <stop offset="100%" stop-color="#27ae60" stop-opacity=".3"/>
+            </radialGradient>
+          </defs>
+          <circle cx="100" cy="100" r="95" fill="url(#earthGrad)" stroke="rgba(30,91,255,.3)" stroke-width="1"/>
+          <!-- Simplified continents -->
+          <ellipse cx="70" cy="55" rx="25" ry="20" fill="url(#landGrad)" opacity=".7"/>
+          <ellipse cx="130" cy="50" rx="30" ry="22" fill="url(#landGrad)" opacity=".6"/>
+          <ellipse cx="65" cy="95" rx="15" ry="30" fill="url(#landGrad)" opacity=".5"/>
+          <ellipse cx="135" cy="90" rx="20" ry="18" fill="url(#landGrad)" opacity=".4"/>
+          <ellipse cx="160" cy="130" rx="18" ry="15" fill="url(#landGrad)" opacity=".4"/>
+          <!-- Glow ring -->
+          <circle cx="100" cy="100" r="97" fill="none" stroke="rgba(30,91,255,.15)" stroke-width="3"/>
+        </svg>
+      </div>
+      <div class="earth-info">
+        <div class="earth-stats">
+          <div class="earth-stat active reveal d1" data-fact="0">
+            <div class="stat-ico"><iconify-icon icon="ph:calendar-duotone"></iconify-icon></div>
+            <div>
+              <div class="stat-val">13 Años</div>
+              <div class="stat-desc">De trayectoria global desde 2013</div>
+            </div>
+          </div>
+          <div class="earth-stat reveal d2" data-fact="1">
+            <div class="stat-ico"><iconify-icon icon="ph:users-three-duotone"></iconify-icon></div>
+            <div>
+              <div class="stat-val">+500,000</div>
+              <div class="stat-desc">Miembros activos en 5 continentes</div>
+            </div>
+          </div>
+          <div class="earth-stat reveal d3" data-fact="2">
+            <div class="stat-ico"><iconify-icon icon="ph:seal-check-duotone"></iconify-icon></div>
+            <div>
+              <div class="stat-val">ETOA 2025</div>
+              <div class="stat-desc">Miembro certificado de la asociación europea de turismo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ────────── SLIDE 7: #1 AWARD ────────── -->
+  <div class="slide" id="s7">
+    <div class="slide-bg"></div>
+    <div class="content">
+      <div class="eyebrow reveal">Reconocimiento Global</div>
+      <div class="medal reveal d1">
+        <div class="medal-circle">
+          <span class="medal-number"><span class="medal-hash">#</span>1</span>
+        </div>
+      </div>
+      <h2 class="h2 reveal d2">Plataforma de Viajes<br><span class="gold">Más Premiada del Mundo</span></h2>
+      <p class="lead reveal d3" style="text-align:center; color:var(--white-70);">Reconocida internacionalmente por la calidad de experiencias de viaje y el modelo de negocio más innovador del sector turístico.</p>
+    </div>
+  </div>
+
+  <!-- ────────── SLIDE 8: WORLD MAP ────────── -->
+  <div class="slide" id="s8">
+    <div class="content">
+      <div class="eyebrow reveal">Presencia Global</div>
+      <h2 class="h2 reveal d1" style="margin-bottom:10px;">Sedes en<br><span class="gold">5 Países Estratégicos</span></h2>
+      <div class="map-container reveal d2">
+        <svg viewBox="0 0 800 400" fill="none">
+          <!-- Simplified world outline -->
+          <!-- North America -->
+          <path d="M120,80 Q140,60 180,70 Q200,65 220,80 Q230,100 220,120 Q210,140 200,160 Q180,170 160,180 Q140,170 120,150 Q100,130 110,100 Z" class="map-path"/>
+          <!-- South America -->
+          <path d="M180,200 Q200,190 210,210 Q220,240 215,270 Q210,300 200,320 Q190,330 180,310 Q170,290 165,260 Q160,230 170,210 Z" class="map-path"/>
+          <!-- Europe -->
+          <path d="M380,70 Q400,60 420,65 Q440,70 450,85 Q445,100 435,110 Q420,115 405,110 Q390,105 380,90 Z" class="map-path"/>
+          <!-- Africa -->
+          <path d="M390,140 Q410,130 430,140 Q445,160 450,190 Q445,230 435,260 Q420,280 405,270 Q390,250 385,220 Q380,180 385,150 Z" class="map-path"/>
+          <!-- Asia -->
+          <path d="M470,60 Q520,50 570,55 Q620,60 660,80 Q680,100 670,130 Q650,150 620,155 Q580,160 540,150 Q500,140 480,120 Q460,100 465,75 Z" class="map-path"/>
+          <!-- Australia -->
+          <path d="M620,260 Q650,250 680,255 Q700,265 695,285 Q680,300 660,295 Q640,290 630,275 Z" class="map-path"/>
+
+          <!-- Connection lines -->
+          <line x1="440" y1="90" x2="630" y2="100" stroke="rgba(245,166,35,.3)" stroke-width="1" stroke-dasharray="4,4">
+            <animate attributeName="stroke-dashoffset" values="0;-8" dur="1s" repeatCount="indefinite"/>
+          </line>
+          <line x1="200" y1="120" x2="400" y2="85" stroke="rgba(245,166,35,.3)" stroke-width="1" stroke-dasharray="4,4">
+            <animate attributeName="stroke-dashoffset" values="0;-8" dur="1s" repeatCount="indefinite"/>
+          </line>
+          <line x1="430" y1="90" x2="470" y2="170" stroke="rgba(245,166,35,.3)" stroke-width="1" stroke-dasharray="4,4">
+            <animate attributeName="stroke-dashoffset" values="0;-8" dur="1s" repeatCount="indefinite"/>
+          </line>
+          <line x1="420" y1="90" x2="380" y2="80" stroke="rgba(245,166,35,.3)" stroke-width="1" stroke-dasharray="4,4">
+            <animate attributeName="stroke-dashoffset" values="0;-8" dur="1s" repeatCount="indefinite"/>
+          </line>
+
+          <!-- HQ Dots -->
+          <!-- Hong Kong -->
+          <circle cx="630" cy="100" r="6" class="hq-dot"/>
+          <circle cx="630" cy="100" r="14" class="hq-dot-ring"/>
+          <!-- USA -->
+          <circle cx="180" cy="100" r="6" class="hq-dot"/>
+          <circle cx="180" cy="100" r="14" class="hq-dot-ring"/>
+          <!-- France -->
+          <circle cx="405" cy="82" r="6" class="hq-dot"/>
+          <circle cx="405" cy="82" r="14" class="hq-dot-ring"/>
+          <!-- UK -->
+          <circle cx="390" cy="72" r="6" class="hq-dot"/>
+          <circle cx="390" cy="72" r="14" class="hq-dot-ring"/>
+          <!-- UAE -->
+          <circle cx="500" cy="140" r="6" class="hq-dot"/>
+          <circle cx="500" cy="140" r="14" class="hq-dot-ring"/>
+        </svg>
+      </div>
+      <div class="hq-list reveal d3">
+        <div class="hq-tag"><span class="dot"></span>Hong Kong</div>
+        <div class="hq-tag"><span class="dot"></span>Estados Unidos</div>
+        <div class="hq-tag"><span class="dot"></span>Francia</div>
+        <div class="hq-tag"><span class="dot"></span>Reino Unido</div>
+        <div class="hq-tag"><span class="dot"></span>Emiratos Árabes</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ────────── SLIDE 9: CLUB 5.0 ────────── -->
+  <div class="slide" id="s9">
+    <div class="content">
+      <div class="top-section">
+        <div class="eyebrow reveal">Programa de Reconocimiento</div>
+        <h2 class="h2 reveal d1">Club <span class="gold">5.0</span></h2>
+      </div>
+      <div class="club-grid">
+        <div class="club-card reveal d2">
+          <iconify-icon icon="ph:medal-duotone"></iconify-icon>
+          <div class="club-name">Bronce</div>
+        </div>
+        <div class="club-card reveal d2">
+          <iconify-icon icon="ph:medal-duotone"></iconify-icon>
+          <div class="club-name">Plata</div>
+        </div>
+        <div class="club-card reveal d3">
+          <iconify-icon icon="ph:trophy-duotone"></iconify-icon>
+          <div class="club-name">Oro</div>
+        </div>
+        <div class="club-card reveal d3">
+          <iconify-icon icon="ph:diamond-duotone"></iconify-icon>
+          <div class="club-name">Platino</div>
+        </div>
+        <div class="club-card reveal d4">
+          <iconify-icon icon="ph:crown-duotone"></iconify-icon>
+          <div class="club-name">Zafiro</div>
+        </div>
+        <div class="club-card reveal d4">
+          <iconify-icon icon="ph:star-four-duotone"></iconify-icon>
+          <div class="club-name">Ónix</div>
+        </div>
+        <div class="club-card reveal d5">
+          <iconify-icon icon="ph:fire-duotone"></iconify-icon>
+          <div class="club-name">Fénix</div>
+        </div>
+        <div class="club-card reveal d5">
+          <iconify-icon icon="ph:lightning-duotone"></iconify-icon>
+          <div class="club-name">Zirconia</div>
+        </div>
+        <div class="club-card reveal d6">
+          <iconify-icon icon="ph:crown-simple-duotone"></iconify-icon>
+          <div class="club-name">Rubí</div>
+        </div>
+        <div class="club-card reveal d6">
+          <iconify-icon icon="ph:globe-hemisphere-east-duotone"></iconify-icon>
+          <div class="club-name">Esmeralda</div>
+        </div>
+        <div class="club-card reveal d7">
+          <iconify-icon icon="ph:heart-duotone"></iconify-icon>
+          <div class="club-name">Diamante</div>
+        </div>
+        <div class="club-card reveal d7">
+          <iconify-icon icon="ph:shield-star-duotone"></iconify-icon>
+          <div class="club-name">Embajador</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ────────── SLIDE 10: PACKAGES ────────── -->
+  <div class="slide" id="s10">
+    <div class="slide-bg"></div>
+    <div class="content">
+      <div class="top-section">
+        <div class="eyebrow reveal">Elige Tu Plan</div>
+        <h2 class="h2 reveal d1">Paquetes de<br><span class="gold">Inscripción</span></h2>
+      </div>
+      <div class="pkg-grid">
+        <div class="pkg-card reveal d2">
+          <div class="pkg-icon"><iconify-icon icon="ph:rocket-launch-duotone"></iconify-icon></div>
+          <div class="pkg-name">Elite</div>
+          <div class="pkg-price">$150<span>/único</span></div>
+          <ul class="pkg-features">
+            <li><iconify-icon icon="ph:check-circle-duotone"></iconify-icon>Acceso a plataforma de viajes</li>
+            <li><iconify-icon icon="ph:check-circle-duotone"></iconify-icon>120 Loyalty Points mensuales</li>
+            <li><iconify-icon icon="ph:check-circle-duotone"></iconify-icon>Descuentos exclusivos</li>
+            <li><iconify-icon icon="ph:check-circle-duotone"></iconify-icon>App móvil premium</li>
+          </ul>
+        </div>
+        <div class="pkg-card featured reveal d3">
+          <div class="pkg-icon"><iconify-icon icon="ph:shooting-star-duotone"></iconify-icon></div>
+          <div class="pkg-name">Elite Pro</div>
+          <div class="pkg-price">$250<span>/único</span></div>
+          <ul class="pkg-features">
+            <li><iconify-icon icon="ph:check-circle-duotone"></iconify-icon>Todo lo de Elite</li>
+            <li><iconify-icon icon="ph:check-circle-duotone"></iconify-icon>240 Loyalty Points mensuales</li>
+            <li><iconify-icon icon="ph:check-circle-duotone"></iconify-icon>Experiencias de vida exclusivas</li>
+            <li><iconify-icon icon="ph:check-circle-duotone"></iconify-icon>Pases de invitado ilimitados</li>
+            <li><iconify-icon icon="ph:check-circle-duotone"></iconify-icon>Bonos de inicio rápido</li>
+          </ul>
+        </div>
+        <div class="pkg-card reveal d4">
+          <div class="pkg-icon"><iconify-icon icon="ph:crown-duotone"></iconify-icon></div>
+          <div class="pkg-name">Turbo</div>
+          <div class="pkg-price">$400<span>/único</span></div>
+          <ul class="pkg-features">
+            <li><iconify-icon icon="ph:check-circle-duotone"></iconify-icon>Todo lo de Elite Pro</li>
+            <li><iconify-icon icon="ph:check-circle-duotone"></iconify-icon>360 Loyalty Points mensuales</li>
+            <li><iconify-icon icon="ph:check-circle-duotone"></iconify-icon>Prioridad en reservas</li>
+            <li><iconify-icon icon="ph:check-circle-duotone"></iconify-icon>Flex Traveler cada 6 meses</li>
+            <li><iconify-icon icon="ph:check-circle-duotone"></iconify-icon>Máximo potencial de ingresos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ────────── SLIDE 11: TIMELINE ────────── -->
+  <div class="slide" id="s11">
+    <div class="content">
+      <div class="eyebrow reveal">Tu Primer Año</div>
+      <h2 class="h2 reveal d1">12 Meses Que<br><span class="gold">Cambian Todo</span></h2>
+      <div class="timeline reveal d2">
+        <div class="timeline-track">
+          <div class="timeline-fill"></div>
+          <div class="timeline-plane">
+            <iconify-icon icon="ph:airplane-tilt-duotone"></iconify-icon>
+          </div>
+        </div>
+      </div>
+      <div class="months reveal d3">
+        <div class="month"><span class="m-num">1</span><span class="m-reward">Inicio</span></div>
+        <div class="month"><span class="m-num">2</span><span class="m-reward"></span></div>
+        <div class="month"><span class="m-num">3</span><span class="m-reward">Bono</span></div>
+        <div class="month"><span class="m-num">4</span><span class="m-reward"></span></div>
+        <div class="month"><span class="m-num">5</span><span class="m-reward"></span></div>
+        <div class="month"><span class="m-num">6</span><span class="m-reward">Viaje</span></div>
+        <div class="month"><span class="m-num">7</span><span class="m-reward"></span></div>
+        <div class="month"><span class="m-num">8</span><span class="m-reward"></span></div>
+        <div class="month"><span class="m-num">9</span><span class="m-reward">Club</span></div>
+        <div class="month"><span class="m-num">10</span><span class="m-reward"></span></div>
+        <div class="month"><span class="m-num">11</span><span class="m-reward"></span></div>
+        <div class="month"><span class="m-num">12</span><span class="m-reward">Líder</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ────────── SLIDE 12: NETWORK ────────── -->
+  <div class="slide" id="s12">
+    <div class="slide-bg"></div>
+    <div class="content">
+      <div class="eyebrow reveal">Líder Club</div>
+      <h2 class="h2 reveal d1">Tu Membresía<br><span class="gold">Se Paga Sola</span></h2>
+      <div class="network-visual reveal d2">
+        <div class="person-node">
+          <div class="person-avatar you"><iconify-icon icon="ph:crown-simple-duotone"></iconify-icon></div>
+          <span class="person-label gold">Tú</span>
+        </div>
+        <div class="network-connector">
+          <div class="connector-line"></div>
+          <span class="connector-plus">+</span>
+          <div class="connector-line"></div>
+        </div>
+        <div class="person-node">
+          <div class="person-avatar team"><iconify-icon icon="ph:user-duotone"></iconify-icon></div>
+          <span class="person-label">Persona 1</span>
+        </div>
+        <div class="network-connector">
+          <span class="connector-plus">+</span>
+        </div>
+        <div class="person-node">
+          <div class="person-avatar team"><iconify-icon icon="ph:user-duotone"></iconify-icon></div>
+          <span class="person-label">Persona 2</span>
+        </div>
+        <div class="network-connector">
+          <span class="connector-plus">+</span>
+        </div>
+        <div class="person-node">
+          <div class="person-avatar team"><iconify-icon icon="ph:user-duotone"></iconify-icon></div>
+          <span class="person-label">Persona 3</span>
+        </div>
+      </div>
+      <div class="result-box reveal d3">
+        <iconify-icon icon="ph:check-circle-duotone"></iconify-icon>
+        <div class="result-text">
+          3 referidos directos = <span class="gold">Membresía autofinanciada</span><br>
+          <span style="font-size:14px; color:var(--white-70); font-weight:400;">Tu suscripción mensual queda cubierta. Viajas gratis.</span>
+        </div>
+      </div>
+      <div class="badge-gold reveal d4">
+        <iconify-icon icon="ph:airplane-duotone"></iconify-icon>
+        Comienza Hoy
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════ NAVIGATION ═══════════ -->
+<div class="counter"><b id="currSlide">01</b> / <span id="totalSlides">12</span></div>
+<div class="nav">
+  <button id="prevBtn" aria-label="Anterior"><iconify-icon icon="ph:arrow-left-bold"></iconify-icon></button>
+  <button id="nextBtn" aria-label="Siguiente"><iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
+</div>
+<div class="keys-hint">Usa las flechas del teclado</div>
+
+<!-- ═══════════ JAVASCRIPT ═══════════ -->
+<script>
+(() => {
+  'use strict';
+
+  /* ── SLIDES ── */
+  const slides = [...document.querySelectorAll('.slide')];
+  const total = slides.length;
+  let current = 0;
+  let busy = false;
+
+  const $curr = document.getElementById('currSlide');
+  const $total = document.getElementById('totalSlides');
+  const $bar = document.getElementById('progressBar');
+  $total.textContent = total;
+
+  function go(idx) {
+    if (busy || idx === current || idx < 0 || idx >= total) return;
+    busy = true;
+    const prev = slides[current];
+    const next = slides[idx];
+    prev.classList.add('exiting');
+    prev.classList.remove('active');
+    next.classList.add('active');
+    setTimeout(() => {
+      prev.classList.remove('exiting');
+      busy = false;
+    }, 900);
+    current = idx;
+    $curr.textContent = String(current + 1).padStart(2, '0');
+    $bar.style.width = ((current / (total - 1)) * 100) + '%';
+
+    // Slide-specific triggers
+    if (idx === 3) startDestLoop();
+    else stopDestLoop();
+    if (idx === 10) triggerTimeline();
+  }
+
+  document.getElementById('prevBtn').onclick = () => go(current - 1);
+  document.getElementById('nextBtn').onclick = () => go(current + 1);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  });
+
+  /* ── DESTINATION VIDEO LOOP ── */
+  const destinations = [
+    { name: 'PUNTA CANA', tag: 'República Dominicana', video: 'https://cdn.pixabay.com/video/2024/03/16/204417-924223996_large.mp4' },
+    { name: 'COLOMBIA', tag: 'Cartagena de Indias', video: 'https://cdn.pixabay.com/video/2021/04/16/71071-540400493_large.mp4' },
+    { name: 'GRECIA', tag: 'Santorini', video: 'https://cdn.pixabay.com/video/2020/05/25/40130-424300959_large.mp4' },
+    { name: 'ESPAÑA', tag: 'Barcelona', video: 'https://cdn.pixabay.com/video/2024/06/05/215270_large.mp4' },
+    { name: 'DISNEY', tag: 'Orlando, Florida', video: 'https://cdn.pixabay.com/video/2024/08/09/225637_large.mp4' },
+    { name: 'JAPÓN', tag: 'Tokio', video: 'https://cdn.pixabay.com/video/2023/10/10/184372-873299498_large.mp4' },
+    { name: 'CHINA', tag: 'Shanghai', video: 'https://cdn.pixabay.com/video/2024/09/17/231505_large.mp4' },
+    { name: 'ÁFRICA', tag: 'Safari', video: 'https://cdn.pixabay.com/video/2022/07/29/126323-735656906_large.mp4' },
+  ];
+
+  const $video = document.getElementById('destVideo');
+  const $country = document.getElementById('destCountry');
+  const $tagline = document.getElementById('destTagline');
+  const $dots = document.getElementById('destDots');
+  let destIdx = 0;
+  let destTimer = null;
+
+  // Build dots
+  destinations.forEach((_, i) => {
+    const d = document.createElement('span');
+    if (i === 0) d.classList.add('active');
+    $dots.appendChild(d);
+  });
+  const dotEls = [...$dots.children];
+
+  function showDest(i) {
+    destIdx = i;
+    const d = destinations[i];
+    $country.style.opacity = '0';
+    $country.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      $country.textContent = d.name;
+      $tagline.textContent = d.tag;
+      $country.style.opacity = '1';
+      $country.style.transform = 'translateY(0)';
+    }, 300);
+    $video.src = d.video;
+    $video.play().catch(() => {});
+    dotEls.forEach((el, j) => el.classList.toggle('active', j === i));
+  }
+
+  function startDestLoop() {
+    showDest(0);
+    destTimer = setInterval(() => {
+      showDest((destIdx + 1) % destinations.length);
+    }, 7000);
+  }
+
+  function stopDestLoop() {
+    clearInterval(destTimer);
+    destTimer = null;
+    $video.pause();
+  }
+
+  /* ── MUSIC ── */
+  const $music = document.getElementById('bgMusic');
+  const $musicIcon = document.getElementById('musicIcon');
+  let musicOn = false;
+  document.getElementById('musicBtn').onclick = () => {
+    musicOn = !musicOn;
+    if (musicOn) {
+      $music.play().catch(() => {});
+      $musicIcon.setAttribute('icon', 'ph:speaker-simple-high-duotone');
+    } else {
+      $music.pause();
+      $musicIcon.setAttribute('icon', 'ph:speaker-simple-x-duotone');
+    }
+  };
+
+  /* ── EARTH CLICK ── */
+  const earthStats = document.querySelectorAll('.earth-stat');
+  earthStats.forEach(el => {
+    el.addEventListener('click', () => {
+      earthStats.forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+    });
+  });
+
+  /* ── TIMELINE ── */
+  function triggerTimeline() {
+    const fill = document.querySelector('#s11 .timeline-fill');
+    const plane = document.querySelector('#s11 .timeline-plane');
+    if (fill) fill.style.width = '100%';
+    if (plane) plane.style.left = 'calc(100% - 36px)';
+  }
+
+  /* ── Touch / Swipe ── */
+  let touchX = 0;
+  document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 60) {
+      if (dx < 0) go(current + 1);
+      else go(current - 1);
+    }
+  });
+
+})();
+</script>
+</body>
+</html>
