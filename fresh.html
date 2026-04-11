@@ -71,9 +71,11 @@ html, body {
 .slide.active {
   opacity: 1; transform: scale(1);
   pointer-events: auto;
+  z-index: 5;
 }
 .slide.exiting {
   opacity: 0; transform: scale(.98);
+  z-index: 4;
 }
 
 /* Full-bleed background photos */
@@ -415,31 +417,7 @@ html, body {
   line-height: 1;
   text-transform: uppercase;
 }
-#s3 .gold-circle {
-  width: 180px; height: 180px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #FFE58A, #F5A623 50%, #A17A1A);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--sh-gold);
-  position: relative;
-}
-#s3 .gold-circle::before {
-  content: "";
-  position: absolute;
-  inset: -6px;
-  border-radius: 50%;
-  background: conic-gradient(from 0deg, transparent, rgba(255,215,0,.5), transparent, rgba(255,215,0,.3), transparent);
-  animation: spin 8s linear infinite;
-}
 @keyframes spin { to { transform: rotate(360deg); } }
-#s3 .gold-circle iconify-icon {
-  font-size: 64px;
-  color: var(--navy);
-  position: relative;
-  z-index: 1;
-}
 
 /* ═══════════════════════════════════════════════════════════════════════
    SLIDE 4 — DESTINATIONS VIDEO
@@ -453,16 +431,22 @@ html, body {
   align-items: center;
   justify-content: center;
 }
-#s4 video {
+#s4 .dest-img {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
   z-index: 0;
-  transition: opacity 1.2s ease;
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity 1.4s ease, transform 8s ease-out;
+}
+#s4 .dest-img.active {
+  opacity: 1;
+  transform: scale(1);
 }
 #s4 .video-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(0deg, rgba(6,11,36,.85) 0%, rgba(6,11,36,.2) 40%, rgba(6,11,36,.2) 60%, rgba(6,11,36,.7) 100%);
+  background: linear-gradient(0deg, rgba(6,11,36,.8) 0%, rgba(6,11,36,.35) 35%, rgba(6,11,36,.35) 65%, rgba(6,11,36,.7) 100%);
   z-index: 1;
 }
 #s4 .dest-info {
@@ -583,14 +567,11 @@ html, body {
   box-shadow: var(--sh-glow);
   transform: translateY(-4px);
 }
-.logo-box .logo-text {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  font-size: 28px;
-}
-.logo-box .logo-text .life {
-  font-weight: 300;
-  font-style: italic;
+.logo-box img {
+  max-width: 80%;
+  max-height: 70%;
+  object-fit: contain;
+  filter: brightness(1.1);
 }
 #s5 .connector {
   font-size: 28px;
@@ -619,8 +600,11 @@ html, body {
   flex-shrink: 0;
   width: 340px; height: 340px;
   border-radius: 50%;
-  background: radial-gradient(circle at 40% 35%, #1a5fb4 0%, #0a1f6e 50%, #060B24 100%);
-  box-shadow: 0 0 80px rgba(30,91,255,.3), 0 0 160px rgba(30,91,255,.15), inset 0 0 60px rgba(30,91,255,.2);
+  background: #000;
+  box-shadow:
+    0 0 60px rgba(70,130,255,.4),
+    0 0 120px rgba(70,130,255,.2),
+    inset 0 0 40px rgba(70,130,255,.15);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -628,23 +612,45 @@ html, body {
   position: relative;
   transition: all .6s cubic-bezier(.22,1,.36,1);
   overflow: hidden;
+  animation: earth-glow 4s ease-in-out infinite alternate;
+}
+@keyframes earth-glow {
+  0% { box-shadow: 0 0 60px rgba(70,130,255,.4), 0 0 120px rgba(70,130,255,.2); }
+  100% { box-shadow: 0 0 80px rgba(70,130,255,.55), 0 0 160px rgba(70,130,255,.3); }
 }
 #s6 .earth-wrap:hover {
-  box-shadow: 0 0 100px rgba(30,91,255,.5), 0 0 200px rgba(30,91,255,.25);
-  transform: scale(1.03);
+  transform: scale(1.05);
 }
 #s6 .earth-wrap::before {
   content: "";
   position: absolute;
-  inset: -4px;
+  inset: -3px;
   border-radius: 50%;
-  background: conic-gradient(from 0deg, transparent, rgba(30,91,255,.4), transparent 33%, transparent, rgba(245,166,35,.3), transparent 66%);
-  animation: spin 12s linear infinite;
+  background: conic-gradient(from 0deg, rgba(70,130,255,.5), transparent 20%, transparent 40%, rgba(0,198,255,.4), transparent 60%, transparent 80%, rgba(70,130,255,.5));
+  animation: spin 20s linear infinite;
+  z-index: 0;
 }
-#s6 .earth-svg {
-  width: 280px; height: 280px;
+#s6 .earth-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.12) 0%, transparent 50%);
+  z-index: 3;
+  pointer-events: none;
+}
+#s6 .earth-img {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
   position: relative;
   z-index: 1;
+  animation: earth-rotate 60s linear infinite;
+}
+@keyframes earth-rotate {
+  0% { transform: scale(1.15) translateX(0); }
+  50% { transform: scale(1.15) translateX(-8%); }
+  100% { transform: scale(1.15) translateX(0); }
 }
 #s6 .earth-info {
   flex: 1;
@@ -758,40 +764,72 @@ html, body {
    SLIDE 8 — WORLD MAP
    ═══════════════════════════════════════════════════════════════════════ */
 #s8 { background: var(--navy); }
+#s8 .slide-bg-map {
+  position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=1920&q=70&auto=format&fit=crop') center/cover;
+  opacity: .08;
+}
 #s8 .content {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 40px;
+  gap: 30px;
   padding: 20px 60px 80px;
   max-width: 1200px;
 }
 #s8 .map-container {
   width: 100%;
-  max-width: 900px;
+  max-width: 1000px;
   position: relative;
 }
 #s8 .map-container svg {
   width: 100%;
   height: auto;
 }
+.map-land {
+  fill: rgba(91,134,229,.18);
+  stroke: rgba(91,134,229,.35);
+  stroke-width: .4;
+  stroke-linejoin: round;
+  transition: fill .3s;
+}
 .hq-dot {
   fill: var(--gold);
-  filter: drop-shadow(0 0 8px rgba(245,166,35,.6));
+  filter: drop-shadow(0 0 10px rgba(245,166,35,.7));
 }
-.hq-dot-ring {
+.hq-pulse {
+  fill: var(--gold);
+  opacity: 0;
+  animation: hq-pulse 2.5s ease-out infinite;
+}
+@keyframes hq-pulse {
+  0% { r: 5; opacity: .6; }
+  100% { r: 22; opacity: 0; }
+}
+.hq-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 7px;
+  font-weight: 700;
+  fill: var(--white);
+  letter-spacing: .5px;
+  text-anchor: middle;
+}
+.conn-line {
+  stroke: rgba(245,166,35,.25);
+  stroke-width: .8;
+  stroke-dasharray: 3 3;
   fill: none;
+}
+.conn-line-anim {
   stroke: var(--gold);
-  stroke-width: .5;
-  opacity: .4;
-  animation: pulse-ring 2s ease-in-out infinite;
+  stroke-width: .8;
+  stroke-dasharray: 3 3;
+  fill: none;
+  opacity: .6;
+  animation: dash-flow 2s linear infinite;
 }
-.map-path {
-  fill: rgba(30,91,255,.2);
-  stroke: rgba(30,91,255,.3);
-  stroke-width: .5;
-}
+@keyframes dash-flow { to { stroke-dashoffset: -12; } }
 #s8 .hq-list {
   display: flex;
   gap: 20px;
@@ -818,72 +856,72 @@ html, body {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
-   SLIDE 9 — CLUB 5.0
+   SLIDE 9 — SERVICIOS
    ═══════════════════════════════════════════════════════════════════════ */
 #s9 { background: var(--grad-hero); }
 #s9 .content {
-  padding: 0 60px;
+  padding: 0 40px;
 }
 #s9 .top-section {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
 }
-#s9 .club-grid {
+#s9 .services-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-.club-card {
+.svc-card {
   border-radius: var(--radius);
-  padding: 24px 16px;
-  text-align: center;
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(12px);
-  transition: all .5s cubic-bezier(.22,1,.36,1);
-  position: relative;
   overflow: hidden;
+  position: relative;
+  height: 180px;
+  cursor: pointer;
+  transition: all .5s cubic-bezier(.22,1,.36,1);
 }
-.club-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity .5s;
-  z-index: 0;
+.svc-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(0,0,0,.4);
+  z-index: 2;
 }
-.club-card:hover::before { opacity: 1; }
-.club-card:hover {
-  transform: translateY(-6px);
-  border-color: transparent;
+.svc-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .6s;
 }
-.club-card:nth-child(1)::before { background: linear-gradient(135deg, #CD7F32 0%, #A0522D 100%); }
-.club-card:nth-child(2)::before { background: linear-gradient(135deg, #C0C0C0 0%, #808080 100%); }
-.club-card:nth-child(3)::before { background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%); }
-.club-card:nth-child(4)::before { background: linear-gradient(135deg, #E5E4E2 0%, #B0C4DE 100%); }
-.club-card:nth-child(5)::before { background: linear-gradient(135deg, #2D1B8E 0%, #4834D4 100%); }
-.club-card:nth-child(6)::before { background: linear-gradient(135deg, #000000 0%, #2C2C2C 100%); }
-.club-card:nth-child(7)::before { background: linear-gradient(135deg, #FFD700 0%, #FF4500 100%); }
-.club-card:nth-child(8)::before { background: linear-gradient(135deg, #4169E1 0%, #00BFFF 100%); }
-.club-card:nth-child(9)::before { background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%); }
-.club-card:nth-child(10)::before { background: linear-gradient(135deg, #228B22 0%, #006400 100%); }
-.club-card:nth-child(11)::before { background: linear-gradient(135deg, #FF69B4 0%, #C71585 100%); }
-.club-card:nth-child(12)::before { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
-.club-card > * { position: relative; z-index: 1; }
-.club-card .club-name {
+.svc-card:hover img { transform: scale(1.1); }
+.svc-card .svc-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(6,11,36,.88) 0%, rgba(6,11,36,.2) 60%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+  transition: background .3s;
+}
+.svc-card:hover .svc-overlay {
+  background: linear-gradient(0deg, rgba(30,91,255,.7) 0%, rgba(6,11,36,.2) 70%);
+}
+.svc-card .svc-name {
   font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: .5px;
-  margin-top: 10px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  letter-spacing: 1px;
 }
-.club-card iconify-icon {
-  font-size: 30px;
+/* First row cards bigger */
+.svc-card.featured-svc {
+  height: 220px;
+}
+.svc-card.featured-svc .svc-overlay {
+  border: 2px solid var(--gold);
+  border-radius: var(--radius);
+}
+.svc-card.featured-svc .svc-name {
   color: var(--gold);
+  font-size: 13px;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -995,7 +1033,7 @@ html, body {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
-   SLIDE 11 — TIMELINE AIRPLANE
+   SLIDE 11 — TIMELINE AIRPLANE PRO
    ═══════════════════════════════════════════════════════════════════════ */
 #s11 { background: var(--grad-hero); }
 #s11 .content {
@@ -1003,74 +1041,119 @@ html, body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 40px;
-  padding: 0 60px;
+  gap: 36px;
+  padding: 0 50px;
 }
-#s11 .timeline {
+#s11 .timeline-wrap {
   width: 100%;
   max-width: 1100px;
   position: relative;
-  padding: 30px 0;
+  padding: 20px 0;
 }
-#s11 .timeline-track {
+#s11 .timeline-svg {
   width: 100%;
-  height: 4px;
-  background: var(--white-10);
-  border-radius: 2px;
-  position: relative;
+  height: 140px;
+  overflow: visible;
 }
-#s11 .timeline-fill {
-  height: 100%;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--blue), var(--gold));
-  width: 0%;
-  transition: width 2s cubic-bezier(.22,1,.36,1);
+#s11 .tl-track {
+  stroke: var(--white-10);
+  stroke-width: 3;
+  fill: none;
+  stroke-linecap: round;
 }
-.slide.active #s11-fill, #s11.active .timeline-fill {
-  width: 100%;
+#s11 .tl-fill {
+  stroke: url(#tlGrad);
+  stroke-width: 3;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 3s cubic-bezier(.22,1,.36,1);
 }
-#s11 .timeline-plane {
-  position: absolute;
-  top: -20px;
-  left: 0%;
-  font-size: 36px;
-  color: var(--gold);
-  transition: left 2s cubic-bezier(.22,1,.36,1);
-  filter: drop-shadow(0 0 12px rgba(245,166,35,.5));
+#s11.active .tl-fill {
+  stroke-dashoffset: 0;
 }
-#s11.active .timeline-plane {
-  left: calc(100% - 36px);
+#s11 .tl-plane {
+  transition: all 3s cubic-bezier(.22,1,.36,1);
+  filter: drop-shadow(0 0 12px rgba(245,166,35,.6));
 }
-#s11 .months {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 18px;
-  width: 100%;
-  max-width: 1100px;
+#s11 .tl-dot {
+  fill: var(--white-20);
+  transition: fill .5s, r .5s;
 }
-#s11 .month {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  opacity: .4;
-  transition: all .5s;
-}
-#s11.active .month { opacity: 1; }
-#s11 .month .m-num {
+#s11.active .tl-dot { fill: var(--blue-2); }
+#s11.active .tl-dot.gold { fill: var(--gold); }
+#s11 .tl-label {
   font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 800;
-  color: var(--white);
+  fill: var(--white-50);
+  text-anchor: middle;
+  transition: fill .5s;
 }
-#s11 .month .m-reward {
+#s11.active .tl-label { fill: var(--white); }
+#s11.active .tl-label.gold { fill: var(--gold); }
+#s11 .tl-milestone {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  fill: var(--gold);
+  text-anchor: middle;
+  letter-spacing: .5px;
+  opacity: 0;
+  transition: opacity .5s;
+}
+#s11.active .tl-milestone { opacity: 1; }
+#s11 .milestone-cards {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1000px;
+}
+.ms-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 24px;
+  border-radius: var(--radius);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all .6s cubic-bezier(.22,1,.36,1);
+}
+#s11.active .ms-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+#s11.active .ms-card:nth-child(1) { transition-delay: 1s; }
+#s11.active .ms-card:nth-child(2) { transition-delay: 1.5s; }
+#s11.active .ms-card:nth-child(3) { transition-delay: 2s; }
+#s11.active .ms-card:nth-child(4) { transition-delay: 2.5s; }
+.ms-card .ms-ico {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  background: var(--grad-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy);
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.ms-card .ms-month {
+  font-family: 'Montserrat', sans-serif;
   font-size: 11px;
+  font-weight: 800;
   color: var(--gold);
-  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
-#s11 .month:nth-child(12) .m-num {
-  color: var(--gold);
-  font-size: 18px;
+.ms-card .ms-text {
+  font-size: 13px;
+  color: var(--white-70);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -1263,19 +1346,16 @@ html, body {
     <div class="content">
       <div class="eyebrow reveal">La Gran Pregunta</div>
       <div class="big-question reveal d1">¿Y si el viaje<br><span class="gold">se pagara solo?</span></div>
-      <div class="gold-circle reveal d2">
-        <iconify-icon icon="ph:coin-vertical-duotone"></iconify-icon>
-      </div>
-      <p class="lead reveal d3" style="color:var(--white-70); text-align:center;">
+      <p class="lead reveal d2" style="color:var(--white-70); text-align:center;">
         Existe un modelo donde viajar no es un gasto — es una inversión que genera ingresos. Así funciona Travel Advantage.
       </p>
     </div>
   </div>
 
-  <!-- ────────── SLIDE 4: DESTINATIONS VIDEO ────────── -->
+  <!-- ────────── SLIDE 4: DESTINATIONS PHOTOS ────────── -->
   <div class="slide" id="s4">
     <div class="content">
-      <video id="destVideo" muted playsinline></video>
+      <div id="destImages"></div>
       <div class="video-overlay"></div>
       <div class="dest-info">
         <div class="dest-tagline" id="destTagline">Explora el mundo</div>
@@ -1299,11 +1379,11 @@ html, body {
       <h2 class="h2 reveal d1">Viaja. Gana. <span class="gold">Repite.</span></h2>
       <div class="logos-row reveal d2">
         <div class="logo-box">
-          <div class="logo-text">MWR <span class="life">Life</span></div>
+          <img src="logo-mwr-life.png" alt="MWR Life">
         </div>
         <span class="connector">×</span>
         <div class="logo-box">
-          <div class="logo-text" style="font-size:22px;">Travel<br><span style="font-weight:400;font-size:16px;">Advantage</span></div>
+          <img src="logo-travel-advantage.png" alt="Travel Advantage">
         </div>
       </div>
       <p class="tagline reveal d3">La plataforma de viajes que te paga por compartirla</p>
@@ -1314,28 +1394,7 @@ html, body {
   <div class="slide" id="s6">
     <div class="content">
       <div class="earth-wrap reveal" id="earthWrap">
-        <svg class="earth-svg" viewBox="0 0 200 200">
-          <defs>
-            <radialGradient id="earthGrad" cx="40%" cy="35%">
-              <stop offset="0%" stop-color="#1a5fb4"/>
-              <stop offset="60%" stop-color="#0a1f6e"/>
-              <stop offset="100%" stop-color="#060B24"/>
-            </radialGradient>
-            <radialGradient id="landGrad">
-              <stop offset="0%" stop-color="#2ecc71" stop-opacity=".5"/>
-              <stop offset="100%" stop-color="#27ae60" stop-opacity=".3"/>
-            </radialGradient>
-          </defs>
-          <circle cx="100" cy="100" r="95" fill="url(#earthGrad)" stroke="rgba(30,91,255,.3)" stroke-width="1"/>
-          <!-- Simplified continents -->
-          <ellipse cx="70" cy="55" rx="25" ry="20" fill="url(#landGrad)" opacity=".7"/>
-          <ellipse cx="130" cy="50" rx="30" ry="22" fill="url(#landGrad)" opacity=".6"/>
-          <ellipse cx="65" cy="95" rx="15" ry="30" fill="url(#landGrad)" opacity=".5"/>
-          <ellipse cx="135" cy="90" rx="20" ry="18" fill="url(#landGrad)" opacity=".4"/>
-          <ellipse cx="160" cy="130" rx="18" ry="15" fill="url(#landGrad)" opacity=".4"/>
-          <!-- Glow ring -->
-          <circle cx="100" cy="100" r="97" fill="none" stroke="rgba(30,91,255,.15)" stroke-width="3"/>
-        </svg>
+        <img class="earth-img" src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=800&q=80&auto=format&fit=crop" alt="Earth from space">
       </div>
       <div class="earth-info">
         <div class="earth-stats">
@@ -1382,55 +1441,65 @@ html, body {
 
   <!-- ────────── SLIDE 8: WORLD MAP ────────── -->
   <div class="slide" id="s8">
+    <div class="slide-bg-map"></div>
     <div class="content">
       <div class="eyebrow reveal">Presencia Global</div>
       <h2 class="h2 reveal d1" style="margin-bottom:10px;">Sedes en<br><span class="gold">5 Países Estratégicos</span></h2>
       <div class="map-container reveal d2">
-        <svg viewBox="0 0 800 400" fill="none">
-          <!-- Simplified world outline -->
+        <svg viewBox="0 0 900 450" fill="none">
           <!-- North America -->
-          <path d="M120,80 Q140,60 180,70 Q200,65 220,80 Q230,100 220,120 Q210,140 200,160 Q180,170 160,180 Q140,170 120,150 Q100,130 110,100 Z" class="map-path"/>
+          <path d="M80,55 L110,42 L145,38 L175,42 L200,50 L220,58 L240,70 L250,85 L248,100 L242,115 L232,128 L225,140 L218,148 L205,158 L195,165 L178,172 L165,175 L155,178 L148,180 L140,175 L130,168 L118,155 L108,142 L98,125 L90,108 L82,92 L78,75 Z" class="map-land"/>
+          <!-- Central America -->
+          <path d="M155,178 L165,185 L170,195 L168,202 L160,208 L152,205 L148,198 L148,188 Z" class="map-land"/>
           <!-- South America -->
-          <path d="M180,200 Q200,190 210,210 Q220,240 215,270 Q210,300 200,320 Q190,330 180,310 Q170,290 165,260 Q160,230 170,210 Z" class="map-path"/>
+          <path d="M168,212 L185,205 L200,208 L212,218 L220,232 L225,250 L222,270 L218,288 L210,305 L202,318 L195,328 L188,335 L180,332 L172,322 L168,308 L165,290 L162,270 L160,248 L162,230 Z" class="map-land"/>
           <!-- Europe -->
-          <path d="M380,70 Q400,60 420,65 Q440,70 450,85 Q445,100 435,110 Q420,115 405,110 Q390,105 380,90 Z" class="map-path"/>
+          <path d="M400,48 L415,42 L432,38 L448,42 L458,50 L462,60 L460,72 L455,82 L448,90 L440,98 L432,102 L420,105 L410,102 L402,95 L396,85 L392,72 L395,58 Z" class="map-land"/>
+          <!-- UK/Ireland -->
+          <path d="M385,48 L395,45 L398,52 L396,60 L390,62 L385,58 Z" class="map-land"/>
+          <!-- Scandinavia -->
+          <path d="M420,22 L432,18 L440,22 L445,32 L442,42 L435,42 L428,38 L422,32 Z" class="map-land"/>
           <!-- Africa -->
-          <path d="M390,140 Q410,130 430,140 Q445,160 450,190 Q445,230 435,260 Q420,280 405,270 Q390,250 385,220 Q380,180 385,150 Z" class="map-path"/>
-          <!-- Asia -->
-          <path d="M470,60 Q520,50 570,55 Q620,60 660,80 Q680,100 670,130 Q650,150 620,155 Q580,160 540,150 Q500,140 480,120 Q460,100 465,75 Z" class="map-path"/>
+          <path d="M402,115 L418,108 L435,110 L448,118 L458,130 L465,148 L468,170 L465,195 L460,220 L452,242 L442,260 L430,275 L418,280 L408,275 L400,265 L395,248 L390,228 L388,205 L390,180 L392,158 L395,138 Z" class="map-land"/>
+          <!-- Middle East -->
+          <path d="M468,100 L488,95 L505,100 L515,110 L518,122 L512,132 L502,138 L490,135 L480,128 L472,118 L468,108 Z" class="map-land"/>
+          <!-- Asia (Russia/China/India) -->
+          <path d="M462,30 L500,22 L545,18 L590,20 L635,25 L670,32 L700,42 L720,55 L728,72 L725,90 L718,105 L708,118 L695,128 L678,135 L660,140 L640,142 L618,140 L598,138 L575,140 L558,145 L542,152 L528,158 L518,155 L508,148 L498,140 L488,130 L478,118 L470,105 L465,88 L460,72 L458,55 L460,40 Z" class="map-land"/>
+          <!-- India -->
+          <path d="M558,145 L572,148 L582,158 L588,172 L585,188 L578,200 L568,205 L558,200 L552,188 L548,175 L550,160 Z" class="map-land"/>
+          <!-- Southeast Asia -->
+          <path d="M620,142 L635,148 L648,158 L655,170 L650,180 L640,185 L628,182 L620,172 L618,158 Z" class="map-land"/>
+          <!-- Japan -->
+          <path d="M725,65 L735,58 L742,62 L745,72 L740,82 L732,85 L726,78 Z" class="map-land"/>
           <!-- Australia -->
-          <path d="M620,260 Q650,250 680,255 Q700,265 695,285 Q680,300 660,295 Q640,290 630,275 Z" class="map-path"/>
+          <path d="M660,280 L685,272 L710,275 L730,282 L740,295 L738,310 L728,322 L712,330 L695,332 L678,328 L665,318 L658,305 L656,292 Z" class="map-land"/>
+          <!-- Indonesia -->
+          <path d="M638,205 L658,200 L678,202 L690,208 L685,215 L670,218 L652,216 L640,212 Z" class="map-land"/>
 
-          <!-- Connection lines -->
-          <line x1="440" y1="90" x2="630" y2="100" stroke="rgba(245,166,35,.3)" stroke-width="1" stroke-dasharray="4,4">
-            <animate attributeName="stroke-dashoffset" values="0;-8" dur="1s" repeatCount="indefinite"/>
-          </line>
-          <line x1="200" y1="120" x2="400" y2="85" stroke="rgba(245,166,35,.3)" stroke-width="1" stroke-dasharray="4,4">
-            <animate attributeName="stroke-dashoffset" values="0;-8" dur="1s" repeatCount="indefinite"/>
-          </line>
-          <line x1="430" y1="90" x2="470" y2="170" stroke="rgba(245,166,35,.3)" stroke-width="1" stroke-dasharray="4,4">
-            <animate attributeName="stroke-dashoffset" values="0;-8" dur="1s" repeatCount="indefinite"/>
-          </line>
-          <line x1="420" y1="90" x2="380" y2="80" stroke="rgba(245,166,35,.3)" stroke-width="1" stroke-dasharray="4,4">
-            <animate attributeName="stroke-dashoffset" values="0;-8" dur="1s" repeatCount="indefinite"/>
-          </line>
+          <!-- Connection lines from center (Europe) to HQs -->
+          <path d="M430,78 C350,78 280,95 190,100" class="conn-line"/>
+          <path d="M430,78 C350,78 280,95 190,100" class="conn-line-anim"/>
+          <path d="M450,78 C500,75 560,70 680,60" class="conn-line"/>
+          <path d="M450,78 C500,75 560,70 680,60" class="conn-line-anim"/>
+          <path d="M460,95 C470,100 490,115 510,120" class="conn-line"/>
+          <path d="M460,95 C470,100 490,115 510,120" class="conn-line-anim"/>
+          <path d="M395,55 L390,52" class="conn-line"/>
 
-          <!-- HQ Dots -->
-          <!-- Hong Kong -->
-          <circle cx="630" cy="100" r="6" class="hq-dot"/>
-          <circle cx="630" cy="100" r="14" class="hq-dot-ring"/>
-          <!-- USA -->
-          <circle cx="180" cy="100" r="6" class="hq-dot"/>
-          <circle cx="180" cy="100" r="14" class="hq-dot-ring"/>
-          <!-- France -->
-          <circle cx="405" cy="82" r="6" class="hq-dot"/>
-          <circle cx="405" cy="82" r="14" class="hq-dot-ring"/>
-          <!-- UK -->
-          <circle cx="390" cy="72" r="6" class="hq-dot"/>
-          <circle cx="390" cy="72" r="14" class="hq-dot-ring"/>
-          <!-- UAE -->
-          <circle cx="500" cy="140" r="6" class="hq-dot"/>
-          <circle cx="500" cy="140" r="14" class="hq-dot-ring"/>
+          <!-- HQ: USA -->
+          <circle cx="190" cy="100" r="5" class="hq-pulse"/><circle cx="190" cy="100" r="5" class="hq-dot"/>
+          <text x="190" y="118" class="hq-label">USA</text>
+          <!-- HQ: UK -->
+          <circle cx="390" cy="52" r="4" class="hq-pulse"/><circle cx="390" cy="52" r="4" class="hq-dot"/>
+          <text x="390" y="42" class="hq-label">UK</text>
+          <!-- HQ: France -->
+          <circle cx="420" cy="72" r="4" class="hq-pulse"/><circle cx="420" cy="72" r="4" class="hq-dot"/>
+          <text x="420" y="62" class="hq-label">FRANCIA</text>
+          <!-- HQ: UAE -->
+          <circle cx="510" cy="120" r="4" class="hq-pulse"/><circle cx="510" cy="120" r="4" class="hq-dot"/>
+          <text x="510" y="138" class="hq-label">EAU</text>
+          <!-- HQ: Hong Kong -->
+          <circle cx="680" cy="60" r="5" class="hq-pulse"/><circle cx="680" cy="60" r="5" class="hq-dot"/>
+          <text x="680" y="50" class="hq-label">HONG KONG</text>
         </svg>
       </div>
       <div class="hq-list reveal d3">
@@ -1443,61 +1512,53 @@ html, body {
     </div>
   </div>
 
-  <!-- ────────── SLIDE 9: CLUB 5.0 ────────── -->
+  <!-- ────────── SLIDE 9: SERVICIOS ────────── -->
   <div class="slide" id="s9">
     <div class="content">
       <div class="top-section">
-        <div class="eyebrow reveal">Programa de Reconocimiento</div>
-        <h2 class="h2 reveal d1">Club <span class="gold">5.0</span></h2>
+        <div class="eyebrow reveal">Plataforma Privada</div>
+        <h2 class="h2 reveal d1">Todos Los Servicios<br><span class="gold">En Un Solo Lugar</span></h2>
       </div>
-      <div class="club-grid">
-        <div class="club-card reveal d2">
-          <iconify-icon icon="ph:medal-duotone"></iconify-icon>
-          <div class="club-name">Bronce</div>
+      <div class="services-grid">
+        <div class="svc-card featured-svc reveal d2">
+          <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=500&q=80&auto=format&fit=crop" alt="El Club">
+          <div class="svc-overlay"><div class="svc-name">El Club</div></div>
         </div>
-        <div class="club-card reveal d2">
-          <iconify-icon icon="ph:medal-duotone"></iconify-icon>
-          <div class="club-name">Plata</div>
+        <div class="svc-card featured-svc reveal d2">
+          <img src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=500&q=80&auto=format&fit=crop" alt="Experiencias">
+          <div class="svc-overlay"><div class="svc-name">Experiencias de Vida</div></div>
         </div>
-        <div class="club-card reveal d3">
-          <iconify-icon icon="ph:trophy-duotone"></iconify-icon>
-          <div class="club-name">Oro</div>
+        <div class="svc-card featured-svc reveal d2">
+          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&q=80&auto=format&fit=crop" alt="Centro Comercial">
+          <div class="svc-overlay"><div class="svc-name">Centro Comercial</div></div>
         </div>
-        <div class="club-card reveal d3">
-          <iconify-icon icon="ph:diamond-duotone"></iconify-icon>
-          <div class="club-name">Platino</div>
+        <div class="svc-card featured-svc reveal d2">
+          <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=500&q=80&auto=format&fit=crop" alt="IA">
+          <div class="svc-overlay"><div class="svc-name">Inteligencia Artificial</div></div>
         </div>
-        <div class="club-card reveal d4">
-          <iconify-icon icon="ph:crown-duotone"></iconify-icon>
-          <div class="club-name">Zafiro</div>
+        <div class="svc-card featured-svc reveal d2">
+          <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500&q=80&auto=format&fit=crop" alt="Hoteles">
+          <div class="svc-overlay"><div class="svc-name">Hoteles</div></div>
         </div>
-        <div class="club-card reveal d4">
-          <iconify-icon icon="ph:star-four-duotone"></iconify-icon>
-          <div class="club-name">Ónix</div>
+        <div class="svc-card reveal d3">
+          <img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=500&q=80&auto=format&fit=crop" alt="Complejos">
+          <div class="svc-overlay"><div class="svc-name">Complejos Turísticos</div></div>
         </div>
-        <div class="club-card reveal d5">
-          <iconify-icon icon="ph:fire-duotone"></iconify-icon>
-          <div class="club-name">Fénix</div>
+        <div class="svc-card reveal d3">
+          <img src="https://images.unsplash.com/photo-1556388158-158ea5ccacbd?w=500&q=80&auto=format&fit=crop" alt="Vuelos">
+          <div class="svc-overlay"><div class="svc-name">Vuelos</div></div>
         </div>
-        <div class="club-card reveal d5">
-          <iconify-icon icon="ph:lightning-duotone"></iconify-icon>
-          <div class="club-name">Zirconia</div>
+        <div class="svc-card reveal d3">
+          <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=500&q=80&auto=format&fit=crop" alt="Cruceros">
+          <div class="svc-overlay"><div class="svc-name">Cruceros</div></div>
         </div>
-        <div class="club-card reveal d6">
-          <iconify-icon icon="ph:crown-simple-duotone"></iconify-icon>
-          <div class="club-name">Rubí</div>
+        <div class="svc-card reveal d3">
+          <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?w=500&q=80&auto=format&fit=crop" alt="Renta de Autos">
+          <div class="svc-overlay"><div class="svc-name">Renta de Autos</div></div>
         </div>
-        <div class="club-card reveal d6">
-          <iconify-icon icon="ph:globe-hemisphere-east-duotone"></iconify-icon>
-          <div class="club-name">Esmeralda</div>
-        </div>
-        <div class="club-card reveal d7">
-          <iconify-icon icon="ph:heart-duotone"></iconify-icon>
-          <div class="club-name">Diamante</div>
-        </div>
-        <div class="club-card reveal d7">
-          <iconify-icon icon="ph:shield-star-duotone"></iconify-icon>
-          <div class="club-name">Embajador</div>
+        <div class="svc-card reveal d3">
+          <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&q=80&auto=format&fit=crop" alt="Actividades">
+          <div class="svc-overlay"><div class="svc-name">Actividades</div></div>
         </div>
       </div>
     </div>
@@ -1551,32 +1612,94 @@ html, body {
     </div>
   </div>
 
-  <!-- ────────── SLIDE 11: TIMELINE ────────── -->
+  <!-- ────────── SLIDE 11: TIMELINE PRO ────────── -->
   <div class="slide" id="s11">
     <div class="content">
       <div class="eyebrow reveal">Tu Primer Año</div>
       <h2 class="h2 reveal d1">12 Meses Que<br><span class="gold">Cambian Todo</span></h2>
-      <div class="timeline reveal d2">
-        <div class="timeline-track">
-          <div class="timeline-fill"></div>
-          <div class="timeline-plane">
-            <iconify-icon icon="ph:airplane-tilt-duotone"></iconify-icon>
+      <div class="timeline-wrap reveal d2">
+        <svg class="timeline-svg" viewBox="0 0 1000 140" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="tlGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#1E5BFF"/>
+              <stop offset="50%" stop-color="#4834D4"/>
+              <stop offset="100%" stop-color="#F5A623"/>
+            </linearGradient>
+          </defs>
+          <!-- Curved path -->
+          <path d="M30,90 C120,90 160,40 250,40 C340,40 360,90 450,90 C540,90 560,40 650,40 C740,40 780,90 970,90" class="tl-track"/>
+          <path d="M30,90 C120,90 160,40 250,40 C340,40 360,90 450,90 C540,90 560,40 650,40 C740,40 780,90 970,90" class="tl-fill" id="tlFill"/>
+
+          <!-- Month dots -->
+          <circle cx="30" cy="90" r="5" class="tl-dot gold"/>
+          <circle cx="115" cy="62" r="4" class="tl-dot"/>
+          <circle cx="195" cy="42" r="5" class="tl-dot gold"/>
+          <circle cx="280" cy="48" r="4" class="tl-dot"/>
+          <circle cx="360" cy="72" r="4" class="tl-dot"/>
+          <circle cx="450" cy="90" r="5" class="tl-dot gold"/>
+          <circle cx="535" cy="68" r="4" class="tl-dot"/>
+          <circle cx="610" cy="44" r="4" class="tl-dot"/>
+          <circle cx="680" cy="42" r="5" class="tl-dot gold"/>
+          <circle cx="770" cy="58" r="4" class="tl-dot"/>
+          <circle cx="870" cy="78" r="4" class="tl-dot"/>
+          <circle cx="970" cy="90" r="7" class="tl-dot gold"/>
+
+          <!-- Month labels -->
+          <text x="30" y="115" class="tl-label gold">1</text>
+          <text x="115" y="115" class="tl-label">2</text>
+          <text x="195" y="115" class="tl-label gold">3</text>
+          <text x="280" y="115" class="tl-label">4</text>
+          <text x="360" y="115" class="tl-label">5</text>
+          <text x="450" y="115" class="tl-label gold">6</text>
+          <text x="535" y="115" class="tl-label">7</text>
+          <text x="610" y="115" class="tl-label">8</text>
+          <text x="680" y="115" class="tl-label gold">9</text>
+          <text x="770" y="115" class="tl-label">10</text>
+          <text x="870" y="115" class="tl-label">11</text>
+          <text x="970" y="115" class="tl-label gold" style="font-size:13px;">12</text>
+
+          <!-- Milestone labels on curve -->
+          <text x="30" y="80" class="tl-milestone">INICIO</text>
+          <text x="195" y="32" class="tl-milestone">BONO</text>
+          <text x="450" y="80" class="tl-milestone">1er VIAJE</text>
+          <text x="680" y="32" class="tl-milestone">CLUB</text>
+          <text x="970" y="80" class="tl-milestone" style="font-size:10px;">LÍDER</text>
+
+          <!-- Airplane at end -->
+          <g class="tl-plane" id="tlPlane" transform="translate(30,76)">
+            <text font-size="26" fill="#F5A623" text-anchor="middle" dominant-baseline="middle">✈</text>
+          </g>
+        </svg>
+      </div>
+      <div class="milestone-cards reveal d3">
+        <div class="ms-card">
+          <div class="ms-ico"><iconify-icon icon="ph:rocket-launch-duotone"></iconify-icon></div>
+          <div>
+            <div class="ms-month">Mes 1</div>
+            <div class="ms-text">Activas tu membresía</div>
           </div>
         </div>
-      </div>
-      <div class="months reveal d3">
-        <div class="month"><span class="m-num">1</span><span class="m-reward">Inicio</span></div>
-        <div class="month"><span class="m-num">2</span><span class="m-reward"></span></div>
-        <div class="month"><span class="m-num">3</span><span class="m-reward">Bono</span></div>
-        <div class="month"><span class="m-num">4</span><span class="m-reward"></span></div>
-        <div class="month"><span class="m-num">5</span><span class="m-reward"></span></div>
-        <div class="month"><span class="m-num">6</span><span class="m-reward">Viaje</span></div>
-        <div class="month"><span class="m-num">7</span><span class="m-reward"></span></div>
-        <div class="month"><span class="m-num">8</span><span class="m-reward"></span></div>
-        <div class="month"><span class="m-num">9</span><span class="m-reward">Club</span></div>
-        <div class="month"><span class="m-num">10</span><span class="m-reward"></span></div>
-        <div class="month"><span class="m-num">11</span><span class="m-reward"></span></div>
-        <div class="month"><span class="m-num">12</span><span class="m-reward">Líder</span></div>
+        <div class="ms-card">
+          <div class="ms-ico"><iconify-icon icon="ph:gift-duotone"></iconify-icon></div>
+          <div>
+            <div class="ms-month">Mes 3</div>
+            <div class="ms-text">Bono de inicio rápido</div>
+          </div>
+        </div>
+        <div class="ms-card">
+          <div class="ms-ico"><iconify-icon icon="ph:airplane-tilt-duotone"></iconify-icon></div>
+          <div>
+            <div class="ms-month">Mes 6</div>
+            <div class="ms-text">Tu primer viaje gratis</div>
+          </div>
+        </div>
+        <div class="ms-card">
+          <div class="ms-ico"><iconify-icon icon="ph:crown-duotone"></iconify-icon></div>
+          <div>
+            <div class="ms-month">Mes 12</div>
+            <div class="ms-text">Alcanzas Líder Club</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1675,7 +1798,11 @@ html, body {
     // Slide-specific triggers
     if (idx === 3) startDestLoop();
     else stopDestLoop();
-    if (idx === 10) triggerTimeline();
+    // Timeline triggers on slide 11 (index 10)
+    if (idx === 10) {
+      // Small delay so the CSS .active class is applied first
+      setTimeout(triggerTimeline, 100);
+    }
   }
 
   document.getElementById('prevBtn').onclick = () => go(current - 1);
@@ -1685,24 +1812,35 @@ html, body {
     if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
   });
 
-  /* ── DESTINATION VIDEO LOOP ── */
+  /* ── DESTINATION PHOTO LOOP ── */
   const destinations = [
-    { name: 'PUNTA CANA', tag: 'República Dominicana', video: 'https://cdn.pixabay.com/video/2024/03/16/204417-924223996_large.mp4' },
-    { name: 'COLOMBIA', tag: 'Cartagena de Indias', video: 'https://cdn.pixabay.com/video/2021/04/16/71071-540400493_large.mp4' },
-    { name: 'GRECIA', tag: 'Santorini', video: 'https://cdn.pixabay.com/video/2020/05/25/40130-424300959_large.mp4' },
-    { name: 'ESPAÑA', tag: 'Barcelona', video: 'https://cdn.pixabay.com/video/2024/06/05/215270_large.mp4' },
-    { name: 'DISNEY', tag: 'Orlando, Florida', video: 'https://cdn.pixabay.com/video/2024/08/09/225637_large.mp4' },
-    { name: 'JAPÓN', tag: 'Tokio', video: 'https://cdn.pixabay.com/video/2023/10/10/184372-873299498_large.mp4' },
-    { name: 'CHINA', tag: 'Shanghai', video: 'https://cdn.pixabay.com/video/2024/09/17/231505_large.mp4' },
-    { name: 'ÁFRICA', tag: 'Safari', video: 'https://cdn.pixabay.com/video/2022/07/29/126323-735656906_large.mp4' },
+    { name: 'PUNTA CANA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1505881502353-a1986add3762?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'COLOMBIA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1583531172005-814194fa2da4?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'GRECIA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'ESPAÑA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'DISNEY', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1597466599360-3b9775841aec?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'JAPÓN', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'CHINA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'ÁFRICA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1920&q=80&auto=format&fit=crop' },
   ];
 
-  const $video = document.getElementById('destVideo');
+  const $imgContainer = document.getElementById('destImages');
   const $country = document.getElementById('destCountry');
   const $tagline = document.getElementById('destTagline');
   const $dots = document.getElementById('destDots');
   let destIdx = 0;
   let destTimer = null;
+
+  // Pre-create all images
+  const destImgs = destinations.map((d, i) => {
+    const img = document.createElement('img');
+    img.className = 'dest-img';
+    img.src = d.img;
+    img.alt = d.name;
+    if (i === 0) img.classList.add('active');
+    $imgContainer.appendChild(img);
+    return img;
+  });
 
   // Build dots
   destinations.forEach((_, i) => {
@@ -1715,6 +1853,7 @@ html, body {
   function showDest(i) {
     destIdx = i;
     const d = destinations[i];
+    // Fade text
     $country.style.opacity = '0';
     $country.style.transform = 'translateY(20px)';
     setTimeout(() => {
@@ -1722,9 +1861,9 @@ html, body {
       $tagline.textContent = d.tag;
       $country.style.opacity = '1';
       $country.style.transform = 'translateY(0)';
-    }, 300);
-    $video.src = d.video;
-    $video.play().catch(() => {});
+    }, 400);
+    // Crossfade images
+    destImgs.forEach((img, j) => img.classList.toggle('active', j === i));
     dotEls.forEach((el, j) => el.classList.toggle('active', j === i));
   }
 
@@ -1732,13 +1871,12 @@ html, body {
     showDest(0);
     destTimer = setInterval(() => {
       showDest((destIdx + 1) % destinations.length);
-    }, 7000);
+    }, 5000);
   }
 
   function stopDestLoop() {
     clearInterval(destTimer);
     destTimer = null;
-    $video.pause();
   }
 
   /* ── MUSIC ── */
@@ -1765,12 +1903,26 @@ html, body {
     });
   });
 
-  /* ── TIMELINE ── */
+  /* ── TIMELINE ANIMATION ── */
   function triggerTimeline() {
-    const fill = document.querySelector('#s11 .timeline-fill');
-    const plane = document.querySelector('#s11 .timeline-plane');
-    if (fill) fill.style.width = '100%';
-    if (plane) plane.style.left = 'calc(100% - 36px)';
+    const s11 = document.getElementById('s11');
+    // The .active class triggers CSS transitions for tl-fill stroke-dashoffset
+    // Animate the airplane along the path
+    const plane = document.getElementById('tlPlane');
+    const path = document.querySelector('#s11 .tl-track');
+    if (!plane || !path) return;
+    const len = path.getTotalLength();
+    const duration = 3000;
+    const start = performance.now();
+    function animatePlane(now) {
+      const t = Math.min((now - start) / duration, 1);
+      // ease out cubic
+      const ease = 1 - Math.pow(1 - t, 3);
+      const pt = path.getPointAtLength(ease * len);
+      plane.setAttribute('transform', `translate(${pt.x},${pt.y - 14})`);
+      if (t < 1) requestAnimationFrame(animatePlane);
+    }
+    requestAnimationFrame(animatePlane);
   }
 
   /* ── Touch / Swipe ── */
