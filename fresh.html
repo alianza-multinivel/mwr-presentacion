@@ -605,21 +605,21 @@ html, body {
 #s6 .hq-photos::after {
   content: "";
   position: absolute; inset: 0;
-  background: linear-gradient(90deg, transparent 60%, var(--navy) 100%),
-              linear-gradient(0deg, rgba(6,11,36,.7) 0%, rgba(6,11,36,.2) 40%, rgba(6,11,36,.5) 100%);
+  background: linear-gradient(90deg, transparent 50%, rgba(255,255,255,.15) 85%, rgba(255,255,255,.4) 100%),
+              linear-gradient(0deg, rgba(6,11,36,.6) 0%, rgba(6,11,36,.1) 40%, rgba(6,11,36,.4) 100%);
   z-index: 1;
 }
 #s6 .hq-city-name {
   position: absolute;
-  bottom: 60px; left: 50%;
-  transform: translateX(-50%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 2;
   font-family: 'Montserrat', sans-serif;
-  font-size: clamp(28px, 3vw, 48px);
+  font-size: clamp(36px, 4vw, 64px);
   font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: .08em;
-  text-shadow: 0 4px 30px rgba(0,0,0,.7);
+  letter-spacing: .12em;
+  text-shadow: 0 4px 40px rgba(0,0,0,.8), 0 2px 10px rgba(0,0,0,.5);
   transition: opacity .5s, transform .5s;
 }
 #s6 .hq-info {
@@ -627,69 +627,95 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 50px 50px 50px 60px;
-  gap: 28px;
-  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
+  padding: 40px 36px;
+  gap: 20px;
+  background: #ffffff;
+  overflow: hidden;
+}
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 #s6 .info-item {
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 20px 24px;
-  border-radius: var(--radius);
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(12px);
-  transition: all .4s;
+  padding: 28px 28px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #7c3aed, #4f46e5, #2563eb, #7c3aed, #4f46e5);
+  background-size: 300% 300%;
+  animation: gradient-shift 4s ease infinite;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all .7s cubic-bezier(.22,1,.36,1);
+  box-shadow: 0 8px 30px rgba(79,70,229,.35);
 }
+#s6.active .info-item { opacity: 1; transform: translateY(0); }
+#s6.active .info-item:nth-child(1) { transition-delay: .3s; }
+#s6.active .info-item:nth-child(2) { transition-delay: .6s; }
+#s6.active .info-item:nth-child(3) { transition-delay: .9s; }
 #s6 .info-item:hover {
-  background: var(--glass-2);
-  transform: translateX(4px);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(79,70,229,.5);
 }
 #s6 .info-item .info-ico {
-  width: 50px; height: 50px;
-  border-radius: 14px;
-  background: var(--grad-gold);
+  width: 56px; height: 56px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  color: var(--navy);
+  font-size: 28px;
+  color: #fff;
   flex-shrink: 0;
 }
 #s6 .info-item .info-val {
   font-family: 'Montserrat', sans-serif;
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 900;
   line-height: 1;
+  color: #fff;
 }
 #s6 .info-item .info-desc {
   font-size: 13px;
-  color: var(--white-70);
-  margin-top: 2px;
+  color: rgba(255,255,255,.8);
+  margin-top: 4px;
 }
 #s6 .certifications {
   margin-top: 8px;
-  padding: 16px 24px;
-  border-radius: var(--radius);
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
+  padding: 18px 24px;
+  border-radius: 18px;
+  background: #f3f0ff;
   text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all .7s cubic-bezier(.22,1,.36,1);
 }
-#s6 .certifications img {
-  max-width: 100%;
-  height: 55px;
+#s6.active .certifications { opacity: 1; transform: translateY(0); transition-delay: 1.2s; }
+#s6 .cert-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+#s6 .cert-logos img {
+  height: 40px;
   object-fit: contain;
-  filter: brightness(1.2);
+  filter: grayscale(20%);
+  transition: filter .3s;
 }
+#s6 .cert-logos img:hover { filter: grayscale(0%); }
 #s6 .cert-label {
   font-family: 'Montserrat', sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--white-50);
-  margin-bottom: 10px;
+  color: #7c3aed;
+  margin-bottom: 12px;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -1033,8 +1059,8 @@ html, body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 36px;
-  padding: 0 50px;
+  gap: 20px;
+  padding: 30px 50px 0;
 }
 #s13 .timeline-wrap {
   width: 100%;
@@ -1044,22 +1070,22 @@ html, body {
 }
 #s13 .timeline-svg {
   width: 100%;
-  height: 200px;
+  height: 300px;
   overflow: visible;
 }
 #s13 .tl-track {
   stroke: var(--white-10);
-  stroke-width: 3;
+  stroke-width: 6;
   fill: none;
   stroke-linecap: round;
 }
 #s13 .tl-fill {
   stroke: url(#tlGrad);
-  stroke-width: 3;
+  stroke-width: 6;
   fill: none;
   stroke-linecap: round;
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
   transition: stroke-dashoffset 6s cubic-bezier(.22,1,.36,1);
 }
 #s13.active .tl-fill {
@@ -1077,7 +1103,7 @@ html, body {
 #s13.active .tl-dot.gold { fill: var(--gold); }
 #s13 .tl-label {
   font-family: 'Montserrat', sans-serif;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 800;
   fill: var(--white-50);
   text-anchor: middle;
@@ -1087,11 +1113,11 @@ html, body {
 #s13.active .tl-label.gold { fill: var(--gold); }
 #s13 .tl-milestone {
   font-family: 'Montserrat', sans-serif;
-  font-size: 8px;
+  font-size: 12px;
   font-weight: 700;
   fill: var(--gold);
   text-anchor: middle;
-  letter-spacing: .5px;
+  letter-spacing: 1px;
   opacity: 0;
   transition: opacity .5s;
 }
@@ -1190,7 +1216,7 @@ html, body {
   background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1920&q=80&auto=format&fit=crop');
 }
 #s14 .slide-bg::after {
-  background: linear-gradient(135deg, rgba(6,11,36,.93) 0%, rgba(45,27,142,.85) 100%);
+  background: linear-gradient(135deg, rgba(30,10,80,.95) 0%, rgba(75,40,180,.92) 50%, rgba(45,27,142,.95) 100%);
 }
 #s14 .content {
   display: flex;
@@ -1203,7 +1229,7 @@ html, body {
 #s14 .network-visual {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 28px;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -1214,13 +1240,14 @@ html, body {
   gap: 10px;
 }
 .person-avatar {
-  width: 80px; height: 80px;
+  width: 130px; height: 130px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 36px;
+  font-size: 48px;
   position: relative;
+  overflow: hidden;
 }
 .person-avatar.you {
   background: var(--grad-gold);
@@ -1229,15 +1256,26 @@ html, body {
 }
 .person-avatar.team {
   background: var(--glass);
-  border: 2px solid var(--blue);
+  border: 3px solid var(--blue);
   color: var(--blue-2);
+}
+.person-avatar.team img {
+  width: 100%; height: 100%;
+  object-fit: cover;
 }
 .person-label {
   font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
+}
+.person-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--white-70);
+  letter-spacing: 1px;
 }
 .network-connector {
   display: flex;
@@ -1424,30 +1462,35 @@ html, body {
         <div class="hq-city-name" id="hqCityName">MIAMI</div>
       </div>
       <div class="hq-info">
-        <div class="info-item reveal">
+        <div class="info-item">
           <div class="info-ico"><iconify-icon icon="ph:calendar-check-duotone"></iconify-icon></div>
           <div>
             <div class="info-val">13 Años</div>
             <div class="info-desc">De trayectoria exitosa</div>
           </div>
         </div>
-        <div class="info-item reveal d1">
+        <div class="info-item">
           <div class="info-ico"><iconify-icon icon="ph:users-three-duotone"></iconify-icon></div>
           <div>
             <div class="info-val">+500,000</div>
             <div class="info-desc">Miembros activos</div>
           </div>
         </div>
-        <div class="info-item reveal d2">
+        <div class="info-item">
           <div class="info-ico"><iconify-icon icon="ph:globe-duotone"></iconify-icon></div>
           <div>
             <div class="info-val">+150 Países</div>
             <div class="info-desc">Presencia mundial</div>
           </div>
         </div>
-        <div class="certifications reveal d3">
+        <div class="certifications">
           <div class="cert-label">Certificaciones Internacionales</div>
-          <img src="certificaciones.png" alt="ETOA · IATA · Trustpilot 4.8">
+          <div class="cert-logos">
+            <img src="etoa-logo.png" alt="ETOA">
+            <img src="atout-logo.png" alt="Atout France">
+            <img src="iata-logo.png" alt="IATA">
+            <img src="trustpilot-logo.png" alt="Trustpilot">
+          </div>
         </div>
       </div>
     </div>
@@ -1591,10 +1634,10 @@ html, body {
   <!-- ────────── SLIDE 13: TIMELINE PRO ────────── -->
   <div class="slide" id="s13">
     <div class="content">
-      <div class="eyebrow reveal">Tu Primer Año</div>
+      <div class="eyebrow reveal">Tus Próximos 12 Meses</div>
       <h2 class="h2 reveal d1">12 Meses Que<br><span class="gold">Cambian Todo</span></h2>
       <div class="timeline-wrap reveal d2">
-        <svg class="timeline-svg" viewBox="0 0 1000 200" preserveAspectRatio="xMidYMid meet">
+        <svg class="timeline-svg" viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid meet">
           <defs>
             <linearGradient id="tlGrad" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stop-color="#1E5BFF"/>
@@ -1602,83 +1645,50 @@ html, body {
               <stop offset="100%" stop-color="#F5A623"/>
             </linearGradient>
           </defs>
-          <!-- Curved path -->
-          <path d="M30,130 C120,130 160,50 250,50 C340,50 360,130 450,130 C540,130 560,50 650,50 C740,50 780,130 970,130" class="tl-track"/>
-          <path d="M30,130 C120,130 160,50 250,50 C340,50 360,130 450,130 C540,130 560,50 650,50 C740,50 780,130 970,130" class="tl-fill" id="tlFill"/>
+          <!-- Curved path - bigger -->
+          <path d="M40,200 C150,200 180,60 300,60 C420,60 450,200 570,200 C690,200 720,60 850,60 C920,60 950,140 960,200" class="tl-track"/>
+          <path d="M40,200 C150,200 180,60 300,60 C420,60 450,200 570,200 C690,200 720,60 850,60 C920,60 950,140 960,200" class="tl-fill" id="tlFill"/>
 
           <!-- Month dots -->
-          <circle cx="30" cy="130" r="6" class="tl-dot gold"/>
-          <circle cx="115" cy="85" r="5" class="tl-dot"/>
-          <circle cx="195" cy="52" r="6" class="tl-dot gold"/>
-          <circle cx="280" cy="62" r="5" class="tl-dot"/>
-          <circle cx="360" cy="100" r="5" class="tl-dot"/>
-          <circle cx="450" cy="130" r="6" class="tl-dot gold"/>
-          <circle cx="535" cy="95" r="5" class="tl-dot"/>
-          <circle cx="610" cy="56" r="5" class="tl-dot"/>
-          <circle cx="680" cy="52" r="6" class="tl-dot gold"/>
-          <circle cx="770" cy="75" r="5" class="tl-dot"/>
-          <circle cx="870" cy="112" r="5" class="tl-dot"/>
-          <circle cx="970" cy="130" r="9" class="tl-dot gold"/>
+          <circle cx="40" cy="200" r="8" class="tl-dot gold"/>
+          <circle cx="125" cy="145" r="7" class="tl-dot"/>
+          <circle cx="215" cy="75" r="8" class="tl-dot gold"/>
+          <circle cx="310" cy="65" r="7" class="tl-dot"/>
+          <circle cx="400" cy="120" r="7" class="tl-dot"/>
+          <circle cx="500" cy="195" r="8" class="tl-dot gold"/>
+          <circle cx="590" cy="190" r="7" class="tl-dot"/>
+          <circle cx="665" cy="135" r="7" class="tl-dot"/>
+          <circle cx="740" cy="80" r="8" class="tl-dot gold"/>
+          <circle cx="820" cy="65" r="7" class="tl-dot"/>
+          <circle cx="895" cy="100" r="7" class="tl-dot"/>
+          <circle cx="960" cy="200" r="12" class="tl-dot gold"/>
 
           <!-- Month labels -->
-          <text x="30" y="160" class="tl-label gold">1</text>
-          <text x="115" y="160" class="tl-label">2</text>
-          <text x="195" y="160" class="tl-label gold">3</text>
-          <text x="280" y="160" class="tl-label">4</text>
-          <text x="360" y="160" class="tl-label">5</text>
-          <text x="450" y="160" class="tl-label gold">6</text>
-          <text x="535" y="160" class="tl-label">7</text>
-          <text x="610" y="160" class="tl-label">8</text>
-          <text x="680" y="160" class="tl-label gold">9</text>
-          <text x="770" y="160" class="tl-label">10</text>
-          <text x="870" y="160" class="tl-label">11</text>
-          <text x="970" y="160" class="tl-label gold" style="font-size:14px;">12</text>
+          <text x="40" y="240" class="tl-label gold">1</text>
+          <text x="125" y="240" class="tl-label">2</text>
+          <text x="215" y="240" class="tl-label gold">3</text>
+          <text x="310" y="240" class="tl-label">4</text>
+          <text x="400" y="240" class="tl-label">5</text>
+          <text x="500" y="240" class="tl-label gold">6</text>
+          <text x="590" y="240" class="tl-label">7</text>
+          <text x="665" y="240" class="tl-label">8</text>
+          <text x="740" y="240" class="tl-label gold">9</text>
+          <text x="820" y="240" class="tl-label">10</text>
+          <text x="895" y="240" class="tl-label">11</text>
+          <text x="960" y="240" class="tl-label gold" style="font-size:14px;">12</text>
 
           <!-- Milestone labels on curve -->
-          <text x="30" y="118" class="tl-milestone">INICIO</text>
-          <text x="195" y="38" class="tl-milestone">BONO</text>
-          <text x="450" y="118" class="tl-milestone">1er VIAJE</text>
-          <text x="680" y="38" class="tl-milestone">CLUB</text>
-          <text x="970" y="118" class="tl-milestone" style="font-size:11px;">LÍDER</text>
+          <text x="40" y="183" class="tl-milestone" style="font-size:12px;">INICIO</text>
+          <text x="960" y="183" class="tl-milestone" style="font-size:12px;">VIAJE GRATIS</text>
 
-          <!-- Airplane -->
-          <g class="tl-plane" id="tlPlane" transform="translate(30,110)">
-            <text font-size="38" fill="#F5A623" text-anchor="middle" dominant-baseline="middle">✈</text>
+          <!-- Airplane - bigger -->
+          <g class="tl-plane" id="tlPlane" transform="translate(40,175)">
+            <text font-size="56" fill="#F5A623" text-anchor="middle" dominant-baseline="middle">✈</text>
           </g>
         </svg>
       </div>
-      <div class="milestone-cards reveal d3">
-        <div class="ms-card">
-          <div class="ms-ico"><iconify-icon icon="ph:rocket-launch-duotone"></iconify-icon></div>
-          <div>
-            <div class="ms-month">Mes 1</div>
-            <div class="ms-text">Activas tu membresía</div>
-          </div>
-        </div>
-        <div class="ms-card">
-          <div class="ms-ico"><iconify-icon icon="ph:gift-duotone"></iconify-icon></div>
-          <div>
-            <div class="ms-month">Mes 3</div>
-            <div class="ms-text">Bono de inicio rápido</div>
-          </div>
-        </div>
-        <div class="ms-card">
-          <div class="ms-ico"><iconify-icon icon="ph:airplane-tilt-duotone"></iconify-icon></div>
-          <div>
-            <div class="ms-month">Mes 6</div>
-            <div class="ms-text">Tu primer viaje gratis</div>
-          </div>
-        </div>
-        <div class="ms-card">
-          <div class="ms-ico"><iconify-icon icon="ph:crown-duotone"></iconify-icon></div>
-          <div>
-            <div class="ms-month">Mes 12</div>
-            <div class="ms-text">Alcanzas Líder Club</div>
-          </div>
-        </div>
-      </div>
       <div class="tl-final-msg" id="tlFinalMsg">
-        🎉 Disfruta de tu viaje con <span class="gold">100% de puntos</span> 🎉
+        🎉 Disfruta tu viaje con <span class="gold">100% de tus puntos</span>. Total de puntos <span class="gold">+2800</span> 🎉
       </div>
       <div class="emoji-rain" id="emojiRain"></div>
     </div>
@@ -1702,22 +1712,25 @@ html, body {
           <div class="connector-line"></div>
         </div>
         <div class="person-node net-step" data-step="1" style="opacity:0;transform:scale(0);">
-          <div class="person-avatar team"><iconify-icon icon="ph:user-duotone"></iconify-icon></div>
+          <div class="person-avatar team"><img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&q=80&auto=format&fit=crop" alt="María"></div>
           <span class="person-label">Persona 1</span>
+          <span class="person-name">María</span>
         </div>
         <div class="network-connector net-step" data-step="2" style="opacity:0;transform:scale(0);">
           <span class="connector-plus">+</span>
         </div>
         <div class="person-node net-step" data-step="2" style="opacity:0;transform:scale(0);">
-          <div class="person-avatar team"><iconify-icon icon="ph:user-duotone"></iconify-icon></div>
+          <div class="person-avatar team"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&q=80&auto=format&fit=crop" alt="Carlos"></div>
           <span class="person-label">Persona 2</span>
+          <span class="person-name">Carlos</span>
         </div>
         <div class="network-connector net-step" data-step="3" style="opacity:0;transform:scale(0);">
           <span class="connector-plus">+</span>
         </div>
         <div class="person-node net-step" data-step="3" style="opacity:0;transform:scale(0);">
-          <div class="person-avatar team"><iconify-icon icon="ph:user-duotone"></iconify-icon></div>
+          <div class="person-avatar team"><img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?w=400&q=80&auto=format&fit=crop" alt="Sofía"></div>
           <span class="person-label">Persona 3</span>
+          <span class="person-name">Sofía</span>
         </div>
       </div>
       <div class="result-box net-step" data-step="4" id="resultBox" style="opacity:0;transform:translateY(20px);">
@@ -1798,14 +1811,14 @@ html, body {
   /* ── DESTINATION PHOTO LOOP ── */
   const destinations = [
     { name: 'PUNTA CANA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1505881502353-a1986add3762?w=1920&q=80&auto=format&fit=crop' },
-    { name: 'COLOMBIA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1532443603613-61fa154742cd?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'COLOMBIA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1583997052103-b4a1cb974ce5?w=1920&q=80&auto=format&fit=crop' },
     { name: 'GRECIA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=1920&q=80&auto=format&fit=crop' },
     { name: 'ESPAÑA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=1920&q=80&auto=format&fit=crop' },
     { name: 'DISNEY', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1551762142-0e2c05535197?w=1920&q=80&auto=format&fit=crop' },
     { name: 'JAPÓN', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1920&q=80&auto=format&fit=crop' },
     { name: 'CHINA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=1920&q=80&auto=format&fit=crop' },
     { name: 'ROMA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1920&q=80&auto=format&fit=crop' },
-    { name: 'TAILANDIA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'TAILANDIA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1537956965359-7573183d1f57?w=1920&q=80&auto=format&fit=crop' },
     { name: 'ÁFRICA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1750232944224-9c7f6fd306a7?w=1920&q=80&auto=format&fit=crop' },
   ];
 
@@ -1881,11 +1894,11 @@ html, body {
 
   /* ── SLIDE 6: HQ PHOTOS LOOP ── */
   const hqCities = [
-    { name: 'MIAMI', img: 'https://images.unsplash.com/photo-1448630360428-65456885c650?w=1920&q=80&auto=format&fit=crop' },
-    { name: 'FRANCIA', img: 'https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=1920&q=80&auto=format&fit=crop' },
-    { name: 'LONDRES', img: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1920&q=80&auto=format&fit=crop' },
-    { name: 'HONG KONG', img: 'https://images.unsplash.com/photo-1520333789090-1afc82db536a?w=1920&q=80&auto=format&fit=crop' },
-    { name: 'DUBAI', img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'MIAMI', img: 'https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'FRANCIA', img: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'LONDRES', img: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'HONG KONG', img: 'https://images.unsplash.com/photo-1532188363366-3a1b2ac4a338?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'DUBAI', img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1920&q=80&auto=format&fit=crop' },
   ];
   const $hqContainer = document.getElementById('hqPhotos');
   const $hqCity = document.getElementById('hqCityName');
@@ -1902,11 +1915,11 @@ html, body {
   function showHQ(i) {
     hqIdx = i;
     $hqCity.style.opacity = '0';
-    $hqCity.style.transform = 'translateX(-50%) translateY(10px)';
+    $hqCity.style.transform = 'translate(-50%, -40%)';
     setTimeout(() => {
       $hqCity.textContent = hqCities[i].name;
       $hqCity.style.opacity = '1';
-      $hqCity.style.transform = 'translateX(-50%) translateY(0)';
+      $hqCity.style.transform = 'translate(-50%, -50%)';
     }, 400);
     hqImgs.forEach((img, j) => img.classList.toggle('active', j === i));
   }
