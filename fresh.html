@@ -397,7 +397,7 @@ html, body {
    SLIDE 3 — WHAT IF
    ═══════════════════════════════════════════════════════════════════════ */
 #s3 .slide-bg {
-  background-image: url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1920&q=80&auto=format&fit=crop');
+  background-image: url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1920&q=80&auto=format&fit=crop');
 }
 #s3 .slide-bg::after {
   background: linear-gradient(135deg, rgba(6,11,36,.88) 0%, rgba(45,27,142,.75) 60%, rgba(6,11,36,.85) 100%);
@@ -548,7 +548,7 @@ html, body {
 }
 .mwr-hero-logo {
   position: relative;
-  overflow: hidden;
+  display: inline-block;
 }
 .mwr-hero-logo img {
   width: clamp(320px, 55vw, 650px);
@@ -556,23 +556,28 @@ html, body {
   object-fit: contain;
   filter: drop-shadow(0 0 40px rgba(255,255,255,.15)) drop-shadow(0 0 80px rgba(30,91,255,.2));
 }
-.mwr-hero-logo::after {
+.mwr-hero-logo::before {
   content: "";
   position: absolute;
-  top: 0; left: -100%;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0) 20%, rgba(255,255,255,.5) 45%, rgba(255,255,255,.8) 50%, rgba(255,255,255,.5) 55%, rgba(255,255,255,0) 80%, transparent 100%);
-  animation: logo-gleam 3.5s ease-in-out infinite;
+  inset: -6px;
+  border-radius: 12px;
+  padding: 3px;
+  background: conic-gradient(from var(--border-angle, 0deg), transparent 40%, var(--gold) 50%, rgba(245,166,35,.8) 55%, transparent 60%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-trace 3s linear infinite;
   pointer-events: none;
   z-index: 2;
+  filter: drop-shadow(0 0 12px rgba(245,166,35,.7));
 }
-@keyframes logo-gleam {
-  0% { left: -100%; opacity: 0; }
-  10% { opacity: 1; }
-  70% { left: 200%; opacity: 1; }
-  80% { opacity: 0; }
-  100% { left: 200%; opacity: 0; }
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes border-trace {
+  to { --border-angle: 360deg; }
 }
 #s5 .tagline-main {
   font-family: 'Montserrat', sans-serif;
@@ -622,7 +627,7 @@ html, body {
 #s6 .hq-photos::after {
   content: "";
   position: absolute; inset: 0;
-  background: linear-gradient(90deg, transparent 50%, rgba(255,255,255,.15) 85%, rgba(255,255,255,.4) 100%),
+  background: linear-gradient(90deg, transparent 50%, rgba(10,16,53,.3) 85%, rgba(10,16,53,.7) 100%),
               linear-gradient(0deg, rgba(6,11,36,.6) 0%, rgba(6,11,36,.1) 40%, rgba(6,11,36,.4) 100%);
   z-index: 1;
 }
@@ -647,7 +652,7 @@ html, body {
   align-items: center;
   padding: 30px 28px;
   gap: 16px;
-  background: #ffffff;
+  background: linear-gradient(135deg, #0a1035 0%, #0f1a4a 50%, #131f5c 100%);
   overflow: hidden;
 }
 #s6 .hq-info-logo {
@@ -658,7 +663,6 @@ html, body {
 #s6 .hq-info-logo img {
   width: clamp(140px, 14vw, 200px);
   height: auto;
-  filter: invert(1) brightness(0.2);
 }
 @keyframes gradient-shift {
   0% { background-position: 0% 50%; }
@@ -713,9 +717,10 @@ html, body {
 }
 #s6 .certifications {
   margin-top: 8px;
-  padding: 18px 24px;
+  padding: 16px 20px;
   border-radius: 18px;
-  background: #f3f0ff;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
   text-align: center;
   opacity: 0;
   transform: translateY(30px);
@@ -726,12 +731,15 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 14px;
   flex-wrap: wrap;
 }
 #s6 .cert-logos img {
-  height: clamp(45px, 5vw, 65px);
+  height: clamp(40px, 4.5vw, 58px);
   object-fit: contain;
+  background: #fff;
+  border-radius: 10px;
+  padding: 6px 10px;
   transition: transform .3s;
 }
 #s6 .cert-logos img:hover { transform: scale(1.1); }
@@ -741,7 +749,7 @@ html, body {
   font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: #7c3aed;
+  color: var(--gold);
   margin-bottom: 12px;
 }
 
@@ -1210,7 +1218,7 @@ html, body {
   justify-content: center;
   text-align: center;
   padding: 40px;
-  z-index: 20;
+  z-index: 25;
   pointer-events: none;
   opacity: 0;
   transition: opacity 1.2s ease;
@@ -1232,7 +1240,7 @@ html, body {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  gap: 3px;
+  gap: 0;
   z-index: 15;
   pointer-events: none;
   opacity: 0;
@@ -1243,8 +1251,8 @@ html, body {
   width: 100%; height: 100%;
   object-fit: cover;
   opacity: 0;
-  transform: scale(1.1);
-  transition: opacity .6s ease, transform .8s ease;
+  transform: scale(1.15);
+  transition: opacity .5s ease, transform .7s ease;
 }
 .city-collage img.visible {
   opacity: 1;
@@ -1254,8 +1262,9 @@ html, body {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(6,11,36,.45);
+  background: rgba(6,11,36,.4);
   z-index: 1;
+  pointer-events: none;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -1401,15 +1410,8 @@ html, body {
   <div class="slide active" id="s1">
     <div class="slide-bg"></div>
     <div class="content">
-      <div class="eyebrow reveal">MWR Life × Travel Advantage</div>
       <div class="hero-question reveal d1">
-        ¿Cuándo fue la última vez<br>
-        <span class="accent">que viajaste con tu familia?</span>
-      </div>
-      <p class="hero-sub reveal d2">Millones de personas sueñan con viajar. Muy pocas descubren cómo hacerlo realidad cada año.</p>
-      <div class="scroll-hint reveal d3">
-        <iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
-        Continuar
+        El viajar y conocer el mundo<br>se ha vuelto algo con lo que<br><span class="accent">muchos sueñan y pocos experimentan</span>
       </div>
     </div>
   </div>
@@ -1419,40 +1421,40 @@ html, body {
     <div class="content">
       <div class="top-section">
         <div class="eyebrow reveal">El Impacto de Viajar</div>
-        <h2 class="h2 reveal d1">Viajar transforma<br><span class="gold">familias enteras</span></h2>
+        <h2 class="h2 reveal d1">Viajar transforma<br><span class="gold">personas y familias</span></h2>
       </div>
       <div class="stats-grid">
         <div class="stat-card reveal d2">
-          <img src="https://images.unsplash.com/photo-1602002418816-5c0aeef426aa?w=600&q=80&auto=format&fit=crop" alt="Familia viajando">
+          <img src="https://images.unsplash.com/photo-1602002418816-5c0aeef426aa?w=600&q=80&auto=format&fit=crop" alt="Vacaciones">
           <div class="card-overlay">
-            <div class="stat-number">78%</div>
-            <div class="stat-label">de las familias que viajan juntas reportan mayor conexión emocional</div>
+            <div class="stat-number">40%</div>
+            <div class="stat-label">más riesgo de morir si tienes menos de 3 semanas de vacaciones al año</div>
           </div>
-          <div class="stat-icon"><iconify-icon icon="ph:heart-duotone"></iconify-icon></div>
+          <div class="stat-icon"><iconify-icon icon="ph:warning-duotone"></iconify-icon></div>
         </div>
         <div class="stat-card reveal d3">
-          <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&q=80&auto=format&fit=crop" alt="Experiencias">
+          <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&q=80&auto=format&fit=crop" alt="Felicidad">
           <div class="card-overlay">
-            <div class="stat-number">2.5x</div>
-            <div class="stat-label">más felicidad reportada por experiencias vs posesiones materiales</div>
+            <div class="stat-number">3x</div>
+            <div class="stat-label">más felicidad reportada por viajes vs posesiones materiales</div>
           </div>
           <div class="stat-icon"><iconify-icon icon="ph:smiley-duotone"></iconify-icon></div>
         </div>
         <div class="stat-card reveal d4">
-          <img src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=600&q=80&auto=format&fit=crop" alt="Memorias">
+          <img src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=600&q=80&auto=format&fit=crop" alt="Familia">
           <div class="card-overlay">
-            <div class="stat-number">94%</div>
-            <div class="stat-label">de las personas valoran los recuerdos de viaje como su mayor tesoro</div>
+            <div class="stat-number">78%</div>
+            <div class="stat-label">menos probabilidad de problemas familiares y de pareja al viajar en familia</div>
           </div>
-          <div class="stat-icon"><iconify-icon icon="ph:camera-duotone"></iconify-icon></div>
+          <div class="stat-icon"><iconify-icon icon="ph:heart-duotone"></iconify-icon></div>
         </div>
         <div class="stat-card reveal d5">
-          <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80&auto=format&fit=crop" alt="Crecimiento">
+          <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80&auto=format&fit=crop" alt="Salud mental">
           <div class="card-overlay">
-            <div class="stat-number">$8.8T</div>
-            <div class="stat-label">industria global del turismo — crecimiento imparable cada año</div>
+            <div class="stat-number">92%</div>
+            <div class="stat-label">más probabilidad de enfermedades emocionales, mentales y psicológicas sin viajar</div>
           </div>
-          <div class="stat-icon"><iconify-icon icon="ph:trend-up-duotone"></iconify-icon></div>
+          <div class="stat-icon"><iconify-icon icon="ph:brain-duotone"></iconify-icon></div>
         </div>
       </div>
     </div>
@@ -1463,9 +1465,9 @@ html, body {
     <div class="slide-bg"></div>
     <div class="content">
       <div class="eyebrow reveal">La Gran Pregunta</div>
-      <div class="big-question reveal d1">¿Y si el viaje<br><span class="gold">se pagara solo?</span></div>
+      <div class="big-question reveal d1">¿Y si pudieras viajar gratis<br><span class="gold">y ganar dinero al mismo tiempo?</span></div>
       <p class="lead reveal d2" style="color:var(--white-70); text-align:center;">
-        Existe un modelo donde viajar no es un gasto — es una inversión que genera ingresos. Así funciona Travel Advantage.
+        Existe un modelo donde viajar no es un gasto — es una inversión que genera ingresos. Así funciona MWR Life.
       </p>
     </div>
   </div>
@@ -1816,8 +1818,18 @@ html, body {
   const $bar = document.getElementById('progressBar');
   $total.textContent = total;
 
+  let collageShown = false;
+
   function go(idx) {
     if (busy || idx === current || idx < 0 || idx >= total) return;
+
+    // On slide 13 (idx 12), first press after plane arrives shows collage, second press navigates
+    if (current === 12 && idx === 13 && tlPlaneArrived && !collageShown) {
+      collageShown = true;
+      triggerCollageTransition();
+      return; // Don't navigate yet
+    }
+
     busy = true;
     const prev = slides[current];
     const next = slides[idx];
@@ -1840,10 +1852,12 @@ html, body {
 
     // Timeline: trigger on enter, reset on leave
     if (idx === 12) {
+      collageShown = false;
       resetTimeline();
       setTimeout(triggerTimeline, 100);
     } else {
       resetTimeline();
+      collageShown = false;
     }
 
     // Network: reset on leave
@@ -1862,7 +1876,7 @@ html, body {
   /* ── DESTINATION PHOTO LOOP ── */
   const destinations = [
     { name: 'PUNTA CANA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1505881502353-a1986add3762?w=1920&q=80&auto=format&fit=crop' },
-    { name: 'COLOMBIA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1576629592451-828848a535b3?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'COLOMBIA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1534586171786-479ba91943f5?w=1920&q=80&auto=format&fit=crop' },
     { name: 'GRECIA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=1920&q=80&auto=format&fit=crop' },
     { name: 'ESPAÑA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=1920&q=80&auto=format&fit=crop' },
     { name: 'DISNEY', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1551762142-0e2c05535197?w=1920&q=80&auto=format&fit=crop' },
@@ -1982,24 +1996,25 @@ html, body {
 
   /* ── TIMELINE ANIMATION ── */
   let tlAnimId = null;
+  let tlPlaneArrived = false;
+  // Aspirational travel photos with families and happy people
   const cityPhotos = [
+    'photo-1602002418816-5c0aeef426aa','photo-1507525428034-b723cf961d3e','photo-1476514525535-07fb3b4ae5f1',
+    'photo-1501785888041-af3ef285b470','photo-1530789253388-582c481c54b0','photo-1469854523086-cc02fe5d8800',
+    'photo-1528164344705-47542687000d','photo-1537996194471-e657df975ab4','photo-1520250497591-112f2f40a3f4',
+    'photo-1506929562872-bb421503ef21','photo-1519451241324-20b4ea2c4220','photo-1552832230-c0197dd311b5',
+    'photo-1512453979798-5ea266f8880c','photo-1514565131-fce0801e5785','photo-1493976040374-85c8e12f0c0e',
     'photo-1502602898657-3e91760cbb34','photo-1513635269975-59663e0ac1ad','photo-1540959733332-eab4deabeeaf',
-    'photo-1552832230-c0197dd311b5','photo-1512453979798-5ea266f8880c','photo-1493976040374-85c8e12f0c0e',
-    'photo-1518548419970-58e3b4079ab2','photo-1514565131-fce0801e5785','photo-1506973035872-a4ec16b8e8d9',
-    'photo-1537996194471-e657df975ab4','photo-1476514525535-07fb3b4ae5f1','photo-1507525428034-b723cf961d3e',
-    'photo-1501785888041-af3ef285b470','photo-1528164344705-47542687000d','photo-1526129318478-62ed807ebdf9',
-    'photo-1519451241324-20b4ea2c4220','photo-1469474968028-56623f02e42e','photo-1470071459604-3b5ec3a7fe05',
     'photo-1549144511-f099e773c147','photo-1516483638261-f4dbaf036963'
   ];
 
   function triggerTimeline() {
+    tlPlaneArrived = false;
     const plane = document.getElementById('tlPlane');
     const path = document.querySelector('.tl-track');
-    const finalMsg = document.getElementById('tlFinalMsg');
-    const collage = document.getElementById('cityCollage');
     if (!plane || !path) return;
     const len = path.getTotalLength();
-    const duration = 5000;
+    const duration = 8000; // slower
     const start = performance.now();
     function animatePlane(now) {
       const t = Math.min((now - start) / duration, 1);
@@ -2009,19 +2024,28 @@ html, body {
       if (t < 1) {
         tlAnimId = requestAnimationFrame(animatePlane);
       } else {
-        // Fade out timeline content, show city collage
-        startCityCollage(collage, finalMsg);
+        tlPlaneArrived = true;
+        // Show final message on the timeline
+        const finalMsg = document.getElementById('tlFinalMsg');
+        if (finalMsg) {
+          finalMsg.innerHTML = '<div class="tl-final-text">Disfruta tu viaje con <span class="gold">100% de tus puntos</span></div>';
+          finalMsg.classList.add('show');
+        }
       }
     }
     tlAnimId = requestAnimationFrame(animatePlane);
   }
 
-  function startCityCollage(collage, finalMsg) {
+  // Called when leaving slide 13 (pressing arrow) — shows collage on s13 itself
+  function triggerCollageTransition() {
+    const collage = document.getElementById('cityCollage');
+    const finalMsg = document.getElementById('tlFinalMsg');
     if (!collage) return;
     // Fade out timeline elements
     const wrap = document.querySelector('#s13 .timeline-wrap');
     const eyebrow = document.querySelector('#s13 .eyebrow');
     const h2 = document.querySelector('#s13 .h2');
+    if (finalMsg) { finalMsg.classList.remove('show'); }
     [wrap, eyebrow, h2].forEach(el => { if (el) { el.style.transition = 'opacity .8s'; el.style.opacity = '0'; } });
 
     // Build collage images
@@ -2032,24 +2056,25 @@ html, body {
       collage.appendChild(img);
     });
 
-    // Show collage container after fade
     setTimeout(() => {
       collage.classList.add('show');
-      // Reveal images one by one
       const imgs = [...collage.querySelectorAll('img')];
       imgs.forEach((img, i) => {
-        setTimeout(() => img.classList.add('visible'), i * 120);
+        setTimeout(() => img.classList.add('visible'), i * 80);
       });
-      // Show final message after all images
+      // Show final message over collage
       setTimeout(() => {
-        finalMsg.innerHTML = '<div class="tl-final-text">Disfruta tu viaje con <span class="gold">100% de tus puntos</span><br><span style="font-size:.6em;font-weight:600;color:var(--white-70);">¿Qué lugar eliges para hacer realidad tu sueño?</span></div>';
-        finalMsg.classList.add('show');
-      }, imgs.length * 120 + 600);
+        if (finalMsg) {
+          finalMsg.innerHTML = '<div class="tl-final-text">Disfruta tu viaje con <span class="gold">100% de tus puntos</span></div>';
+          finalMsg.classList.add('show');
+        }
+      }, imgs.length * 80 + 400);
     }, 900);
   }
 
   function resetTimeline() {
     if (tlAnimId) { cancelAnimationFrame(tlAnimId); tlAnimId = null; }
+    tlPlaneArrived = false;
     const wrap = document.querySelector('#s13 .timeline-wrap');
     const eyebrow = document.querySelector('#s13 .eyebrow');
     const h2 = document.querySelector('#s13 .h2');
