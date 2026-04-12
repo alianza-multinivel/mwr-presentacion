@@ -546,16 +546,33 @@ html, body {
   justify-content: center;
   width: 100%;
 }
+.mwr-hero-logo {
+  position: relative;
+  overflow: hidden;
+}
 .mwr-hero-logo img {
   width: clamp(320px, 55vw, 650px);
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 0 40px rgba(255,255,255,.15)) drop-shadow(0 0 80px rgba(30,91,255,.2));
-  animation: logo-pulse 4s ease-in-out infinite;
 }
-@keyframes logo-pulse {
-  0%, 100% { filter: drop-shadow(0 0 40px rgba(255,255,255,.15)) drop-shadow(0 0 80px rgba(30,91,255,.2)); }
-  50% { filter: drop-shadow(0 0 60px rgba(255,255,255,.25)) drop-shadow(0 0 100px rgba(245,166,35,.25)); }
+.mwr-hero-logo::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0) 20%, rgba(255,255,255,.5) 45%, rgba(255,255,255,.8) 50%, rgba(255,255,255,.5) 55%, rgba(255,255,255,0) 80%, transparent 100%);
+  animation: logo-gleam 3.5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+@keyframes logo-gleam {
+  0% { left: -100%; opacity: 0; }
+  10% { opacity: 1; }
+  70% { left: 200%; opacity: 1; }
+  80% { opacity: 0; }
+  100% { left: 200%; opacity: 0; }
 }
 #s5 .tagline-main {
   font-family: 'Montserrat', sans-serif;
@@ -586,7 +603,7 @@ html, body {
   width: 100%; height: 100%;
 }
 #s6 .hq-photos {
-  flex: 1;
+  flex: 1.5;
   position: relative;
   overflow: hidden;
 }
@@ -627,10 +644,21 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 40px 36px;
-  gap: 20px;
+  align-items: center;
+  padding: 30px 28px;
+  gap: 16px;
   background: #ffffff;
   overflow: hidden;
+}
+#s6 .hq-info-logo {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 4px;
+}
+#s6 .hq-info-logo img {
+  width: clamp(140px, 14vw, 200px);
+  height: auto;
+  filter: invert(1) brightness(0.2);
 }
 @keyframes gradient-shift {
   0% { background-position: 0% 50%; }
@@ -673,13 +701,13 @@ html, body {
 }
 #s6 .info-item .info-val {
   font-family: 'Montserrat', sans-serif;
-  font-size: 28px;
+  font-size: clamp(28px, 3vw, 42px);
   font-weight: 900;
   line-height: 1;
   color: #fff;
 }
 #s6 .info-item .info-desc {
-  font-size: 13px;
+  font-size: clamp(13px, 1.2vw, 16px);
   color: rgba(255,255,255,.8);
   margin-top: 4px;
 }
@@ -702,12 +730,11 @@ html, body {
   flex-wrap: wrap;
 }
 #s6 .cert-logos img {
-  height: 40px;
+  height: clamp(45px, 5vw, 65px);
   object-fit: contain;
-  filter: grayscale(20%);
-  transition: filter .3s;
+  transition: transform .3s;
 }
-#s6 .cert-logos img:hover { filter: grayscale(0%); }
+#s6 .cert-logos img:hover { transform: scale(1.1); }
 #s6 .cert-label {
   font-family: 'Montserrat', sans-serif;
   font-size: 10px;
@@ -1070,7 +1097,7 @@ html, body {
 }
 #s13 .timeline-svg {
   width: 100%;
-  height: 300px;
+  height: 200px;
   overflow: visible;
 }
 #s13 .tl-track {
@@ -1084,9 +1111,9 @@ html, body {
   stroke-width: 6;
   fill: none;
   stroke-linecap: round;
-  stroke-dasharray: 2000;
-  stroke-dashoffset: 2000;
-  transition: stroke-dashoffset 6s cubic-bezier(.22,1,.36,1);
+  stroke-dasharray: 1500;
+  stroke-dashoffset: 1500;
+  transition: stroke-dashoffset 5s cubic-bezier(.22,1,.36,1);
 }
 #s13.active .tl-fill {
   stroke-dashoffset: 0;
@@ -1175,38 +1202,60 @@ html, body {
 }
 
 .tl-final-msg {
-  font-family: 'Montserrat', sans-serif;
-  font-size: clamp(18px, 1.8vw, 28px);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  opacity: 0;
-  transform: translateY(20px) scale(.9);
-  transition: all 1s cubic-bezier(.22,1,.36,1);
-  margin-top: 16px;
-}
-#s13.active .tl-final-msg.show {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-.emoji-rain {
   position: absolute;
   inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+  z-index: 20;
   pointer-events: none;
-  overflow: hidden;
-  z-index: 10;
-}
-.emoji-rain .emoji {
-  position: absolute;
-  bottom: -60px;
-  font-size: 28px;
-  animation: emoji-rise 4s ease-out forwards;
   opacity: 0;
+  transition: opacity 1.2s ease;
 }
-@keyframes emoji-rise {
-  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-  10% { opacity: 1; }
-  100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+.tl-final-msg.show { opacity: 1; }
+.tl-final-msg .tl-final-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(22px, 3vw, 44px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.3;
+  text-shadow: 0 4px 30px rgba(0,0,0,.8);
+  max-width: 800px;
+}
+.city-collage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 3px;
+  z-index: 15;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .8s ease;
+}
+.city-collage.show { opacity: 1; }
+.city-collage img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.1);
+  transition: opacity .6s ease, transform .8s ease;
+}
+.city-collage img.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+.city-collage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(6,11,36,.45);
+  z-index: 1;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -1229,10 +1278,11 @@ html, body {
 #s14 .network-visual {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 20px;
   flex-wrap: wrap;
   justify-content: center;
 }
+#s14 .person-label { display: none; }
 .person-node {
   display: flex;
   flex-direction: column;
@@ -1240,12 +1290,12 @@ html, body {
   gap: 10px;
 }
 .person-avatar {
-  width: 130px; height: 130px;
+  width: 180px; height: 180px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48px;
+  font-size: 64px;
   position: relative;
   overflow: hidden;
 }
@@ -1256,26 +1306,21 @@ html, body {
 }
 .person-avatar.team {
   background: var(--glass);
-  border: 3px solid var(--blue);
+  border: 4px solid var(--blue);
   color: var(--blue-2);
 }
 .person-avatar.team img {
   width: 100%; height: 100%;
   object-fit: cover;
 }
-.person-label {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
 .person-name {
   font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--white-70);
-  letter-spacing: 1px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white-90);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 4px;
 }
 .network-connector {
   display: flex;
@@ -1462,6 +1507,9 @@ html, body {
         <div class="hq-city-name" id="hqCityName">MIAMI</div>
       </div>
       <div class="hq-info">
+        <div class="hq-info-logo">
+          <img src="logo-mwr-official.svg" alt="MWR Life">
+        </div>
         <div class="info-item">
           <div class="info-ico"><iconify-icon icon="ph:calendar-check-duotone"></iconify-icon></div>
           <div>
@@ -1637,7 +1685,7 @@ html, body {
       <div class="eyebrow reveal">Tus Próximos 12 Meses</div>
       <h2 class="h2 reveal d1">12 Meses Que<br><span class="gold">Cambian Todo</span></h2>
       <div class="timeline-wrap reveal d2">
-        <svg class="timeline-svg" viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid meet">
+        <svg class="timeline-svg" viewBox="0 0 1000 180" preserveAspectRatio="xMidYMid meet">
           <defs>
             <linearGradient id="tlGrad" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stop-color="#1E5BFF"/>
@@ -1645,52 +1693,50 @@ html, body {
               <stop offset="100%" stop-color="#F5A623"/>
             </linearGradient>
           </defs>
-          <!-- Curved path - bigger -->
-          <path d="M40,200 C150,200 180,60 300,60 C420,60 450,200 570,200 C690,200 720,60 850,60 C920,60 950,140 960,200" class="tl-track"/>
-          <path d="M40,200 C150,200 180,60 300,60 C420,60 450,200 570,200 C690,200 720,60 850,60 C920,60 950,140 960,200" class="tl-fill" id="tlFill"/>
+          <!-- Flatter, more horizontal path -->
+          <path d="M30,100 C120,100 150,65 230,65 C310,65 330,110 420,110 C510,110 530,60 620,60 C710,60 740,105 830,105 C890,105 940,85 970,85" class="tl-track"/>
+          <path d="M30,100 C120,100 150,65 230,65 C310,65 330,110 420,110 C510,110 530,60 620,60 C710,60 740,105 830,105 C890,105 940,85 970,85" class="tl-fill" id="tlFill"/>
 
           <!-- Month dots -->
-          <circle cx="40" cy="200" r="8" class="tl-dot gold"/>
-          <circle cx="125" cy="145" r="7" class="tl-dot"/>
-          <circle cx="215" cy="75" r="8" class="tl-dot gold"/>
-          <circle cx="310" cy="65" r="7" class="tl-dot"/>
-          <circle cx="400" cy="120" r="7" class="tl-dot"/>
-          <circle cx="500" cy="195" r="8" class="tl-dot gold"/>
-          <circle cx="590" cy="190" r="7" class="tl-dot"/>
-          <circle cx="665" cy="135" r="7" class="tl-dot"/>
-          <circle cx="740" cy="80" r="8" class="tl-dot gold"/>
-          <circle cx="820" cy="65" r="7" class="tl-dot"/>
-          <circle cx="895" cy="100" r="7" class="tl-dot"/>
-          <circle cx="960" cy="200" r="12" class="tl-dot gold"/>
+          <circle cx="30" cy="100" r="8" class="tl-dot gold"/>
+          <circle cx="115" cy="88" r="6" class="tl-dot"/>
+          <circle cx="195" cy="68" r="7" class="tl-dot gold"/>
+          <circle cx="275" cy="72" r="6" class="tl-dot"/>
+          <circle cx="355" cy="100" r="6" class="tl-dot"/>
+          <circle cx="445" cy="108" r="7" class="tl-dot gold"/>
+          <circle cx="530" cy="92" r="6" class="tl-dot"/>
+          <circle cx="610" cy="62" r="6" class="tl-dot"/>
+          <circle cx="700" cy="65" r="7" class="tl-dot gold"/>
+          <circle cx="780" cy="95" r="6" class="tl-dot"/>
+          <circle cx="870" cy="102" r="6" class="tl-dot"/>
+          <circle cx="970" cy="85" r="12" class="tl-dot gold"/>
 
           <!-- Month labels -->
-          <text x="40" y="240" class="tl-label gold">1</text>
-          <text x="125" y="240" class="tl-label">2</text>
-          <text x="215" y="240" class="tl-label gold">3</text>
-          <text x="310" y="240" class="tl-label">4</text>
-          <text x="400" y="240" class="tl-label">5</text>
-          <text x="500" y="240" class="tl-label gold">6</text>
-          <text x="590" y="240" class="tl-label">7</text>
-          <text x="665" y="240" class="tl-label">8</text>
-          <text x="740" y="240" class="tl-label gold">9</text>
-          <text x="820" y="240" class="tl-label">10</text>
-          <text x="895" y="240" class="tl-label">11</text>
-          <text x="960" y="240" class="tl-label gold" style="font-size:14px;">12</text>
+          <text x="30" y="135" class="tl-label gold">1</text>
+          <text x="115" y="135" class="tl-label">2</text>
+          <text x="195" y="135" class="tl-label gold">3</text>
+          <text x="275" y="135" class="tl-label">4</text>
+          <text x="355" y="135" class="tl-label">5</text>
+          <text x="445" y="135" class="tl-label gold">6</text>
+          <text x="530" y="135" class="tl-label">7</text>
+          <text x="610" y="135" class="tl-label">8</text>
+          <text x="700" y="135" class="tl-label gold">9</text>
+          <text x="780" y="135" class="tl-label">10</text>
+          <text x="870" y="135" class="tl-label">11</text>
+          <text x="970" y="135" class="tl-label gold" style="font-size:14px;">12</text>
 
-          <!-- Milestone labels on curve -->
-          <text x="40" y="183" class="tl-milestone" style="font-size:12px;">INICIO</text>
-          <text x="960" y="183" class="tl-milestone" style="font-size:12px;">VIAJE GRATIS</text>
+          <!-- Milestone labels -->
+          <text x="30" y="82" class="tl-milestone" style="font-size:12px;">INICIO</text>
+          <text x="970" y="68" class="tl-milestone" style="font-size:12px;">VIAJE GRATIS</text>
 
-          <!-- Airplane - bigger -->
-          <g class="tl-plane" id="tlPlane" transform="translate(40,175)">
-            <text font-size="56" fill="#F5A623" text-anchor="middle" dominant-baseline="middle">✈</text>
+          <!-- Airplane -->
+          <g class="tl-plane" id="tlPlane" transform="translate(30,75)">
+            <text font-size="48" fill="#F5A623" text-anchor="middle" dominant-baseline="middle">✈</text>
           </g>
         </svg>
       </div>
-      <div class="tl-final-msg" id="tlFinalMsg">
-        🎉 Disfruta tu viaje con <span class="gold">100% de tus puntos</span>. Total de puntos <span class="gold">+2800</span> 🎉
-      </div>
-      <div class="emoji-rain" id="emojiRain"></div>
+      <div class="tl-final-msg" id="tlFinalMsg"></div>
+      <div class="city-collage" id="cityCollage"></div>
     </div>
   </div>
 
@@ -1712,24 +1758,21 @@ html, body {
           <div class="connector-line"></div>
         </div>
         <div class="person-node net-step" data-step="1" style="opacity:0;transform:scale(0);">
-          <div class="person-avatar team"><img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&q=80&auto=format&fit=crop" alt="María"></div>
-          <span class="person-label">Persona 1</span>
+          <div class="person-avatar team"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80&auto=format&fit=crop" alt="María"></div>
           <span class="person-name">María</span>
         </div>
         <div class="network-connector net-step" data-step="2" style="opacity:0;transform:scale(0);">
           <span class="connector-plus">+</span>
         </div>
         <div class="person-node net-step" data-step="2" style="opacity:0;transform:scale(0);">
-          <div class="person-avatar team"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&q=80&auto=format&fit=crop" alt="Carlos"></div>
-          <span class="person-label">Persona 2</span>
+          <div class="person-avatar team"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80&auto=format&fit=crop" alt="Carlos"></div>
           <span class="person-name">Carlos</span>
         </div>
         <div class="network-connector net-step" data-step="3" style="opacity:0;transform:scale(0);">
           <span class="connector-plus">+</span>
         </div>
         <div class="person-node net-step" data-step="3" style="opacity:0;transform:scale(0);">
-          <div class="person-avatar team"><img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?w=400&q=80&auto=format&fit=crop" alt="Sofía"></div>
-          <span class="person-label">Persona 3</span>
+          <div class="person-avatar team"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80&auto=format&fit=crop" alt="Sofía"></div>
           <span class="person-name">Sofía</span>
         </div>
       </div>
@@ -1789,15 +1832,23 @@ html, body {
     $curr.textContent = String(current + 1).padStart(2, '0');
     $bar.style.width = ((current / (total - 1)) * 100) + '%';
 
-    // Slide-specific triggers
+    // Slide-specific triggers & resets
     if (idx === 3) startDestLoop();
     else stopDestLoop();
     if (idx === 5) startHQLoop();
     else stopHQLoop();
-    // Timeline triggers on slide 13 (index 12)
+
+    // Timeline: trigger on enter, reset on leave
     if (idx === 12) {
-      // Small delay so the CSS .active class is applied first
+      resetTimeline();
       setTimeout(triggerTimeline, 100);
+    } else {
+      resetTimeline();
+    }
+
+    // Network: reset on leave
+    if (idx !== 13) {
+      resetNetwork();
     }
   }
 
@@ -1811,7 +1862,7 @@ html, body {
   /* ── DESTINATION PHOTO LOOP ── */
   const destinations = [
     { name: 'PUNTA CANA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1505881502353-a1986add3762?w=1920&q=80&auto=format&fit=crop' },
-    { name: 'COLOMBIA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1583997052103-b4a1cb974ce5?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'COLOMBIA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1576629592451-828848a535b3?w=1920&q=80&auto=format&fit=crop' },
     { name: 'GRECIA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=1920&q=80&auto=format&fit=crop' },
     { name: 'ESPAÑA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=1920&q=80&auto=format&fit=crop' },
     { name: 'DISNEY', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1551762142-0e2c05535197?w=1920&q=80&auto=format&fit=crop' },
@@ -1894,10 +1945,10 @@ html, body {
 
   /* ── SLIDE 6: HQ PHOTOS LOOP ── */
   const hqCities = [
-    { name: 'MIAMI', img: 'https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'MIAMI', img: 'https://images.unsplash.com/photo-1514214246283-d427a95c5d2f?w=1920&q=80&auto=format&fit=crop' },
     { name: 'FRANCIA', img: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?w=1920&q=80&auto=format&fit=crop' },
     { name: 'LONDRES', img: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1920&q=80&auto=format&fit=crop' },
-    { name: 'HONG KONG', img: 'https://images.unsplash.com/photo-1532188363366-3a1b2ac4a338?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'HONG KONG', img: 'https://images.unsplash.com/photo-1540239352123-3115d42651a6?w=1920&q=80&auto=format&fit=crop' },
     { name: 'DUBAI', img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1920&q=80&auto=format&fit=crop' },
   ];
   const $hqContainer = document.getElementById('hqPhotos');
@@ -1930,47 +1981,85 @@ html, body {
   function stopHQLoop() { clearInterval(hqTimer); hqTimer = null; }
 
   /* ── TIMELINE ANIMATION ── */
+  let tlAnimId = null;
+  const cityPhotos = [
+    'photo-1502602898657-3e91760cbb34','photo-1513635269975-59663e0ac1ad','photo-1540959733332-eab4deabeeaf',
+    'photo-1552832230-c0197dd311b5','photo-1512453979798-5ea266f8880c','photo-1493976040374-85c8e12f0c0e',
+    'photo-1518548419970-58e3b4079ab2','photo-1514565131-fce0801e5785','photo-1506973035872-a4ec16b8e8d9',
+    'photo-1537996194471-e657df975ab4','photo-1476514525535-07fb3b4ae5f1','photo-1507525428034-b723cf961d3e',
+    'photo-1501785888041-af3ef285b470','photo-1528164344705-47542687000d','photo-1526129318478-62ed807ebdf9',
+    'photo-1519451241324-20b4ea2c4220','photo-1469474968028-56623f02e42e','photo-1470071459604-3b5ec3a7fe05',
+    'photo-1549144511-f099e773c147','photo-1516483638261-f4dbaf036963'
+  ];
+
   function triggerTimeline() {
     const plane = document.getElementById('tlPlane');
     const path = document.querySelector('.tl-track');
     const finalMsg = document.getElementById('tlFinalMsg');
-    const emojiRain = document.getElementById('emojiRain');
+    const collage = document.getElementById('cityCollage');
     if (!plane || !path) return;
     const len = path.getTotalLength();
-    const duration = 6000; // slower
+    const duration = 5000;
     const start = performance.now();
     function animatePlane(now) {
       const t = Math.min((now - start) / duration, 1);
       const ease = 1 - Math.pow(1 - t, 3);
       const pt = path.getPointAtLength(ease * len);
-      plane.setAttribute('transform', `translate(${pt.x},${pt.y - 20})`);
+      plane.setAttribute('transform', `translate(${pt.x},${pt.y - 18})`);
       if (t < 1) {
-        requestAnimationFrame(animatePlane);
+        tlAnimId = requestAnimationFrame(animatePlane);
       } else {
-        // Show final message
-        if (finalMsg) finalMsg.classList.add('show');
-        // Start emoji rain
-        if (emojiRain) startEmojiRain(emojiRain);
+        // Fade out timeline content, show city collage
+        startCityCollage(collage, finalMsg);
       }
     }
-    requestAnimationFrame(animatePlane);
+    tlAnimId = requestAnimationFrame(animatePlane);
   }
 
-  function startEmojiRain(container) {
-    const emojis = ['🎉','🥳','✈️','🌴','🏖️','🎊','🌍','🛫','🎈','🏝️','😄','🎁','🗺️','⭐','🌟'];
-    let count = 0;
-    const interval = setInterval(() => {
-      if (count >= 40) { clearInterval(interval); return; }
-      const el = document.createElement('span');
-      el.className = 'emoji';
-      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      el.style.left = Math.random() * 100 + '%';
-      el.style.animationDelay = Math.random() * .5 + 's';
-      el.style.fontSize = (20 + Math.random() * 20) + 'px';
-      container.appendChild(el);
-      count++;
-      setTimeout(() => el.remove(), 5000);
-    }, 120);
+  function startCityCollage(collage, finalMsg) {
+    if (!collage) return;
+    // Fade out timeline elements
+    const wrap = document.querySelector('#s13 .timeline-wrap');
+    const eyebrow = document.querySelector('#s13 .eyebrow');
+    const h2 = document.querySelector('#s13 .h2');
+    [wrap, eyebrow, h2].forEach(el => { if (el) { el.style.transition = 'opacity .8s'; el.style.opacity = '0'; } });
+
+    // Build collage images
+    collage.innerHTML = '';
+    cityPhotos.forEach(id => {
+      const img = document.createElement('img');
+      img.src = `https://images.unsplash.com/${id}?w=400&q=70&auto=format&fit=crop`;
+      collage.appendChild(img);
+    });
+
+    // Show collage container after fade
+    setTimeout(() => {
+      collage.classList.add('show');
+      // Reveal images one by one
+      const imgs = [...collage.querySelectorAll('img')];
+      imgs.forEach((img, i) => {
+        setTimeout(() => img.classList.add('visible'), i * 120);
+      });
+      // Show final message after all images
+      setTimeout(() => {
+        finalMsg.innerHTML = '<div class="tl-final-text">Disfruta tu viaje con <span class="gold">100% de tus puntos</span><br><span style="font-size:.6em;font-weight:600;color:var(--white-70);">¿Qué lugar eliges para hacer realidad tu sueño?</span></div>';
+        finalMsg.classList.add('show');
+      }, imgs.length * 120 + 600);
+    }, 900);
+  }
+
+  function resetTimeline() {
+    if (tlAnimId) { cancelAnimationFrame(tlAnimId); tlAnimId = null; }
+    const wrap = document.querySelector('#s13 .timeline-wrap');
+    const eyebrow = document.querySelector('#s13 .eyebrow');
+    const h2 = document.querySelector('#s13 .h2');
+    [wrap, eyebrow, h2].forEach(el => { if (el) { el.style.transition = 'none'; el.style.opacity = ''; } });
+    const finalMsg = document.getElementById('tlFinalMsg');
+    const collage = document.getElementById('cityCollage');
+    if (finalMsg) { finalMsg.classList.remove('show'); finalMsg.innerHTML = ''; }
+    if (collage) { collage.classList.remove('show'); collage.innerHTML = ''; }
+    const plane = document.getElementById('tlPlane');
+    if (plane) plane.setAttribute('transform', 'translate(30,75)');
   }
 
   /* ── NETWORK INTERACTIVE ── */
@@ -1978,17 +2067,24 @@ html, body {
   const netSlide = document.getElementById('s14');
   if (netSlide) {
     netSlide.addEventListener('click', (e) => {
-      // Don't trigger on nav buttons
       if (e.target.closest('.nav') || e.target.closest('.counter')) return;
       netStep++;
       if (netStep > 4) return;
       document.querySelectorAll(`.net-step[data-step="${netStep}"]`).forEach(el => {
         el.classList.add('visible');
       });
-      // Hide hint after first click
       const hint = document.querySelector('#netCrown div:last-child');
       if (hint && netStep >= 1) hint.style.display = 'none';
     });
+  }
+
+  function resetNetwork() {
+    netStep = 0;
+    document.querySelectorAll('.net-step').forEach(el => {
+      el.classList.remove('visible');
+    });
+    const hint = document.querySelector('#netCrown div:last-child');
+    if (hint) hint.style.display = '';
   }
 
   /* ── Touch / Swipe ── */
