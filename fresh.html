@@ -294,15 +294,15 @@ html, body {
 }
 #s1 .hero-question {
   font-family: 'Montserrat', sans-serif;
-  font-size: clamp(38px, 5vw, 80px);
+  font-size: clamp(26px, 3.2vw, 52px);
   font-weight: 900;
-  line-height: 1;
+  line-height: 1.1;
   text-transform: uppercase;
   text-shadow: 0 4px 30px rgba(0,0,0,.5);
 }
 #s1 .hero-question .accent {
   display: block;
-  background: linear-gradient(90deg, var(--gold), var(--amber));
+  background: linear-gradient(90deg, #FFD700, #FFC107, #FFAB00);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -391,6 +391,29 @@ html, body {
   backdrop-filter: blur(12px);
   color: var(--gold);
   font-size: 22px;
+}
+@property --card-border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+.stat-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  padding: 3px;
+  background: conic-gradient(from var(--card-border-angle, 0deg), transparent 30%, #FFD700 45%, #F5A623 50%, rgba(255,215,0,.6) 55%, transparent 70%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: card-border-trace 2.5s linear infinite;
+  pointer-events: none;
+  z-index: 10;
+  filter: drop-shadow(0 0 10px rgba(255,215,0,.5));
+}
+@keyframes card-border-trace {
+  to { --card-border-angle: 360deg; }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -566,7 +589,7 @@ html, body {
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  animation: border-trace 3s linear infinite;
+  animation: border-trace 3s linear 1 forwards;
   pointer-events: none;
   z-index: 2;
   filter: drop-shadow(0 0 12px rgba(245,166,35,.7));
@@ -577,7 +600,9 @@ html, body {
   inherits: false;
 }
 @keyframes border-trace {
-  to { --border-angle: 360deg; }
+  0% { --border-angle: 0deg; opacity: 1; }
+  80% { --border-angle: 288deg; opacity: 1; }
+  100% { --border-angle: 360deg; opacity: 0; }
 }
 #s5 .tagline-main {
   font-family: 'Montserrat', sans-serif;
@@ -1210,7 +1235,7 @@ html, body {
 }
 
 .tl-final-msg {
-  position: absolute;
+  position: fixed;
   inset: 0;
   display: flex;
   flex-direction: column;
@@ -1218,7 +1243,7 @@ html, body {
   justify-content: center;
   text-align: center;
   padding: 40px;
-  z-index: 25;
+  z-index: 30;
   pointer-events: none;
   opacity: 0;
   transition: opacity 1.2s ease;
@@ -1226,22 +1251,22 @@ html, body {
 .tl-final-msg.show { opacity: 1; }
 .tl-final-msg .tl-final-text {
   font-family: 'Montserrat', sans-serif;
-  font-size: clamp(22px, 3vw, 44px);
+  font-size: clamp(32px, 4.5vw, 64px);
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 2px;
-  line-height: 1.3;
-  text-shadow: 0 4px 30px rgba(0,0,0,.8);
-  max-width: 800px;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-shadow: 0 4px 30px rgba(0,0,0,.8), 0 0 60px rgba(0,0,0,.5);
 }
 .city-collage {
-  position: absolute;
+  position: fixed;
   inset: 0;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(4, 1fr);
   gap: 0;
-  z-index: 15;
+  z-index: 20;
   pointer-events: none;
   opacity: 0;
   transition: opacity .8s ease;
@@ -1268,15 +1293,70 @@ html, body {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
-   SLIDE 13 — NETWORK / LIDER CLUB
+   SLIDE 14 — 80% FIDELIZACIÓN (NEON)
    ═══════════════════════════════════════════════════════════════════════ */
-#s14 .slide-bg {
+#s14 { background: var(--grad-hero); }
+#s14 .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+  padding: 0 40px;
+  height: 100%;
+}
+#s14 .neon-number {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(120px, 20vw, 320px);
+  font-weight: 900;
+  color: #FFD700;
+  line-height: 1;
+  text-shadow:
+    0 0 10px rgba(255,215,0,.8),
+    0 0 20px rgba(255,215,0,.6),
+    0 0 40px rgba(255,215,0,.4),
+    0 0 80px rgba(255,215,0,.3),
+    0 0 120px rgba(255,215,0,.2);
+  animation: neon-pulse 2s ease-in-out infinite;
+}
+@keyframes neon-pulse {
+  0%, 100% {
+    text-shadow:
+      0 0 10px rgba(255,215,0,.8),
+      0 0 20px rgba(255,215,0,.6),
+      0 0 40px rgba(255,215,0,.4),
+      0 0 80px rgba(255,215,0,.3),
+      0 0 120px rgba(255,215,0,.2);
+  }
+  50% {
+    text-shadow:
+      0 0 20px rgba(255,215,0,1),
+      0 0 40px rgba(255,215,0,.8),
+      0 0 80px rgba(255,215,0,.6),
+      0 0 120px rgba(255,215,0,.5),
+      0 0 200px rgba(255,215,0,.3);
+  }
+}
+#s14 .neon-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(28px, 4.5vw, 64px);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--white-90);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDE 15 — NETWORK / LIDER CLUB
+   ═══════════════════════════════════════════════════════════════════════ */
+#s15 .slide-bg {
   background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1920&q=80&auto=format&fit=crop');
 }
-#s14 .slide-bg::after {
+#s15 .slide-bg::after {
   background: linear-gradient(135deg, rgba(30,10,80,.95) 0%, rgba(75,40,180,.92) 50%, rgba(45,27,142,.95) 100%);
 }
-#s14 .content {
+#s15 .content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1284,14 +1364,14 @@ html, body {
   gap: 40px;
   padding: 0 60px;
 }
-#s14 .network-visual {
+#s15 .network-visual {
   display: flex;
   align-items: center;
   gap: 20px;
   flex-wrap: wrap;
   justify-content: center;
 }
-#s14 .person-label { display: none; }
+#s15 .person-label { display: none; }
 .person-node {
   display: flex;
   flex-direction: column;
@@ -1348,7 +1428,7 @@ html, body {
   color: var(--white-50);
   padding: 0 12px;
 }
-#s14 .result-box {
+#s15 .result-box {
   display: flex;
   align-items: center;
   gap: 20px;
@@ -1358,17 +1438,17 @@ html, body {
   border: 2px solid var(--gold);
   backdrop-filter: blur(12px);
 }
-#s14 .result-box iconify-icon {
+#s15 .result-box iconify-icon {
   font-size: 36px;
   color: var(--gold);
 }
-#s14 .result-box .result-text {
+#s15 .result-box .result-text {
   font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   font-weight: 700;
   text-align: left;
 }
-#s14 .result-box .result-text .gold {
+#s15 .result-box .result-text .gold {
   font-size: 22px;
   font-weight: 900;
 }
@@ -1742,8 +1822,16 @@ html, body {
     </div>
   </div>
 
-  <!-- ────────── SLIDE 14: NETWORK INTERACTIVE ────────── -->
+  <!-- ────────── SLIDE 14: 80% FIDELIZACIÓN ────────── -->
   <div class="slide" id="s14">
+    <div class="content">
+      <div class="neon-number reveal">80%</div>
+      <div class="neon-label reveal d1">de fidelización</div>
+    </div>
+  </div>
+
+  <!-- ────────── SLIDE 15: NETWORK INTERACTIVE ────────── -->
+  <div class="slide" id="s15">
     <div class="slide-bg"></div>
     <div class="content">
       <div class="eyebrow net-step" data-step="4" style="opacity:0;transform:translateY(20px);">Líder Club</div>
@@ -1795,7 +1883,7 @@ html, body {
 </div>
 
 <!-- ═══════════ NAVIGATION ═══════════ -->
-<div class="counter"><b id="currSlide">01</b> / <span id="totalSlides">14</span></div>
+<div class="counter"><b id="currSlide">01</b> / <span id="totalSlides">15</span></div>
 <div class="nav">
   <button id="prevBtn" aria-label="Anterior"><iconify-icon icon="ph:arrow-left-bold"></iconify-icon></button>
   <button id="nextBtn" aria-label="Siguiente"><iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
@@ -1861,7 +1949,7 @@ html, body {
     }
 
     // Network: reset on leave
-    if (idx !== 13) {
+    if (idx !== 14) {
       resetNetwork();
     }
   }
@@ -1884,7 +1972,7 @@ html, body {
     { name: 'CHINA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=1920&q=80&auto=format&fit=crop' },
     { name: 'ROMA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1920&q=80&auto=format&fit=crop' },
     { name: 'TAILANDIA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1537956965359-7573183d1f57?w=1920&q=80&auto=format&fit=crop' },
-    { name: 'ÁFRICA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1750232944224-9c7f6fd306a7?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'ÁFRICA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1594555249447-1f8e0143fa6f?w=1920&q=80&auto=format&fit=crop' },
   ];
 
   const $imgContainer = document.getElementById('destImages');
@@ -2025,12 +2113,6 @@ html, body {
         tlAnimId = requestAnimationFrame(animatePlane);
       } else {
         tlPlaneArrived = true;
-        // Show final message on the timeline
-        const finalMsg = document.getElementById('tlFinalMsg');
-        if (finalMsg) {
-          finalMsg.innerHTML = '<div class="tl-final-text">Disfruta tu viaje con <span class="gold">100% de tus puntos</span></div>';
-          finalMsg.classList.add('show');
-        }
       }
     }
     tlAnimId = requestAnimationFrame(animatePlane);
@@ -2041,18 +2123,19 @@ html, body {
     const collage = document.getElementById('cityCollage');
     const finalMsg = document.getElementById('tlFinalMsg');
     if (!collage) return;
-    // Fade out timeline elements
+    // Fade out ALL timeline elements
     const wrap = document.querySelector('#s13 .timeline-wrap');
     const eyebrow = document.querySelector('#s13 .eyebrow');
     const h2 = document.querySelector('#s13 .h2');
-    if (finalMsg) { finalMsg.classList.remove('show'); }
-    [wrap, eyebrow, h2].forEach(el => { if (el) { el.style.transition = 'opacity .8s'; el.style.opacity = '0'; } });
+    const milestones = document.querySelector('#s13 .milestone-cards');
+    if (finalMsg) { finalMsg.classList.remove('show'); finalMsg.innerHTML = ''; }
+    [wrap, eyebrow, h2, milestones].forEach(el => { if (el) { el.style.transition = 'opacity .8s'; el.style.opacity = '0'; } });
 
     // Build collage images
     collage.innerHTML = '';
     cityPhotos.forEach(id => {
       const img = document.createElement('img');
-      img.src = `https://images.unsplash.com/${id}?w=400&q=70&auto=format&fit=crop`;
+      img.src = `https://images.unsplash.com/${id}?w=600&q=80&auto=format&fit=crop`;
       collage.appendChild(img);
     });
 
@@ -2060,15 +2143,15 @@ html, body {
       collage.classList.add('show');
       const imgs = [...collage.querySelectorAll('img')];
       imgs.forEach((img, i) => {
-        setTimeout(() => img.classList.add('visible'), i * 80);
+        setTimeout(() => img.classList.add('visible'), i * 100);
       });
-      // Show final message over collage
+      // Show final message ONLY after ALL images have appeared
       setTimeout(() => {
         if (finalMsg) {
           finalMsg.innerHTML = '<div class="tl-final-text">Disfruta tu viaje con <span class="gold">100% de tus puntos</span></div>';
           finalMsg.classList.add('show');
         }
-      }, imgs.length * 80 + 400);
+      }, imgs.length * 100 + 600);
     }, 900);
   }
 
@@ -2078,7 +2161,8 @@ html, body {
     const wrap = document.querySelector('#s13 .timeline-wrap');
     const eyebrow = document.querySelector('#s13 .eyebrow');
     const h2 = document.querySelector('#s13 .h2');
-    [wrap, eyebrow, h2].forEach(el => { if (el) { el.style.transition = 'none'; el.style.opacity = ''; } });
+    const milestones = document.querySelector('#s13 .milestone-cards');
+    [wrap, eyebrow, h2, milestones].forEach(el => { if (el) { el.style.transition = 'none'; el.style.opacity = ''; } });
     const finalMsg = document.getElementById('tlFinalMsg');
     const collage = document.getElementById('cityCollage');
     if (finalMsg) { finalMsg.classList.remove('show'); finalMsg.innerHTML = ''; }
@@ -2089,7 +2173,7 @@ html, body {
 
   /* ── NETWORK INTERACTIVE ── */
   let netStep = 0;
-  const netSlide = document.getElementById('s14');
+  const netSlide = document.getElementById('s15');
   if (netSlide) {
     netSlide.addEventListener('click', (e) => {
       if (e.target.closest('.nav') || e.target.closest('.counter')) return;
