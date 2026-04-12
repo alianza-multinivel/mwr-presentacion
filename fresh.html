@@ -710,90 +710,140 @@ html, body {
   padding: 0 40px;
 }
 #s7 .medal {
-  width: 220px; height: 260px;
+  width: 260px; height: 340px;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  filter: drop-shadow(0 20px 60px rgba(245,166,35,.4));
+}
+/* Ribbon neck strap */
+#s7 .medal-ribbon-neck {
+  width: 100px; height: 80px;
+  background: linear-gradient(180deg, #1E3A8A 0%, #1E5BFF 50%, #1E3A8A 100%);
+  clip-path: polygon(20% 0, 80% 0, 100% 100%, 0 100%);
+  position: relative;
+  z-index: 1;
+}
+#s7 .medal-ribbon-neck::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg, transparent, transparent 8px, rgba(255,255,255,.08) 8px, rgba(255,255,255,.08) 10px);
 }
 #s7 .medal-circle {
-  width: 200px; height: 200px;
+  width: 220px; height: 220px;
   border-radius: 50%;
-  background: conic-gradient(from 0deg, #FFE58A, #F5A623, #D4941F, #FFD700, #F5A623, #A17A1A, #FFE58A);
+  background: conic-gradient(from 0deg, #FFF6D5, #F5D060, #B8860B, #D4A017, #FFD700, #F5D060, #B8860B, #FFE58A, #FFF6D5);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 50px rgba(245,166,35,.5), 0 0 100px rgba(245,166,35,.2), inset 0 0 30px rgba(255,255,255,.15);
+  box-shadow:
+    0 0 0 4px #B8860B,
+    0 0 0 8px rgba(184,134,11,.3),
+    0 8px 32px rgba(0,0,0,.5),
+    0 0 80px rgba(245,166,35,.3),
+    inset 0 2px 4px rgba(255,255,255,.4);
   position: relative;
-  animation: medal-rotate 8s linear infinite;
+  margin-top: -15px;
+  z-index: 2;
+  animation: medal-shine 6s ease-in-out infinite;
 }
-@keyframes medal-rotate {
-  0% { background: conic-gradient(from 0deg, #FFE58A, #F5A623, #D4941F, #FFD700, #F5A623, #A17A1A, #FFE58A); }
-  100% { background: conic-gradient(from 360deg, #FFE58A, #F5A623, #D4941F, #FFD700, #F5A623, #A17A1A, #FFE58A); }
+@keyframes medal-shine {
+  0%, 100% { box-shadow: 0 0 0 4px #B8860B, 0 0 0 8px rgba(184,134,11,.3), 0 8px 32px rgba(0,0,0,.5), 0 0 80px rgba(245,166,35,.3), inset 0 2px 4px rgba(255,255,255,.4); }
+  50% { box-shadow: 0 0 0 4px #D4A017, 0 0 0 8px rgba(212,160,23,.4), 0 8px 32px rgba(0,0,0,.5), 0 0 120px rgba(245,166,35,.5), inset 0 2px 4px rgba(255,255,255,.5); }
 }
+/* Engraved ring on medal face */
 #s7 .medal-circle::before {
   content: "";
   position: absolute;
-  inset: -12px;
+  inset: 12px;
   border-radius: 50%;
-  border: 3px solid rgba(245,166,35,.3);
-  animation: pulse-ring 2s ease-in-out infinite;
+  border: 2px solid rgba(184,134,11,.6);
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.15), 0 0 0 2px rgba(184,134,11,.3);
 }
+/* Laurel wreath ring */
 #s7 .medal-circle::after {
-  content: "";
+  content: "🏆";
   position: absolute;
-  inset: -24px;
+  bottom: -10px;
+  font-size: 0;
+  width: 240px; height: 240px;
   border-radius: 50%;
-  border: 1px solid rgba(245,166,35,.15);
-  animation: pulse-ring 2s ease-in-out infinite .5s;
+  border: 3px solid rgba(245,166,35,.2);
+  animation: pulse-ring 3s ease-in-out infinite;
 }
 @keyframes pulse-ring {
   0%,100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.08); opacity: .3; }
+  50% { transform: scale(1.06); opacity: .4; }
 }
 #s7 .medal-inner {
-  width: 170px; height: 170px;
+  width: 190px; height: 190px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #FFE58A 0%, #F5A623 40%, #B8860B 100%);
+  background: radial-gradient(ellipse at 30% 25%, #FFF6D5 0%, #FFD700 25%, #F5A623 50%, #D4941F 75%, #B8860B 100%);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 -4px 8px rgba(0,0,0,.2), inset 0 4px 8px rgba(255,255,255,.3);
+  box-shadow:
+    inset 0 -6px 12px rgba(0,0,0,.25),
+    inset 0 6px 12px rgba(255,255,255,.35),
+    inset -4px 0 8px rgba(0,0,0,.1),
+    inset 4px 0 8px rgba(255,255,255,.15);
+  position: relative;
+  overflow: hidden;
 }
-#s7 .medal-ribbons {
-  display: flex;
-  gap: 4px;
-  margin-top: -10px;
-}
-#s7 .medal-ribbon {
-  width: 30px; height: 50px;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 75%, 0 100%);
-}
-#s7 .medal-ribbon:first-child { background: linear-gradient(135deg, #1E5BFF, #4834D4); }
-#s7 .medal-ribbon:last-child { background: linear-gradient(135deg, #F5A623, #D4941F); }
-#s7 .medal-stars {
+/* Metallic highlight sweep */
+#s7 .medal-inner::before {
+  content: "";
   position: absolute;
-  top: -8px; left: 50%;
-  transform: translateX(-50%);
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,.25) 45%, rgba(255,255,255,.4) 50%, rgba(255,255,255,.25) 55%, transparent 60%);
+  animation: medal-gleam 4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes medal-gleam {
+  0% { transform: translateX(-100%) rotate(45deg); }
+  50% { transform: translateX(100%) rotate(45deg); }
+  100% { transform: translateX(100%) rotate(45deg); }
+}
+#s7 .medal-stars {
   display: flex;
-  gap: 4px;
-  font-size: 16px;
-  color: var(--navy);
-  text-shadow: 0 0 8px rgba(245,166,35,.6);
-  filter: drop-shadow(0 0 4px rgba(255,215,0,.5));
+  gap: 2px;
+  font-size: 14px;
+  color: #8B6914;
+  margin-bottom: 2px;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 2px rgba(255,255,255,.4);
 }
 #s7 .medal-number {
   font-family: 'Montserrat', sans-serif;
-  font-size: 80px;
+  font-size: 90px;
   font-weight: 900;
-  color: var(--navy);
+  color: #5C3D0E;
   line-height: 1;
-  text-shadow: 0 2px 4px rgba(0,0,0,.15);
+  text-shadow: 0 2px 0 rgba(255,255,255,.3), 0 -1px 0 rgba(0,0,0,.15);
+  position: relative;
+  z-index: 1;
 }
 #s7 .medal-hash {
-  font-size: 36px;
-  font-weight: 600;
+  font-size: 40px;
+  font-weight: 700;
 }
+#s7 .medal-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #8B6914;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+/* Side ribbons removed — using neck strap instead */
+#s7 .medal-ribbons { display: none; }
 
 /* Old world map styles removed */
 
@@ -1409,15 +1459,13 @@ html, body {
     <div class="content">
       <div class="eyebrow reveal">Reconocimiento Global</div>
       <div class="medal reveal d1">
+        <div class="medal-ribbon-neck"></div>
         <div class="medal-circle">
-          <div class="medal-stars">★ ★ ★ ★ ★</div>
           <div class="medal-inner">
+            <div class="medal-stars">★ ★ ★ ★ ★</div>
             <span class="medal-number"><span class="medal-hash">#</span>1</span>
+            <div class="medal-label">World's Best</div>
           </div>
-        </div>
-        <div class="medal-ribbons">
-          <div class="medal-ribbon"></div>
-          <div class="medal-ribbon"></div>
         </div>
       </div>
       <h2 class="h2 reveal d2">La Compañía #1 de Viajes<br><span class="gold">y Con Mayor Crecimiento a Nivel Mundial</span></h2>
@@ -1756,6 +1804,8 @@ html, body {
     { name: 'DISNEY', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1551762142-0e2c05535197?w=1920&q=80&auto=format&fit=crop' },
     { name: 'JAPÓN', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1920&q=80&auto=format&fit=crop' },
     { name: 'CHINA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'ROMA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'TAILANDIA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=1920&q=80&auto=format&fit=crop' },
     { name: 'ÁFRICA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1750232944224-9c7f6fd306a7?w=1920&q=80&auto=format&fit=crop' },
   ];
 
@@ -1831,11 +1881,11 @@ html, body {
 
   /* ── SLIDE 6: HQ PHOTOS LOOP ── */
   const hqCities = [
-    { name: 'MIAMI', img: 'https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=1920&q=80&auto=format&fit=crop' },
-    { name: 'FRANCIA', img: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1920&q=80&auto=format&fit=crop' },
-    { name: 'LONDRES', img: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1920&q=80&auto=format&fit=crop' },
-    { name: 'HONG KONG', img: 'https://images.unsplash.com/photo-1536599018102-9f803c029bf1?w=1920&q=80&auto=format&fit=crop' },
-    { name: 'DUBAI', img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'MIAMI', img: 'https://images.unsplash.com/photo-1448630360428-65456885c650?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'FRANCIA', img: 'https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'LONDRES', img: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'HONG KONG', img: 'https://images.unsplash.com/photo-1520333789090-1afc82db536a?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'DUBAI', img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80&auto=format&fit=crop' },
   ];
   const $hqContainer = document.getElementById('hqPhotos');
   const $hqCity = document.getElementById('hqCityName');
