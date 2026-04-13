@@ -1254,6 +1254,29 @@ html, body {
 }
 #s13.active .tl-label { fill: var(--white); }
 #s13.active .tl-label.gold { fill: var(--gold); }
+#s13 .tl-pts {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  fill: rgba(245,166,35,.6);
+  text-anchor: middle;
+}
+#s13 .tl-points-summary {
+  text-align: center;
+  margin-top: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(14px, 1.5vw, 20px);
+  font-weight: 700;
+  color: var(--white-70);
+  opacity: 0;
+  transition: opacity .8s ease 1s;
+}
+#s13.active .tl-points-summary { opacity: 1; }
+#s13 .tl-points-summary .gold {
+  color: var(--gold);
+  font-size: clamp(18px, 2vw, 28px);
+  font-weight: 900;
+}
 #s13 .tl-milestone {
   font-family: 'Montserrat', sans-serif;
   font-size: 12px;
@@ -1783,11 +1806,19 @@ html, body {
 
   <!-- ────────── SLIDE 12: PRO OFFER (PRECIOS IMAGE) ────────── -->
   <div class="slide" id="s12">
-    <!-- Airplane border animations (orange) -->
-    <div class="offer-plane offer-plane-top"><span>✈</span></div>
-    <div class="offer-plane offer-plane-bottom"><span>✈</span></div>
-    <div class="offer-plane offer-plane-right"><span>✈</span></div>
-    <div class="offer-plane offer-plane-left"><span>✈</span></div>
+    <!-- Airplane border animations (orange) — 3 per side -->
+    <div class="offer-plane offer-plane-top" style="animation-delay:0s"><span>✈</span></div>
+    <div class="offer-plane offer-plane-top" style="animation-delay:-2s"><span>✈</span></div>
+    <div class="offer-plane offer-plane-top" style="animation-delay:-4s"><span>✈</span></div>
+    <div class="offer-plane offer-plane-bottom" style="animation-delay:-1s"><span>✈</span></div>
+    <div class="offer-plane offer-plane-bottom" style="animation-delay:-3s"><span>✈</span></div>
+    <div class="offer-plane offer-plane-bottom" style="animation-delay:-5s"><span>✈</span></div>
+    <div class="offer-plane offer-plane-right" style="animation-delay:-0.5s"><span>✈</span></div>
+    <div class="offer-plane offer-plane-right" style="animation-delay:-2.5s"><span>✈</span></div>
+    <div class="offer-plane offer-plane-right" style="animation-delay:-4.5s"><span>✈</span></div>
+    <div class="offer-plane offer-plane-left" style="animation-delay:-1.5s"><span>✈</span></div>
+    <div class="offer-plane offer-plane-left" style="animation-delay:-3.5s"><span>✈</span></div>
+    <div class="offer-plane offer-plane-left" style="animation-delay:-5.5s"><span>✈</span></div>
     <div class="content">
       <img src="precios.png" alt="Paquetes de Inscripción — MWR Life" class="offer-img">
     </div>
@@ -1874,6 +1905,20 @@ html, body {
           <text x="870" y="135" class="tl-label">11</text>
           <text x="970" y="135" class="tl-label gold" style="font-size:14px;">12</text>
 
+          <!-- 240pts per month -->
+          <text x="30" y="155" class="tl-pts">240pts</text>
+          <text x="115" y="155" class="tl-pts">240pts</text>
+          <text x="195" y="155" class="tl-pts">240pts</text>
+          <text x="275" y="155" class="tl-pts">240pts</text>
+          <text x="355" y="155" class="tl-pts">240pts</text>
+          <text x="445" y="155" class="tl-pts">240pts</text>
+          <text x="530" y="155" class="tl-pts">240pts</text>
+          <text x="610" y="155" class="tl-pts">240pts</text>
+          <text x="700" y="155" class="tl-pts">240pts</text>
+          <text x="780" y="155" class="tl-pts">240pts</text>
+          <text x="870" y="155" class="tl-pts">240pts</text>
+          <text x="970" y="155" class="tl-pts">240pts</text>
+
           <!-- Milestone labels -->
           <text x="30" y="82" class="tl-milestone" style="font-size:12px;">INICIO</text>
           <text x="970" y="68" class="tl-milestone" style="font-size:12px;">MES 12</text>
@@ -1902,6 +1947,7 @@ html, body {
           <div class="ic-text">Te duplicamos tus puntos todos los meses</div>
         </div>
       </div>
+      <div class="tl-points-summary reveal d3">240pts × 12 meses = <span class="gold">2,880 pts de viaje</span></div>
       <div class="tl-final-msg" id="tlFinalMsg"></div>
       <div class="tl-screenshots-layout" id="tlScreenshots">
         <div class="tl-screenshots-grid">
@@ -1919,15 +1965,24 @@ html, body {
     </div>
   </div>
 
-  <!-- ────────── SLIDE 14: 80% FIDELIZACIÓN ────────── -->
-  <div class="slide" id="s14">
-    <div class="content">
-      <div class="neon-number reveal">80%</div>
-      <div class="neon-label reveal d1">de fidelización</div>
+  <!-- ────────── SLIDE NEW: ¿TE GUSTARÍA VIVIR ESTAS EXPERIENCIAS? ────────── -->
+  <div class="slide" id="sExp">
+    <img src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=1920&q=80&auto=format&fit=crop" alt="Grupo de viaje" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,.3) 50%,rgba(0,0,0,.6) 100%);"></div>
+    <div class="content" style="position:relative;z-index:2;display:flex;align-items:center;justify-content:center;text-align:center;">
+      <h2 class="h2 reveal" style="font-size:clamp(32px,5vw,72px);line-height:1.2;text-shadow:0 4px 30px rgba(0,0,0,.8);">¿Te gustaría vivir estas<br><span class="gold">experiencias gratis?</span></h2>
     </div>
   </div>
 
-  <!-- ────────── SLIDE 15: NETWORK INTERACTIVE ────────── -->
+  <!-- ────────── SLIDE NEW: ¿Y SI PUDIERAS...? ────────── -->
+  <div class="slide" id="sQst">
+    <div class="slide-bg"></div>
+    <div class="content" style="display:flex;align-items:center;justify-content:center;text-align:center;">
+      <h2 class="h2 reveal" style="font-size:clamp(30px,4.5vw,64px);line-height:1.3;">¿Y si pudieras<br><span class="gold">viajar gratis</span> y<br><span class="gold">ganar dinero</span><br>al mismo tiempo?</h2>
+    </div>
+  </div>
+
+  <!-- ────────── SLIDE 15: NETWORK INTERACTIVE (MOVED) ────────── -->
   <div class="slide" id="s15">
     <div class="slide-bg"></div>
     <div class="content">
@@ -1977,10 +2032,39 @@ html, body {
     </div>
   </div>
 
+  <!-- ────────── SLIDE 14: 80% FIDELIZACIÓN ────────── -->
+  <div class="slide" id="s14">
+    <div class="content">
+      <div class="neon-number reveal">80%</div>
+      <div class="neon-label reveal d1">de fidelización</div>
+    </div>
+  </div>
+
+  <!-- ────────── SLIDE NEW: MWR 55-80% DISTRIBUCIÓN ────────── -->
+  <div class="slide" id="sDist">
+    <div class="slide-bg"></div>
+    <div class="content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;text-align:center;max-width:1000px;">
+      <img src="logo-mwr-official.svg" alt="MWR Life" class="reveal" style="height:clamp(50px,6vw,80px);filter:drop-shadow(0 4px 12px rgba(0,0,0,.5));">
+      <h2 class="h2 reveal d1" style="font-size:clamp(24px,3.5vw,48px);line-height:1.3;">Reparte del<br><span class="gold" style="font-size:clamp(48px,7vw,100px);">55% al 80%</span></h2>
+      <p class="reveal d2" style="font-size:clamp(16px,2vw,26px);color:var(--white-70);font-weight:600;max-width:700px;">con sus socios club por<br><span style="color:#fff;font-weight:800;">Marketing de Experiencia</span></p>
+      <div class="reveal d3" style="display:flex;gap:20px;margin-top:10px;">
+        <div style="background:rgba(245,166,35,.15);border:2px solid var(--gold);border-radius:16px;padding:20px 28px;text-align:center;">
+          <div style="font-family:'Montserrat',sans-serif;font-size:clamp(28px,3.5vw,48px);font-weight:900;color:var(--gold);">55%</div>
+          <div style="font-size:13px;color:var(--white-70);font-weight:600;margin-top:4px;">Mínimo</div>
+        </div>
+        <div style="display:flex;align-items:center;font-size:28px;color:var(--gold);">→</div>
+        <div style="background:rgba(245,166,35,.15);border:2px solid var(--gold);border-radius:16px;padding:20px 28px;text-align:center;">
+          <div style="font-family:'Montserrat',sans-serif;font-size:clamp(28px,3.5vw,48px);font-weight:900;color:var(--gold);">80%</div>
+          <div style="font-size:13px;color:var(--white-70);font-weight:600;margin-top:4px;">Máximo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- ═══════════ NAVIGATION ═══════════ -->
-<div class="counter"><b id="currSlide">01</b> / <span id="totalSlides">19</span></div>
+<div class="counter"><b id="currSlide">01</b> / <span id="totalSlides">22</span></div>
 <div class="nav">
   <button id="prevBtn" aria-label="Anterior"><iconify-icon icon="ph:arrow-left-bold"></iconify-icon></button>
   <button id="nextBtn" aria-label="Siguiente"><iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
@@ -2045,8 +2129,8 @@ html, body {
       collageShown = false;
     }
 
-    // Network: reset on leave
-    if (idx !== 18) {
+    // Network: reset on leave (s15 is now at index 19)
+    if (idx !== 19) {
       resetNetwork();
     }
   }
