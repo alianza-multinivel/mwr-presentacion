@@ -1430,11 +1430,106 @@ html, body {
 }
 #s14 .neon-label {
   font-family: 'Montserrat', sans-serif;
-  font-size: clamp(28px, 4.5vw, 64px);
+  font-size: clamp(20px, 3vw, 40px);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .05em;
   color: var(--white-90);
+}
+/* ── Testimonial scrolling rows ── */
+.testimonial-section {
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+.testimonial-row {
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 5%, #000 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 5%, #000 95%, transparent 100%);
+}
+.testimonial-track {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  animation: t-scroll 30s linear infinite;
+}
+.testimonial-row[data-speed="slow"] .testimonial-track { animation-duration: 40s; }
+.testimonial-row[data-speed="medium"] .testimonial-track { animation-duration: 32s; }
+.testimonial-row[data-speed="fast"] .testimonial-track { animation-duration: 26s; }
+.testimonial-track:hover { animation-play-state: paused; }
+@keyframes t-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+/* ── Card base ── */
+.t-card {
+  flex-shrink: 0;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-family: 'Montserrat', sans-serif;
+  transition: transform .3s, box-shadow .3s;
+  cursor: default;
+}
+.t-card:hover { transform: scale(1.04); box-shadow: 0 8px 24px rgba(0,0,0,.4); }
+/* ── WhatsApp cards ── */
+.t-whatsapp {
+  background: #075E54;
+  width: 220px;
+  color: #fff;
+}
+.t-wa-header { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.t-wa-name { font-size: 11px; font-weight: 700; color: #25D366; }
+.t-wa-time { font-size: 9px; color: rgba(255,255,255,.5); }
+.t-wa-msg {
+  font-size: 11px;
+  line-height: 1.4;
+  background: #128C7E;
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: #fff;
+}
+/* ── Trustpilot cards ── */
+.t-trustpilot {
+  background: #1a1a2e;
+  border: 1px solid rgba(0,182,122,.3);
+  width: 210px;
+}
+.t-tp-stars { color: #00B67A; font-size: 13px; letter-spacing: 2px; margin-bottom: 4px; }
+.t-tp-title { font-size: 11px; font-weight: 800; color: #fff; margin-bottom: 3px; }
+.t-tp-text { font-size: 10px; color: rgba(255,255,255,.7); line-height: 1.3; margin-bottom: 4px; }
+.t-tp-author { font-size: 9px; color: #00B67A; font-weight: 600; }
+/* ── YouTube cards ── */
+.t-youtube { background: #1a1a2e; width: 200px; padding: 0; overflow: hidden; }
+.t-yt-thumb {
+  width: 100%;
+  height: 100px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.t-yt-play {
+  width: 36px; height: 26px;
+  background: rgba(255,0,0,.85);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 14px;
+}
+.t-yt-title {
+  padding: 8px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -1947,15 +2042,7 @@ html, body {
     </div>
   </div>
 
-  <!-- ────────── SLIDE NEW: ¿Y SI PUDIERAS...? ────────── -->
-  <div class="slide" id="sQst">
-    <div class="slide-bg"></div>
-    <div class="content" style="display:flex;align-items:center;justify-content:center;text-align:center;">
-      <h2 class="h2 reveal" style="font-size:clamp(30px,4.5vw,64px);line-height:1.3;">¿Y si pudieras<br><span class="gold">viajar gratis</span> y<br><span class="gold">ganar dinero</span><br>al mismo tiempo?</h2>
-    </div>
-  </div>
-
-  <!-- ────────── SLIDE 15: NETWORK INTERACTIVE (MOVED) ────────── -->
+  <!-- ────────── SLIDE 15: NETWORK INTERACTIVE ────────── -->
   <div class="slide" id="s15">
     <div class="slide-bg"></div>
     <div class="content">
@@ -2005,11 +2092,66 @@ html, body {
     </div>
   </div>
 
-  <!-- ────────── SLIDE 14: 80% FIDELIZACIÓN ────────── -->
+  <!-- ────────── SLIDE NEW: LA VERDADERA PREGUNTA ────────── -->
+  <div class="slide" id="sPreg">
+    <div class="slide-bg"></div>
+    <div class="content" style="display:flex;align-items:center;justify-content:center;text-align:center;">
+      <h2 class="h2 reveal" style="font-size:clamp(24px,3.5vw,48px);line-height:1.4;">La verdadera pregunta es:<br><span class="gold" style="font-size:clamp(28px,4.5vw,64px);">¿Solo quieres viajar gratis<br>o ganar dinero al mismo tiempo?</span></h2>
+    </div>
+  </div>
+
+  <!-- ────────── SLIDE 14: 80% FIDELIZACIÓN + TESTIMONIOS ────────── -->
   <div class="slide" id="s14">
-    <div class="content">
-      <div class="neon-number reveal">80%</div>
-      <div class="neon-label reveal d1">de fidelización</div>
+    <div class="content" style="flex-direction:column;gap:10px;padding:20px 0;max-width:100%;overflow:hidden;">
+      <div style="text-align:center;">
+        <div class="neon-number reveal" style="font-size:clamp(40px,6vw,80px);">80%</div>
+        <div class="neon-label reveal d1">de fidelización</div>
+      </div>
+      <!-- Testimonial rows -->
+      <div class="testimonial-section reveal d2">
+        <div class="testimonial-row" data-speed="slow">
+          <div class="testimonial-track">
+            <div class="t-card t-whatsapp"><div class="t-wa-header"><span class="t-wa-name">Laura G.</span><span class="t-wa-time">10:32 a.m.</span></div><div class="t-wa-msg">Increíble! Ya reservé mi primer viaje a Cancún con mis puntos 🌴✈️</div></div>
+            <div class="t-card t-whatsapp"><div class="t-wa-header"><span class="t-wa-name">Miguel R.</span><span class="t-wa-time">3:15 p.m.</span></div><div class="t-wa-msg">Mi membresía ya se pagó sola el segundo mes 💰🔥</div></div>
+            <div class="t-card t-whatsapp"><div class="t-wa-header"><span class="t-wa-name">Ana P.</span><span class="t-wa-time">8:45 a.m.</span></div><div class="t-wa-msg">Viajé a Grecia con toda mi familia GRATIS! No lo puedo creer 😍</div></div>
+            <div class="t-card t-whatsapp"><div class="t-wa-header"><span class="t-wa-name">Carlos M.</span><span class="t-wa-time">5:20 p.m.</span></div><div class="t-wa-msg">3 referidos y ya no pago mi suscripción. Esto es real! 🚀</div></div>
+            <div class="t-card t-whatsapp"><div class="t-wa-header"><span class="t-wa-name">Sofía L.</span><span class="t-wa-time">11:05 a.m.</span></div><div class="t-wa-msg">Hotel 5 estrellas en Dubai por la mitad de precio 🏨✨</div></div>
+            <div class="t-card t-whatsapp"><div class="t-wa-header"><span class="t-wa-name">Diego F.</span><span class="t-wa-time">7:30 p.m.</span></div><div class="t-wa-msg">Llevamos 4 viajes este año gracias a MWR 🌍💪</div></div>
+            <div class="t-card t-whatsapp"><div class="t-wa-header"><span class="t-wa-name">María T.</span><span class="t-wa-time">9:12 a.m.</span></div><div class="t-wa-msg">Crucero por el Caribe con 100% de mis puntos! 🚢🎉</div></div>
+            <div class="t-card t-whatsapp"><div class="t-wa-header"><span class="t-wa-name">Roberto S.</span><span class="t-wa-time">2:40 p.m.</span></div><div class="t-wa-msg">En 6 meses generé más que mi trabajo anterior 📈</div></div>
+            <div class="t-card t-whatsapp"><div class="t-wa-header"><span class="t-wa-name">Valentina C.</span><span class="t-wa-time">4:55 p.m.</span></div><div class="t-wa-msg">Bali fue un sueño hecho realidad. Gracias MWR! 🏝️</div></div>
+            <div class="t-card t-whatsapp"><div class="t-wa-header"><span class="t-wa-name">Fernando H.</span><span class="t-wa-time">1:22 p.m.</span></div><div class="t-wa-msg">Mi equipo ya tiene 15 personas. Libertad financiera! 🙌</div></div>
+          </div>
+        </div>
+        <div class="testimonial-row" data-speed="medium">
+          <div class="testimonial-track">
+            <div class="t-card t-trustpilot"><div class="t-tp-stars">★★★★★</div><div class="t-tp-title">La mejor decisión de mi vida</div><div class="t-tp-text">Viajé a Europa pagando una fracción del precio normal.</div><div class="t-tp-author">— Andrea M.</div></div>
+            <div class="t-card t-trustpilot"><div class="t-tp-stars">★★★★★</div><div class="t-tp-title">Servicio excepcional</div><div class="t-tp-text">Atención 24/7 y los mejores precios del mercado.</div><div class="t-tp-author">— Jorge R.</div></div>
+            <div class="t-card t-trustpilot"><div class="t-tp-stars">★★★★★</div><div class="t-tp-title">Viajes de lujo accesibles</div><div class="t-tp-text">Resort todo incluido en Punta Cana, experiencia 10/10.</div><div class="t-tp-author">— Patricia L.</div></div>
+            <div class="t-card t-trustpilot"><div class="t-tp-stars">★★★★★</div><div class="t-tp-title">Negocio real y transparente</div><div class="t-tp-text">Recuperé mi inversión el primer mes. 100% recomendado.</div><div class="t-tp-author">— David K.</div></div>
+            <div class="t-card t-trustpilot"><div class="t-tp-stars">★★★★★</div><div class="t-tp-title">Superó mis expectativas</div><div class="t-tp-text">Ahorro un 60% en cada viaje. No volvería a reservar sin MWR.</div><div class="t-tp-author">— Camila V.</div></div>
+            <div class="t-card t-trustpilot"><div class="t-tp-stars">★★★★★</div><div class="t-tp-title">Plataforma increíble</div><div class="t-tp-text">Reservé vuelos, hotel y actividades todo desde una app.</div><div class="t-tp-author">— Martín G.</div></div>
+            <div class="t-card t-trustpilot"><div class="t-tp-stars">★★★★★</div><div class="t-tp-title">Comunidad de viajeros</div><div class="t-tp-text">Lo mejor es la comunidad. Conocí gente increíble viajando.</div><div class="t-tp-author">— Isabel F.</div></div>
+            <div class="t-card t-trustpilot"><div class="t-tp-stars">★★★★★</div><div class="t-tp-title">Cambió mi perspectiva</div><div class="t-tp-text">Antes viajar era un lujo, ahora es parte de mi vida.</div><div class="t-tp-author">— Alejandro N.</div></div>
+            <div class="t-card t-trustpilot"><div class="t-tp-stars">★★★★★</div><div class="t-tp-title">Puntos que sí valen</div><div class="t-tp-text">A diferencia de otras plataformas, aquí los puntos realmente funcionan.</div><div class="t-tp-author">— Lucía B.</div></div>
+            <div class="t-card t-trustpilot"><div class="t-tp-stars">★★★★★</div><div class="t-tp-title">Modelo innovador</div><div class="t-tp-text">Gano viajando y compartiendo. No existe nada igual.</div><div class="t-tp-author">— Ricardo P.</div></div>
+          </div>
+        </div>
+        <div class="testimonial-row" data-speed="fast">
+          <div class="testimonial-track">
+            <div class="t-card t-youtube"><div class="t-yt-thumb" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300&q=80&auto=format&fit=crop')"><div class="t-yt-play">▶</div></div><div class="t-yt-title">MI PRIMER VIAJE GRATIS con MWR 🌴</div></div>
+            <div class="t-card t-youtube"><div class="t-yt-thumb" style="background-image:url('https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=300&q=80&auto=format&fit=crop')"><div class="t-yt-play">▶</div></div><div class="t-yt-title">EUROPA SIN PAGAR: Mi experiencia real</div></div>
+            <div class="t-card t-youtube"><div class="t-yt-thumb" style="background-image:url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=300&q=80&auto=format&fit=crop')"><div class="t-yt-play">▶</div></div><div class="t-yt-title">Cómo gano $3,000/mes viajando 💰</div></div>
+            <div class="t-card t-youtube"><div class="t-yt-thumb" style="background-image:url('https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=300&q=80&auto=format&fit=crop')"><div class="t-yt-play">▶</div></div><div class="t-yt-title">REVIEW HONESTA: ¿Vale la pena MWR?</div></div>
+            <div class="t-card t-youtube"><div class="t-yt-thumb" style="background-image:url('https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=300&q=80&auto=format&fit=crop')"><div class="t-yt-play">▶</div></div><div class="t-yt-title">CRUCERO GRATIS: Así lo logré en 6 meses</div></div>
+            <div class="t-card t-youtube"><div class="t-yt-thumb" style="background-image:url('https://images.unsplash.com/photo-1518684079-3c830dcef090?w=300&q=80&auto=format&fit=crop')"><div class="t-yt-play">▶</div></div><div class="t-yt-title">DUBAI con puntos MWR — Tour completo</div></div>
+            <div class="t-card t-youtube"><div class="t-yt-thumb" style="background-image:url('https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=300&q=80&auto=format&fit=crop')"><div class="t-yt-play">▶</div></div><div class="t-yt-title">De empleado a VIAJERO: Mi historia real</div></div>
+            <div class="t-card t-youtube"><div class="t-yt-thumb" style="background-image:url('https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?w=300&q=80&auto=format&fit=crop')"><div class="t-yt-play">▶</div></div><div class="t-yt-title">TOP 5 destinos con Travel Advantage ✈️</div></div>
+            <div class="t-card t-youtube"><div class="t-yt-thumb" style="background-image:url('https://images.unsplash.com/photo-1504150558240-0b4fd8946624?w=300&q=80&auto=format&fit=crop')"><div class="t-yt-play">▶</div></div><div class="t-yt-title">JAPÓN GRATIS: 10 días de ensueño 🇯🇵</div></div>
+            <div class="t-card t-youtube"><div class="t-yt-thumb" style="background-image:url('https://images.unsplash.com/photo-1519046904884-53103b34b206?w=300&q=80&auto=format&fit=crop')"><div class="t-yt-play">▶</div></div><div class="t-yt-title">Maldivas TODO INCLUIDO por $0 🏝️</div></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -2102,11 +2244,17 @@ html, body {
       collageShown = false;
     }
 
-    // Network: reset on leave (s15 is now at index 19)
-    if (idx !== 19) {
+    // Network: reset on leave (s15 is at index 18)
+    if (idx !== 18) {
       resetNetwork();
     }
   }
+
+  /* ── Duplicate testimonial cards for seamless infinite scroll ── */
+  document.querySelectorAll('.testimonial-track').forEach(track => {
+    const cards = [...track.children];
+    cards.forEach(card => track.appendChild(card.cloneNode(true)));
+  });
 
   document.getElementById('prevBtn').onclick = () => go(current - 1);
   document.getElementById('nextBtn').onclick = () => go(current + 1);
