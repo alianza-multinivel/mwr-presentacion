@@ -1010,20 +1010,30 @@ html, body {
 /* ═══════════════════════════════════════════════════════════════════════
    SLIDE 12 — PRO OFFER (LIGHT BG)
    ═══════════════════════════════════════════════════════════════════════ */
-#s12 { background: #fff; overflow: hidden; }
+#s12 { background: var(--navy); overflow: hidden; position: relative; }
+#s12 .offer-bg-plane {
+  position: absolute;
+  inset: 0;
+  background: url('https://images.unsplash.com/photo-1436491865332-7a61a109db05?w=1920&q=80&auto=format&fit=crop') center center / cover no-repeat;
+  opacity: .12;
+  pointer-events: none;
+}
 #s12 .content {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(24px, 4vw, 50px);
+  padding: clamp(30px, 5vw, 60px);
   height: 100%;
   max-width: 100%;
+  position: relative;
+  z-index: 2;
 }
 #s12 .offer-img {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 92%;
+  max-height: 88%;
   object-fit: contain;
-  border-radius: 12px;
+  border-radius: 14px;
+  filter: drop-shadow(0 8px 30px rgba(0,0,0,.4));
   opacity: 0;
   transform: scale(.95);
   transition: opacity .8s ease, transform .8s ease;
@@ -1032,59 +1042,33 @@ html, body {
   opacity: 1;
   transform: scale(1);
 }
-/* ── Airplane border animations (orange) ── */
-#s12 .offer-plane {
+/* ── Single airplane tracing full border ── */
+#s12 .border-plane {
   position: absolute;
-  z-index: 10;
+  z-index: 15;
   pointer-events: none;
-  opacity: 0;
-  transition: opacity .5s;
-}
-#s12.active .offer-plane { opacity: .8; }
-#s12 .offer-plane span {
-  font-size: 32px;
-  display: block;
+  font-size: 30px;
   color: #E65100;
-  filter: drop-shadow(0 2px 8px rgba(230,81,0,.5));
+  filter: drop-shadow(0 2px 12px rgba(230,81,0,.6));
+  opacity: 0;
+  transition: opacity .6s;
+  animation: s12-trace 12s linear infinite;
 }
-#s12 .offer-plane-top {
-  top: 14px;
-  animation: s12-fly-h 6s linear infinite;
-}
-#s12 .offer-plane-top span { transform: scaleX(1); }
-#s12 .offer-plane-bottom {
-  bottom: 14px;
-  animation: s12-fly-h-rev 6s linear infinite;
-  animation-delay: -3s;
-}
-#s12 .offer-plane-bottom span { transform: scaleX(-1); }
-#s12 .offer-plane-right {
-  right: 14px;
-  animation: s12-fly-v-down 6s linear infinite;
-  animation-delay: -1.5s;
-}
-#s12 .offer-plane-right span { transform: rotate(90deg); }
-#s12 .offer-plane-left {
-  left: 14px;
-  animation: s12-fly-v-up 6s linear infinite;
-  animation-delay: -4.5s;
-}
-#s12 .offer-plane-left span { transform: rotate(-90deg); }
-@keyframes s12-fly-h {
-  0% { left: -50px; }
-  100% { left: calc(100% + 20px); }
-}
-@keyframes s12-fly-h-rev {
-  0% { left: calc(100% + 20px); }
-  100% { left: -50px; }
-}
-@keyframes s12-fly-v-down {
-  0% { top: -50px; }
-  100% { top: calc(100% + 20px); }
-}
-@keyframes s12-fly-v-up {
-  0% { top: calc(100% + 20px); }
-  100% { top: -50px; }
+#s12.active .border-plane { opacity: .9; }
+@keyframes s12-trace {
+  /* Top edge: left → right */
+  0%    { top: 8px;  left: -30px; transform: rotate(0deg); }
+  24%   { top: 8px;  left: calc(100% - 20px); transform: rotate(0deg); }
+  /* Right edge: top → bottom */
+  25%   { top: 8px;  left: calc(100% - 20px); transform: rotate(90deg); }
+  49%   { top: calc(100% - 30px); left: calc(100% - 20px); transform: rotate(90deg); }
+  /* Bottom edge: right → left */
+  50%   { top: calc(100% - 30px); left: calc(100% - 20px); transform: rotate(180deg); }
+  74%   { top: calc(100% - 30px); left: -30px; transform: rotate(180deg); }
+  /* Left edge: bottom → top */
+  75%   { top: calc(100% - 30px); left: -30px; transform: rotate(270deg); }
+  99%   { top: 8px;  left: -30px; transform: rotate(270deg); }
+  100%  { top: 8px;  left: -30px; transform: rotate(360deg); }
 }
 /* Travel screenshots grid for phrase transition */
 .tl-screenshots-layout {
@@ -1806,19 +1790,8 @@ html, body {
 
   <!-- ────────── SLIDE 12: PRO OFFER (PRECIOS IMAGE) ────────── -->
   <div class="slide" id="s12">
-    <!-- Airplane border animations (orange) — 3 per side -->
-    <div class="offer-plane offer-plane-top" style="animation-delay:0s"><span>✈</span></div>
-    <div class="offer-plane offer-plane-top" style="animation-delay:-2s"><span>✈</span></div>
-    <div class="offer-plane offer-plane-top" style="animation-delay:-4s"><span>✈</span></div>
-    <div class="offer-plane offer-plane-bottom" style="animation-delay:-1s"><span>✈</span></div>
-    <div class="offer-plane offer-plane-bottom" style="animation-delay:-3s"><span>✈</span></div>
-    <div class="offer-plane offer-plane-bottom" style="animation-delay:-5s"><span>✈</span></div>
-    <div class="offer-plane offer-plane-right" style="animation-delay:-0.5s"><span>✈</span></div>
-    <div class="offer-plane offer-plane-right" style="animation-delay:-2.5s"><span>✈</span></div>
-    <div class="offer-plane offer-plane-right" style="animation-delay:-4.5s"><span>✈</span></div>
-    <div class="offer-plane offer-plane-left" style="animation-delay:-1.5s"><span>✈</span></div>
-    <div class="offer-plane offer-plane-left" style="animation-delay:-3.5s"><span>✈</span></div>
-    <div class="offer-plane offer-plane-left" style="animation-delay:-5.5s"><span>✈</span></div>
+    <div class="offer-bg-plane"></div>
+    <div class="border-plane">✈</div>
     <div class="content">
       <img src="precios.png" alt="Paquetes de Inscripción — MWR Life" class="offer-img">
     </div>
