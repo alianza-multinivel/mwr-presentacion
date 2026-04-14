@@ -1752,23 +1752,30 @@ html, body {
 /* ═══════════════════════════════════════════════════════════════════════
    SLIDE GOLD — ESTRATEGIA GOLD ACCESS (RADIAL)
    ═══════════════════════════════════════════════════════════════════════ */
-#sGold { background: linear-gradient(160deg, #eee8fa 0%, #ddd4f2 40%, #e8e0f8 70%, #f2eefe 100%); }
-#sGold .gold-deco {
-  position: absolute; top: 50%; left: 50%; width: 52%; height: 78%;
-  transform: translate(-50%, -50%) rotate(-25deg);
-  background: linear-gradient(135deg, rgba(150,120,230,.22) 0%, rgba(110,85,210,.12) 100%);
-  border-radius: 50px; z-index: 0;
+#sGold { background: var(--grad-hero); }
+#sGold .gold-layout {
+  display: flex; width: 100%; height: 100%; align-items: stretch;
+}
+#sGold .gold-left {
+  flex: 0 0 65%; position: relative; display: flex; align-items: center; justify-content: center;
+}
+#sGold .gold-right {
+  flex: 0 0 35%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 40px 30px; text-align: center; position: relative; z-index: 10;
 }
 #sGold .gold-title {
-  position: absolute; top: 16px; left: 0; right: 0; text-align: center; z-index: 10;
-  font-family: 'Montserrat', sans-serif; font-size: clamp(18px, 2.8vw, 34px);
-  font-weight: 900; text-transform: uppercase; letter-spacing: .08em;
-  color: #3a2490;
+  font-family: 'Montserrat', sans-serif; font-size: clamp(22px, 3vw, 42px);
+  font-weight: 900; text-transform: uppercase; letter-spacing: .06em; line-height: 1.2;
+  background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 20px;
+}
+#sGold .gold-subtitle {
+  font-family: 'Inter', sans-serif; font-size: clamp(13px, 1.4vw, 18px);
+  color: var(--white-70); line-height: 1.6; font-weight: 400;
 }
 #sGold .gold-arena {
-  position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 72vh; height: 72vh; max-width: 90vw;
+  position: relative; width: 80vh; height: 80vh; max-width: 100%; max-height: 100%;
 }
 /* Rings */
 #sGold .g-ring {
@@ -1779,19 +1786,19 @@ html, body {
 #sGold .g-ring.visible { opacity: 1; }
 #sGold .g-ring.inner {
   width: 46%; height: 46%;
-  border: 2.5px solid rgba(255,255,255,.85);
-  box-shadow: 0 0 20px rgba(150,120,230,.15);
+  border: 2px solid rgba(255,255,255,.25);
+  box-shadow: 0 0 30px rgba(124,58,237,.15);
 }
 #sGold .g-ring.outer {
   width: 82%; height: 82%;
-  border: 2px solid rgba(90,110,230,.35);
+  border: 1.5px solid rgba(124,58,237,.3);
 }
 /* Arrows */
 #sGold .g-arrow {
   position: absolute; z-index: 3;
   width: 0; height: 0;
-  border-left: 9px solid transparent; border-right: 9px solid transparent;
-  border-bottom: 16px solid rgba(130,90,220,.5);
+  border-left: 8px solid transparent; border-right: 8px solid transparent;
+  border-bottom: 14px solid rgba(124,58,237,.5);
   opacity: 0; transition: opacity .5s;
 }
 #sGold .g-arrow.visible { opacity: 1; }
@@ -1803,44 +1810,41 @@ html, body {
   border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden;
 }
 .gn .gn-wrap.main {
-  width: clamp(100px,18vh,160px); height: clamp(100px,18vh,160px);
+  width: clamp(90px,16vh,140px); height: clamp(90px,16vh,140px);
   background: radial-gradient(circle at 35% 35%, #8b6ce0 0%, #5a40c0 50%, #4030a8 100%);
-  box-shadow: 0 8px 40px rgba(100,60,200,.35), 0 0 0 4px rgba(255,255,255,.3);
+  box-shadow: 0 8px 40px rgba(100,60,200,.4), 0 0 0 4px rgba(255,215,0,.4);
 }
 .gn .gn-wrap.l1 {
-  width: clamp(60px,11vh,95px); height: clamp(60px,11vh,95px);
+  width: clamp(55px,10vh,85px); height: clamp(55px,10vh,85px);
   background: radial-gradient(circle at 35% 35%, #7070e0 0%, #4a4ac0 50%, #3a3aaa 100%);
-  box-shadow: 0 4px 20px rgba(80,60,200,.3), 0 0 0 3px rgba(255,255,255,.25);
+  box-shadow: 0 4px 20px rgba(80,60,200,.35), 0 0 0 3px rgba(255,255,255,.15);
 }
 .gn .gn-wrap.l2 {
-  width: clamp(45px,8.5vh,72px); height: clamp(45px,8.5vh,72px);
+  width: clamp(42px,7.5vh,65px); height: clamp(42px,7.5vh,65px);
   background: radial-gradient(circle at 35% 35%, #5b8ce0 0%, #4565c8 50%, #3550b0 100%);
-  box-shadow: 0 4px 16px rgba(60,80,200,.25), 0 0 0 2px rgba(255,255,255,.2);
+  box-shadow: 0 4px 16px rgba(60,80,200,.3), 0 0 0 2px rgba(255,255,255,.12);
 }
 .gn .gn-pic { border-radius: 50%; object-fit: cover; width: 88%; height: 88%; }
 .gn .gn-name {
-  font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 700;
-  color: #6a5a9a; margin-top: 4px; text-transform: uppercase; letter-spacing: 1px;
+  font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 700;
+  color: var(--white-70); margin-top: 4px; text-transform: uppercase; letter-spacing: 1px;
 }
-.gn .gn-name.gold { color: #3a2490; font-size: 11px; font-weight: 800; }
-#sGold .gold-hint {
-  position: absolute; z-index: 10; font-family: 'Montserrat', sans-serif;
-  font-size: 11px; color: rgba(80,60,150,.45); letter-spacing: 1px; text-transform: uppercase;
-  animation: float 2s ease-in-out infinite; cursor: pointer;
-}
+.gn .gn-name.gold { color: var(--gold); font-size: 10px; font-weight: 800; }
 /* Result */
 #sGold .gold-result {
-  position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; z-index: 10;
   opacity: 0; transform: scale(.8); transition: opacity .6s, transform .6s;
+  margin-top: 30px;
 }
 #sGold .gold-result.visible { opacity: 1; transform: scale(1); }
 #sGold .gold-result .g-amount {
-  font-family: 'Montserrat', sans-serif; font-size: clamp(26px, 4vw, 52px); font-weight: 900;
-  color: #3a2490; text-shadow: 0 2px 8px rgba(100,60,200,.2);
+  font-family: 'Montserrat', sans-serif; font-size: clamp(28px, 4vw, 56px); font-weight: 900;
+  background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  filter: drop-shadow(0 0 12px rgba(255,215,0,.4));
 }
 #sGold .gold-result .g-sublabel {
-  font-family: 'Montserrat', sans-serif; font-size: clamp(11px, 1.4vw, 16px);
-  font-weight: 600; color: #7a6aaa; letter-spacing: 2px; text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif; font-size: clamp(10px, 1.2vw, 15px);
+  font-weight: 600; color: var(--white-50); letter-spacing: 2px; text-transform: uppercase;
 }
 
 </style>
@@ -2366,43 +2370,50 @@ html, body {
 
   <!-- ────────── SLIDE GOLD: ESTRATEGIA GOLD ACCESS ────────── -->
   <div class="slide" id="sGold">
-    <div class="gold-deco"></div>
-    <div class="gold-title reveal">Estrategia Gold Access</div>
-    <div class="gold-arena" id="goldArena">
-      <!-- Rings -->
-      <div class="g-ring inner" id="ringInner"></div>
-      <div class="g-ring outer" id="ringOuter"></div>
-      <!-- Arrows (between rings, pointing outward) -->
-      <div class="g-arrow" id="ga0" style="left:65.5%;top:23.2%;transform:translate(-50%,-50%) rotate(30deg);"></div>
-      <div class="g-arrow" id="ga1" style="left:81%;top:50%;transform:translate(-50%,-50%) rotate(90deg);"></div>
-      <div class="g-arrow" id="ga2" style="left:65.5%;top:76.8%;transform:translate(-50%,-50%) rotate(150deg);"></div>
-      <div class="g-arrow" id="ga3" style="left:34.5%;top:76.8%;transform:translate(-50%,-50%) rotate(210deg);"></div>
-      <div class="g-arrow" id="ga4" style="left:19%;top:50%;transform:translate(-50%,-50%) rotate(270deg);"></div>
-      <div class="g-arrow" id="ga5" style="left:34.5%;top:23.2%;transform:translate(-50%,-50%) rotate(330deg);"></div>
-      <!-- Center node -->
-      <div class="gn" id="gn-main" style="left:50%;top:50%;">
-        <div class="gn-wrap main"><img class="gn-pic" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80&auto=format&fit=crop&crop=face" alt="Tú"></div>
-        <span class="gn-name gold">Tú</span>
+    <div class="gold-layout">
+      <!-- Left 65%: network animation -->
+      <div class="gold-left">
+        <div class="gold-arena" id="goldArena">
+          <!-- Rings -->
+          <div class="g-ring inner" id="ringInner"></div>
+          <div class="g-ring outer" id="ringOuter"></div>
+          <!-- Arrows -->
+          <div class="g-arrow" id="ga0" style="left:65.5%;top:23.2%;transform:translate(-50%,-50%) rotate(30deg);"></div>
+          <div class="g-arrow" id="ga1" style="left:81%;top:50%;transform:translate(-50%,-50%) rotate(90deg);"></div>
+          <div class="g-arrow" id="ga2" style="left:65.5%;top:76.8%;transform:translate(-50%,-50%) rotate(150deg);"></div>
+          <div class="g-arrow" id="ga3" style="left:34.5%;top:76.8%;transform:translate(-50%,-50%) rotate(210deg);"></div>
+          <div class="g-arrow" id="ga4" style="left:19%;top:50%;transform:translate(-50%,-50%) rotate(270deg);"></div>
+          <div class="g-arrow" id="ga5" style="left:34.5%;top:23.2%;transform:translate(-50%,-50%) rotate(330deg);"></div>
+          <!-- Center node -->
+          <div class="gn" id="gn-main" style="left:50%;top:50%;">
+            <div class="gn-wrap main"><img class="gn-pic" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80&auto=format&fit=crop&crop=face" alt="Tú"></div>
+            <span class="gn-name gold">Tú</span>
+          </div>
+          <!-- L1: 6 on inner ring -->
+          <div class="gn hidden" id="gn-l1-0" style="left:50%;top:27%;"><div class="gn-wrap l1"><img class="gn-pic" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80&auto=format&fit=crop&crop=face" alt="María"></div><span class="gn-name">María</span></div>
+          <div class="gn hidden" id="gn-l1-1" style="left:69%;top:39%;"><div class="gn-wrap l1"><img class="gn-pic" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80&auto=format&fit=crop&crop=face" alt="Carlos"></div><span class="gn-name">Carlos</span></div>
+          <div class="gn hidden" id="gn-l1-2" style="left:69%;top:61%;"><div class="gn-wrap l1"><img class="gn-pic" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80&auto=format&fit=crop&crop=face" alt="Ana"></div><span class="gn-name">Ana</span></div>
+          <div class="gn hidden" id="gn-l1-3" style="left:50%;top:73%;"><div class="gn-wrap l1"><img class="gn-pic" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80&auto=format&fit=crop&crop=face" alt="Diego"></div><span class="gn-name">Diego</span></div>
+          <div class="gn hidden" id="gn-l1-4" style="left:31%;top:61%;"><div class="gn-wrap l1"><img class="gn-pic" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80&auto=format&fit=crop&crop=face" alt="Laura"></div><span class="gn-name">Laura</span></div>
+          <div class="gn hidden" id="gn-l1-5" style="left:31%;top:39%;"><div class="gn-wrap l1"><img class="gn-pic" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80&auto=format&fit=crop&crop=face" alt="Roberto"></div><span class="gn-name">Roberto</span></div>
+          <!-- L2: 6 on outer ring -->
+          <div class="gn hidden" id="gn-l2-0" style="left:70%;top:15%;"><div class="gn-wrap l2"><img class="gn-pic" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80&auto=format&fit=crop&crop=face" alt="Sofía"></div><span class="gn-name">Sofía</span></div>
+          <div class="gn hidden" id="gn-l2-1" style="left:90%;top:50%;"><div class="gn-wrap l2"><img class="gn-pic" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80&auto=format&fit=crop&crop=face" alt="Miguel"></div><span class="gn-name">Miguel</span></div>
+          <div class="gn hidden" id="gn-l2-2" style="left:70%;top:85%;"><div class="gn-wrap l2"><img class="gn-pic" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&q=80&auto=format&fit=crop&crop=face" alt="Valentina"></div><span class="gn-name">Valentina</span></div>
+          <div class="gn hidden" id="gn-l2-3" style="left:30%;top:85%;"><div class="gn-wrap l2"><img class="gn-pic" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&q=80&auto=format&fit=crop&crop=face" alt="Andrés"></div><span class="gn-name">Andrés</span></div>
+          <div class="gn hidden" id="gn-l2-4" style="left:10%;top:50%;"><div class="gn-wrap l2"><img class="gn-pic" src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&q=80&auto=format&fit=crop&crop=face" alt="Camila"></div><span class="gn-name">Camila</span></div>
+          <div class="gn hidden" id="gn-l2-5" style="left:30%;top:15%;"><div class="gn-wrap l2"><img class="gn-pic" src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=200&q=80&auto=format&fit=crop&crop=face" alt="Fernando"></div><span class="gn-name">Fernando</span></div>
+        </div>
       </div>
-      <div class="gold-hint" id="goldHint" style="left:50%;top:63%;transform:translateX(-50%);">Toca para avanzar</div>
-      <!-- L1: 6 on inner ring (0°,60°,120°,180°,240°,300°) -->
-      <div class="gn hidden" id="gn-l1-0" style="left:50%;top:27%;"><div class="gn-wrap l1"><img class="gn-pic" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80&auto=format&fit=crop&crop=face" alt="María"></div><span class="gn-name">María</span></div>
-      <div class="gn hidden" id="gn-l1-1" style="left:69%;top:39%;"><div class="gn-wrap l1"><img class="gn-pic" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80&auto=format&fit=crop&crop=face" alt="Carlos"></div><span class="gn-name">Carlos</span></div>
-      <div class="gn hidden" id="gn-l1-2" style="left:69%;top:61%;"><div class="gn-wrap l1"><img class="gn-pic" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80&auto=format&fit=crop&crop=face" alt="Ana"></div><span class="gn-name">Ana</span></div>
-      <div class="gn hidden" id="gn-l1-3" style="left:50%;top:73%;"><div class="gn-wrap l1"><img class="gn-pic" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80&auto=format&fit=crop&crop=face" alt="Diego"></div><span class="gn-name">Diego</span></div>
-      <div class="gn hidden" id="gn-l1-4" style="left:31%;top:61%;"><div class="gn-wrap l1"><img class="gn-pic" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80&auto=format&fit=crop&crop=face" alt="Laura"></div><span class="gn-name">Laura</span></div>
-      <div class="gn hidden" id="gn-l1-5" style="left:31%;top:39%;"><div class="gn-wrap l1"><img class="gn-pic" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80&auto=format&fit=crop&crop=face" alt="Roberto"></div><span class="gn-name">Roberto</span></div>
-      <!-- L2: 6 on outer ring (offset 30°) -->
-      <div class="gn hidden" id="gn-l2-0" style="left:70%;top:15%;"><div class="gn-wrap l2"><img class="gn-pic" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80&auto=format&fit=crop&crop=face" alt="Sofía"></div><span class="gn-name">Sofía</span></div>
-      <div class="gn hidden" id="gn-l2-1" style="left:90%;top:50%;"><div class="gn-wrap l2"><img class="gn-pic" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80&auto=format&fit=crop&crop=face" alt="Miguel"></div><span class="gn-name">Miguel</span></div>
-      <div class="gn hidden" id="gn-l2-2" style="left:70%;top:85%;"><div class="gn-wrap l2"><img class="gn-pic" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&q=80&auto=format&fit=crop&crop=face" alt="Valentina"></div><span class="gn-name">Valentina</span></div>
-      <div class="gn hidden" id="gn-l2-3" style="left:30%;top:85%;"><div class="gn-wrap l2"><img class="gn-pic" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&q=80&auto=format&fit=crop&crop=face" alt="Andrés"></div><span class="gn-name">Andrés</span></div>
-      <div class="gn hidden" id="gn-l2-4" style="left:10%;top:50%;"><div class="gn-wrap l2"><img class="gn-pic" src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&q=80&auto=format&fit=crop&crop=face" alt="Camila"></div><span class="gn-name">Camila</span></div>
-      <div class="gn hidden" id="gn-l2-5" style="left:30%;top:15%;"><div class="gn-wrap l2"><img class="gn-pic" src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=200&q=80&auto=format&fit=crop&crop=face" alt="Fernando"></div><span class="gn-name">Fernando</span></div>
-    </div>
-    <div class="gold-result" id="goldResult">
-      <div class="g-amount">Comisiones de $1,500</div>
-      <div class="g-sublabel">Mensuales con Gold Access</div>
+      <!-- Right 35%: title + result -->
+      <div class="gold-right">
+        <div class="gold-title reveal">Estrategia<br>Gold Access</div>
+        <div class="gold-subtitle reveal d1">Refiere el club a 6 personas y cada una refiere a 1 más</div>
+        <div class="gold-result" id="goldResult">
+          <div class="g-amount">$1,500</div>
+          <div class="g-sublabel">Comisiones mensuales</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -2774,7 +2785,6 @@ html, body {
           document.getElementById('ga' + i).classList.add('visible');
         }
         document.getElementById('ringInner').classList.add('visible');
-        document.getElementById('goldHint').style.display = 'none';
       }
       if (goldStep === 2) {
         for (let i = 0; i < 6; i++) {
@@ -2797,8 +2807,6 @@ html, body {
     document.getElementById('ringInner').classList.remove('visible');
     document.getElementById('ringOuter').classList.remove('visible');
     document.getElementById('goldResult').classList.remove('visible');
-    const hint = document.getElementById('goldHint');
-    if (hint) hint.style.display = '';
   }
 
   /* ── Touch / Swipe ── */
