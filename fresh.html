@@ -939,6 +939,154 @@ html, body {
 /* Old world map styles removed */
 
 /* ═══════════════════════════════════════════════════════════════════════
+   SLIDE FORMAS — 3 FORMAS DE SER PARTE DEL CLUB
+   ═══════════════════════════════════════════════════════════════════════ */
+#sFormas { overflow: hidden; }
+#sFormas .formas-bg {
+  position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1920&q=85&auto=format&fit=crop') center center / cover no-repeat;
+  z-index: 0;
+  animation: formasKenBurns 20s ease-in-out infinite alternate;
+}
+#sFormas .formas-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(6,11,36,.92) 0%, rgba(12,20,56,.75) 45%, rgba(6,11,36,.6) 100%);
+  z-index: 1;
+}
+@keyframes formasKenBurns {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.08) translate(-1%, -1%); }
+}
+#sFormas .formas-layout {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 50px 60px;
+  gap: 50px;
+}
+#sFormas .formas-left {
+  flex: 0 0 34%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  text-align: center;
+}
+#sFormas .formas-logo {
+  width: clamp(200px, 22vw, 340px);
+  height: auto;
+  filter: drop-shadow(0 10px 40px rgba(0,0,0,.6));
+}
+#sFormas .formas-tagline {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(22px, 2.4vw, 36px);
+  font-weight: 900;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--white);
+  text-shadow: 0 4px 20px rgba(0,0,0,.6);
+}
+#sFormas .formas-tagline .gold {
+  color: var(--gold);
+}
+#sFormas .formas-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 640px;
+}
+#sFormas .forma-card {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  padding: 22px 26px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,215,0,.25);
+  box-shadow: 0 15px 50px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.12);
+  position: relative;
+  overflow: hidden;
+  transition: transform .4s cubic-bezier(.22,1,.36,1), border-color .4s, box-shadow .4s;
+}
+#sFormas .forma-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #FFD700, #FFA500);
+}
+#sFormas .forma-card:hover {
+  transform: translateX(6px);
+  border-color: rgba(255,215,0,.55);
+  box-shadow: 0 18px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(255,215,0,.35);
+}
+#sFormas .forma-num {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 900;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  flex-shrink: 0;
+  min-width: 68px;
+}
+#sFormas .forma-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+#sFormas .forma-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(15px, 1.5vw, 22px);
+  font-weight: 800;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+#sFormas .forma-price {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(28px, 3.2vw, 44px);
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1.1;
+  margin: 2px 0 4px;
+}
+#sFormas .forma-price .forma-period {
+  font-size: clamp(13px, 1.2vw, 18px);
+  font-weight: 600;
+  color: var(--white-70);
+  margin-left: 4px;
+}
+#sFormas .forma-highlight {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(20px, 2.2vw, 30px);
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1.1;
+  margin: 2px 0 4px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+#sFormas .forma-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(12px, 1vw, 15px);
+  font-weight: 400;
+  color: var(--white-70);
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
    SLIDE 9 — SERVICIOS
    ═══════════════════════════════════════════════════════════════════════ */
 #s8 { background: var(--grad-hero); }
@@ -2047,6 +2195,44 @@ html, body {
     </div>
   </div>
 
+  <!-- ────────── SLIDE FORMAS: 3 FORMAS DE SER PARTE DEL CLUB ────────── -->
+  <div class="slide" id="sFormas">
+    <div class="formas-bg"></div>
+    <div class="formas-overlay"></div>
+    <div class="formas-layout">
+      <div class="formas-left">
+        <img src="logo-mwr-official.svg" alt="MWR Life" class="formas-logo reveal">
+        <div class="formas-tagline reveal d1">3 Formas de ser<br><span class="gold">parte del club</span></div>
+      </div>
+      <div class="formas-right">
+        <div class="forma-card reveal d1">
+          <div class="forma-num">01</div>
+          <div class="forma-body">
+            <div class="forma-title">Membresía</div>
+            <div class="forma-price">$120<span class="forma-period">/mes</span></div>
+            <div class="forma-desc">Acceso a descuentos en hoteles, cruceros, experiencias, transporte, vuelos, puntos de viaje y mucho más.</div>
+          </div>
+        </div>
+        <div class="forma-card reveal d2">
+          <div class="forma-num">02</div>
+          <div class="forma-body">
+            <div class="forma-title">Membresía Autofinanciada</div>
+            <div class="forma-highlight">Viaja gratis</div>
+            <div class="forma-desc">Una o dos veces al año, tu membresía se paga sola con los beneficios del club.</div>
+          </div>
+        </div>
+        <div class="forma-card reveal d3">
+          <div class="forma-num">03</div>
+          <div class="forma-body">
+            <div class="forma-title">Viaja Gratis + Comisiones</div>
+            <div class="forma-highlight">Genera ingresos</div>
+            <div class="forma-desc">Viaja gratis y genera comisiones siendo parte activa del club como socio.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ────────── SLIDE 8: SERVICIOS ────────── -->
   <div class="slide" id="s8">
     <div class="content">
@@ -2452,7 +2638,7 @@ html, body {
 </div>
 
 <!-- ═══════════ NAVIGATION ═══════════ -->
-<div class="counter"><b id="currSlide">01</b> / <span id="totalSlides">23</span></div>
+<div class="counter"><b id="currSlide">01</b> / <span id="totalSlides">24</span></div>
 <div class="nav">
   <button id="prevBtn" aria-label="Anterior"><iconify-icon icon="ph:arrow-left-bold"></iconify-icon></button>
   <button id="nextBtn" aria-label="Siguiente"><iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
@@ -2480,8 +2666,8 @@ html, body {
   function go(idx) {
     if (busy || idx === current || idx < 0 || idx >= total) return;
 
-    // On timeline slide (idx 16), first press after plane arrives shows phrase, second press navigates
-    if (current === 16 && idx === 17 && tlPlaneArrived && !collageShown) {
+    // On timeline slide (idx 17), first press after plane arrives shows phrase, second press navigates
+    if (current === 17 && idx === 18 && tlPlaneArrived && !collageShown) {
       collageShown = true;
       triggerPhraseTransition();
       return; // Don't navigate yet
@@ -2506,11 +2692,11 @@ html, body {
     else stopDestLoop();
     if (idx === 5) startHQLoop();
     else stopHQLoop();
-    if (idx === 21) startCruiseLoop();
+    if (idx === 22) startCruiseLoop();
     else stopCruiseLoop();
 
     // Timeline: trigger on enter, reset on leave
-    if (idx === 16) {
+    if (idx === 17) {
       collageShown = false;
       resetTimeline();
       setTimeout(triggerTimeline, 100);
@@ -2519,12 +2705,12 @@ html, body {
       collageShown = false;
     }
 
-    // Network: reset on leave (s15 is at index 18)
-    if (idx !== 18) {
+    // Network: reset on leave (s15 is at index 19)
+    if (idx !== 19) {
       resetNetwork();
     }
-    // Gold Access: reset on leave (sGold is at index 22)
-    if (idx !== 22) {
+    // Gold Access: reset on leave (sGold is at index 23)
+    if (idx !== 23) {
       resetGold();
     }
   }
