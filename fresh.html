@@ -1164,18 +1164,18 @@ html, body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 20px;
-  padding: 30px 50px 0;
+  gap: 14px;
+  padding: 20px 40px 0;
 }
 #s13 .timeline-wrap {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1400px;
   position: relative;
-  padding: 20px 0;
+  padding: 10px 0;
 }
 #s13 .timeline-svg {
   width: 100%;
-  height: 200px;
+  height: 280px;
   overflow: visible;
 }
 #s13 .tl-track {
@@ -1191,13 +1191,9 @@ html, body {
   stroke-linecap: round;
   stroke-dasharray: 1500;
   stroke-dashoffset: 1500;
-  transition: stroke-dashoffset 5s cubic-bezier(.22,1,.36,1);
-}
-#s13.active .tl-fill {
-  stroke-dashoffset: 0;
+  /* JS controls dashoffset — no CSS transition */
 }
 #s13 .tl-plane {
-  transition: all 3s cubic-bezier(.22,1,.36,1);
   filter: drop-shadow(0 0 12px rgba(245,166,35,.6));
 }
 #s13 .tl-dot {
@@ -1218,26 +1214,52 @@ html, body {
 #s13.active .tl-label.gold { fill: var(--gold); }
 #s13 .tl-pts {
   font-family: 'Montserrat', sans-serif;
-  font-size: 9px;
-  font-weight: 700;
-  fill: rgba(245,166,35,.6);
+  font-size: 10px;
+  font-weight: 800;
+  fill: rgba(245,166,35,.7);
   text-anchor: middle;
+  opacity: 0;
+  transition: opacity .35s ease, fill .35s ease;
 }
-#s13 .tl-points-summary {
+#s13 .tl-pts.visible {
+  opacity: 1;
+  fill: var(--gold);
+}
+/* Celebration result */
+#s13 .tl-celebration {
   text-align: center;
-  margin-top: 10px;
+  margin-top: 8px;
+  opacity: 0;
+  transform: scale(.5);
+  transition: opacity .6s ease, transform .6s cubic-bezier(.22,1,.36,1);
+}
+#s13 .tl-celebration.show {
+  opacity: 1;
+  transform: scale(1);
+}
+#s13 .tl-celebration .tl-big-points {
   font-family: 'Montserrat', sans-serif;
-  font-size: clamp(14px, 1.5vw, 20px);
+  font-size: clamp(44px, 6.5vw, 85px);
+  font-weight: 900;
+  animation: celebrateColors 2s linear infinite;
+  line-height: 1;
+}
+#s13 .tl-celebration .tl-big-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(13px, 1.8vw, 22px);
   font-weight: 700;
   color: var(--white-70);
-  opacity: 0;
-  transition: opacity .8s ease 1s;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-top: 4px;
 }
-#s13.active .tl-points-summary { opacity: 1; }
-#s13 .tl-points-summary .gold {
-  color: var(--gold);
-  font-size: clamp(18px, 2vw, 28px);
-  font-weight: 900;
+@keyframes celebrateColors {
+  0%, 100% { color: #FFD700; text-shadow: 0 0 30px rgba(255,215,0,.6); }
+  16% { color: #FF6347; text-shadow: 0 0 30px rgba(255,99,71,.6); }
+  33% { color: #00E5CC; text-shadow: 0 0 30px rgba(0,229,204,.6); }
+  50% { color: #1E5BFF; text-shadow: 0 0 30px rgba(30,91,255,.6); }
+  66% { color: #FF69B4; text-shadow: 0 0 30px rgba(255,105,180,.6); }
+  83% { color: #7C3AED; text-shadow: 0 0 30px rgba(124,58,237,.6); }
 }
 #s13 .tl-milestone {
   font-family: 'Montserrat', sans-serif;
@@ -2164,19 +2186,19 @@ html, body {
           <text x="870" y="135" class="tl-label">11</text>
           <text x="970" y="135" class="tl-label gold" style="font-size:14px;">12</text>
 
-          <!-- 240pts per month -->
-          <text x="30" y="155" class="tl-pts">240pts</text>
-          <text x="115" y="155" class="tl-pts">240pts</text>
-          <text x="195" y="155" class="tl-pts">240pts</text>
-          <text x="275" y="155" class="tl-pts">240pts</text>
-          <text x="355" y="155" class="tl-pts">240pts</text>
-          <text x="445" y="155" class="tl-pts">240pts</text>
-          <text x="530" y="155" class="tl-pts">240pts</text>
-          <text x="610" y="155" class="tl-pts">240pts</text>
-          <text x="700" y="155" class="tl-pts">240pts</text>
-          <text x="780" y="155" class="tl-pts">240pts</text>
-          <text x="870" y="155" class="tl-pts">240pts</text>
-          <text x="970" y="155" class="tl-pts">240pts</text>
+          <!-- Cumulative points (shown progressively by JS) -->
+          <text x="30" y="158" class="tl-pts" id="tlPts0">240</text>
+          <text x="115" y="158" class="tl-pts" id="tlPts1">480</text>
+          <text x="195" y="158" class="tl-pts" id="tlPts2">720</text>
+          <text x="275" y="158" class="tl-pts" id="tlPts3">960</text>
+          <text x="355" y="158" class="tl-pts" id="tlPts4">1,200</text>
+          <text x="445" y="158" class="tl-pts" id="tlPts5">1,440</text>
+          <text x="530" y="158" class="tl-pts" id="tlPts6">1,680</text>
+          <text x="610" y="158" class="tl-pts" id="tlPts7">1,920</text>
+          <text x="700" y="158" class="tl-pts" id="tlPts8">2,160</text>
+          <text x="780" y="158" class="tl-pts" id="tlPts9">2,400</text>
+          <text x="870" y="158" class="tl-pts" id="tlPts10">2,640</text>
+          <text x="970" y="158" class="tl-pts" id="tlPts11">2,880</text>
 
           <!-- Milestone labels -->
           <text x="30" y="82" class="tl-milestone" style="font-size:12px;">INICIO</text>
@@ -2206,8 +2228,10 @@ html, body {
           <div class="ic-text">Te duplicamos tus puntos todos los meses</div>
         </div>
       </div>
-      <div class="tl-points-summary reveal d3">240pts × 12 meses = <span class="gold">2,880 pts de viaje</span></div>
-      <div class="tl-final-msg" id="tlFinalMsg"></div>
+      <div class="tl-celebration" id="tlCelebration">
+        <div class="tl-big-points">2,880</div>
+        <div class="tl-big-label">Puntos de viaje acumulados</div>
+      </div>
       <div class="tl-screenshots-layout" id="tlScreenshots">
         <div class="tl-screenshots-grid">
           <img src="bali.jpeg" alt="Bali">
@@ -2691,38 +2715,80 @@ html, body {
   /* ── TIMELINE ANIMATION ── */
   let tlAnimId = null;
   let tlPlaneArrived = false;
+  let tlMonthTimeouts = [];
+
   function triggerTimeline() {
     tlPlaneArrived = false;
     const plane = document.getElementById('tlPlane');
     const path = document.querySelector('.tl-track');
-    if (!plane || !path) return;
-    const len = path.getTotalLength();
-    const duration = 8000; // slower
-    const start = performance.now();
-    function animatePlane(now) {
-      const t = Math.min((now - start) / duration, 1);
-      const ease = 1 - Math.pow(1 - t, 3);
-      const pt = path.getPointAtLength(ease * len);
-      plane.setAttribute('transform', `translate(${pt.x},${pt.y - 18})`);
-      if (t < 1) {
-        tlAnimId = requestAnimationFrame(animatePlane);
-      } else {
-        tlPlaneArrived = true;
+    const fill = document.getElementById('tlFill');
+    if (!plane || !path || !fill) return;
+
+    const totalLen = path.getTotalLength();
+    fill.style.strokeDasharray = totalLen;
+    fill.style.strokeDashoffset = totalLen;
+
+    // Dot x-positions for months 1-12
+    const dotXs = [30, 115, 195, 275, 355, 445, 530, 610, 700, 780, 870, 970];
+
+    // Find path lengths for each dot
+    const dotLens = [];
+    dotXs.forEach(tx => {
+      let best = 0, bestD = Infinity;
+      for (let l = 0; l <= totalLen; l += 0.5) {
+        const d = Math.abs(path.getPointAtLength(l).x - tx);
+        if (d < bestD) { bestD = d; best = l; }
       }
+      dotLens.push(best);
+    });
+
+    let monthIdx = 0;
+    function moveToNext() {
+      if (monthIdx >= 12) {
+        tlPlaneArrived = true;
+        // Show celebration
+        const celeb = document.getElementById('tlCelebration');
+        if (celeb) celeb.classList.add('show');
+        return;
+      }
+      const startL = monthIdx === 0 ? 0 : dotLens[monthIdx - 1];
+      const endL = dotLens[monthIdx];
+      const segTime = 900; // ms per segment
+      const t0 = performance.now();
+
+      function tick(now) {
+        const p = Math.min((now - t0) / segTime, 1);
+        const ease = p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+        const curL = startL + (endL - startL) * ease;
+        const pt = path.getPointAtLength(curL);
+        plane.setAttribute('transform', `translate(${pt.x},${pt.y - 18})`);
+        fill.style.strokeDashoffset = totalLen - curL;
+        if (p < 1) {
+          tlAnimId = requestAnimationFrame(tick);
+        } else {
+          // Show cumulative points for this month
+          const ptEl = document.getElementById('tlPts' + monthIdx);
+          if (ptEl) ptEl.classList.add('visible');
+          monthIdx++;
+          const tid = setTimeout(moveToNext, 350);
+          tlMonthTimeouts.push(tid);
+        }
+      }
+      tlAnimId = requestAnimationFrame(tick);
     }
-    tlAnimId = requestAnimationFrame(animatePlane);
+
+    moveToNext();
   }
 
   // Called on timeline slide — fades everything and shows screenshots + phrase
   function triggerPhraseTransition() {
-    // Fade out ALL timeline elements
     const wrap = document.querySelector('#s13 .timeline-wrap');
     const eyebrow = document.querySelector('#s13 .eyebrow');
     const h2 = document.querySelector('#s13 .h2');
     const infoCards = document.querySelector('#s13 .info-cards');
-    [wrap, eyebrow, h2, infoCards].forEach(el => { if (el) { el.style.transition = 'opacity .8s'; el.style.opacity = '0'; } });
+    const celeb = document.getElementById('tlCelebration');
+    [wrap, eyebrow, h2, infoCards, celeb].forEach(el => { if (el) { el.style.transition = 'opacity .8s'; el.style.opacity = '0'; } });
 
-    // Show screenshots layout with staggered image reveals
     setTimeout(() => {
       const layout = document.getElementById('tlScreenshots');
       if (layout) {
@@ -2737,19 +2803,31 @@ html, body {
 
   function resetTimeline() {
     if (tlAnimId) { cancelAnimationFrame(tlAnimId); tlAnimId = null; }
+    tlMonthTimeouts.forEach(t => clearTimeout(t));
+    tlMonthTimeouts = [];
     tlPlaneArrived = false;
     const wrap = document.querySelector('#s13 .timeline-wrap');
     const eyebrow = document.querySelector('#s13 .eyebrow');
     const h2 = document.querySelector('#s13 .h2');
     const infoCards = document.querySelector('#s13 .info-cards');
+    const celeb = document.getElementById('tlCelebration');
     [wrap, eyebrow, h2, infoCards].forEach(el => { if (el) { el.style.transition = 'none'; el.style.opacity = ''; } });
-    const finalMsg = document.getElementById('tlFinalMsg');
-    if (finalMsg) { finalMsg.classList.remove('show'); finalMsg.innerHTML = ''; }
+    // Reset celebration
+    if (celeb) { celeb.classList.remove('show'); celeb.style.transition = ''; celeb.style.opacity = ''; }
+    // Reset cumulative points
+    for (let i = 0; i < 12; i++) {
+      const el = document.getElementById('tlPts' + i);
+      if (el) el.classList.remove('visible');
+    }
+    // Reset screenshots
     const screenshots = document.getElementById('tlScreenshots');
     if (screenshots) {
       screenshots.classList.remove('show');
       screenshots.querySelectorAll('img').forEach(img => img.classList.remove('visible'));
     }
+    // Reset fill and plane
+    const fill = document.getElementById('tlFill');
+    if (fill) fill.style.strokeDashoffset = '1500';
     const plane = document.getElementById('tlPlane');
     if (plane) plane.setAttribute('transform', 'translate(30,75)');
   }
