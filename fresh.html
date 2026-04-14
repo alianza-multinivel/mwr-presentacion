@@ -1850,17 +1850,10 @@ html, body {
 }
 /* Confetti */
 .confetti-overlay {
-  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-  pointer-events: none; z-index: 9999; overflow: hidden;
+  position: fixed; inset: 0; width: 100vw; height: 100vh;
+  pointer-events: none; z-index: 9999;
 }
-.confetti-overlay .cp {
-  position: absolute; top: -20px; opacity: 0;
-}
-@keyframes confetti-fall {
-  0% { transform: translateY(-10px) rotate(0deg) scale(1); opacity: 1; }
-  80% { opacity: 1; }
-  100% { transform: translateY(105vh) rotate(720deg) scale(0.5); opacity: 0; }
-}
+.confetti-overlay canvas { width: 100%; height: 100%; }
 
 </style>
 </head>
@@ -2817,21 +2810,53 @@ html, body {
     const overlay = document.createElement('div');
     overlay.className = 'confetti-overlay';
     overlay.id = 'confettiOverlay';
+    const cvs = document.createElement('canvas');
+    overlay.appendChild(cvs);
     document.body.appendChild(overlay);
-    const colors = ['#FFD700','#FFA500','#FF6347','#00E5CC','#7c3aed','#1E5BFF','#FF69B4','#00FF88'];
-    for (let i = 0; i < 100; i++) {
-      const p = document.createElement('div');
-      p.className = 'cp';
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      const left = Math.random() * 100;
-      const size = Math.random() * 10 + 6;
-      const dur = Math.random() * 2 + 2.5;
-      const delay = Math.random() * 1.2;
-      const shape = Math.random() > 0.5 ? '50%' : '2px';
-      p.style.cssText = 'left:'+left+'%;width:'+size+'px;height:'+(size * (Math.random()*0.6+0.6))+'px;background:'+color+';border-radius:'+shape+';animation:confetti-fall '+dur+'s ease-out '+delay+'s forwards;';
-      overlay.appendChild(p);
+    const W = cvs.width = window.innerWidth;
+    const H = cvs.height = window.innerHeight;
+    const ctx = cvs.getContext('2d');
+    const colors = ['#FFD700','#FFA500','#FF6347','#00E5CC','#7c3aed','#1E5BFF','#FF69B4','#00FF88','#FFD700','#FFA500'];
+    const pieces = [];
+    for (let i = 0; i < 120; i++) {
+      pieces.push({
+        x: Math.random() * W,
+        y: Math.random() * -H * 0.5,
+        w: Math.random() * 10 + 5,
+        h: Math.random() * 6 + 3,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        vy: Math.random() * 3 + 2,
+        vx: Math.random() * 2 - 1,
+        rot: Math.random() * 360,
+        rv: Math.random() * 8 - 4,
+        opacity: 1
+      });
     }
-    setTimeout(() => { overlay.remove(); }, 6000);
+    let frame = 0;
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      let alive = false;
+      pieces.forEach(p => {
+        if (p.opacity <= 0) return;
+        alive = true;
+        p.y += p.vy;
+        p.x += p.vx;
+        p.rot += p.rv;
+        p.vy += 0.05;
+        if (p.y > H * 0.85) p.opacity -= 0.02;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot * Math.PI / 180);
+        ctx.globalAlpha = Math.max(0, p.opacity);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      });
+      frame++;
+      if (alive && frame < 300) requestAnimationFrame(draw);
+      else overlay.remove();
+    }
+    requestAnimationFrame(draw);
   }
   function resetGold() {
     goldStep = 0;
