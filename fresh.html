@@ -1374,9 +1374,17 @@ html, body {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(6,11,36,.7) 0%, rgba(6,11,36,.55) 40%, rgba(6,11,36,.8) 100%);
+  background: rgba(6,11,36,.6);
 }
 #sPreg .content { position: relative; z-index: 2; }
+#sPreg .h2 {
+  text-shadow: 0 4px 30px rgba(0,0,0,.9), 0 2px 10px rgba(0,0,0,.7);
+  background: rgba(6,11,36,.45);
+  padding: 30px 50px;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.08);
+}
 
 /* ═══════════════════════════════════════════════════════════════════════
    SLIDE 14 — 80% FIDELIZACIÓN (NEON)
@@ -1440,7 +1448,6 @@ html, body {
   flex-direction: column;
   gap: 12px;
   margin-top: 10px;
-  flex: 1;
 }
 .testimonial-row {
   width: 100%;
@@ -2648,16 +2655,16 @@ html, body {
   const cruiseImgsLeft = [
     'https://images.unsplash.com/photo-1599640842225-85d111c60e6b?w=1200&q=80&auto=format&fit=crop',
     'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1200&q=80&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80&auto=format&fit=crop',
     'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1200&q=80&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=1200&q=80&auto=format&fit=crop',
   ];
   const cruiseImgsRight = [
-    'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=1200&q=80&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=1200&q=80&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1518684079-3c830dcef090?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=1200&q=80&auto=format&fit=crop',
     'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=1200&q=80&auto=format&fit=crop',
     'https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1518684079-3c830dcef090?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1504150558240-0b4fd8946624?w=1200&q=80&auto=format&fit=crop',
   ];
   const $cruiseL = document.getElementById('cruiseLeft');
   const $cruiseR = document.getElementById('cruiseRight');
