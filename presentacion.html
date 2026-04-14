@@ -1764,18 +1764,18 @@ html, body {
   padding: 40px 30px; text-align: center; position: relative; z-index: 10;
 }
 #sGold .gold-title {
-  font-family: 'Montserrat', sans-serif; font-size: clamp(22px, 3vw, 42px);
-  font-weight: 900; text-transform: uppercase; letter-spacing: .06em; line-height: 1.2;
+  font-family: 'Montserrat', sans-serif; font-size: clamp(30px, 4.5vw, 60px);
+  font-weight: 900; text-transform: uppercase; letter-spacing: .06em; line-height: 1.15;
   background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  margin-bottom: 20px;
+  margin-bottom: 20px; filter: drop-shadow(0 0 15px rgba(255,215,0,.3));
 }
 #sGold .gold-subtitle {
-  font-family: 'Inter', sans-serif; font-size: clamp(13px, 1.4vw, 18px);
+  font-family: 'Inter', sans-serif; font-size: clamp(14px, 1.6vw, 22px);
   color: var(--white-70); line-height: 1.6; font-weight: 400;
 }
 #sGold .gold-arena {
-  position: relative; width: 80vh; height: 80vh; max-width: 100%; max-height: 100%;
+  position: relative; width: 95vh; height: 95vh; max-width: 100%; max-height: 100%;
 }
 /* Rings */
 #sGold .g-ring {
@@ -1786,19 +1786,21 @@ html, body {
 #sGold .g-ring.visible { opacity: 1; }
 #sGold .g-ring.inner {
   width: 46%; height: 46%;
-  border: 2px solid rgba(255,255,255,.25);
-  box-shadow: 0 0 30px rgba(124,58,237,.15);
+  border: 2.5px solid rgba(255,215,0,.5);
+  box-shadow: 0 0 25px rgba(255,215,0,.15), inset 0 0 25px rgba(255,215,0,.05);
 }
 #sGold .g-ring.outer {
   width: 82%; height: 82%;
-  border: 1.5px solid rgba(124,58,237,.3);
+  border: 2px solid rgba(255,215,0,.3);
+  box-shadow: 0 0 20px rgba(255,215,0,.1);
 }
 /* Arrows */
 #sGold .g-arrow {
   position: absolute; z-index: 3;
   width: 0; height: 0;
-  border-left: 8px solid transparent; border-right: 8px solid transparent;
-  border-bottom: 14px solid rgba(124,58,237,.5);
+  border-left: 9px solid transparent; border-right: 9px solid transparent;
+  border-bottom: 16px solid rgba(255,215,0,.6);
+  filter: drop-shadow(0 0 6px rgba(255,215,0,.4));
   opacity: 0; transition: opacity .5s;
 }
 #sGold .g-arrow.visible { opacity: 1; }
@@ -1810,19 +1812,19 @@ html, body {
   border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden;
 }
 .gn .gn-wrap.main {
-  width: clamp(90px,16vh,140px); height: clamp(90px,16vh,140px);
+  width: clamp(110px,20vh,170px); height: clamp(110px,20vh,170px);
   background: radial-gradient(circle at 35% 35%, #8b6ce0 0%, #5a40c0 50%, #4030a8 100%);
-  box-shadow: 0 8px 40px rgba(100,60,200,.4), 0 0 0 4px rgba(255,215,0,.4);
+  box-shadow: 0 8px 40px rgba(100,60,200,.4), 0 0 0 5px #FFD700, 0 0 25px rgba(255,215,0,.4);
 }
 .gn .gn-wrap.l1 {
-  width: clamp(55px,10vh,85px); height: clamp(55px,10vh,85px);
+  width: clamp(68px,12vh,100px); height: clamp(68px,12vh,100px);
   background: radial-gradient(circle at 35% 35%, #7070e0 0%, #4a4ac0 50%, #3a3aaa 100%);
-  box-shadow: 0 4px 20px rgba(80,60,200,.35), 0 0 0 3px rgba(255,255,255,.15);
+  box-shadow: 0 4px 20px rgba(80,60,200,.35), 0 0 0 3px #FFD700, 0 0 15px rgba(255,215,0,.3);
 }
 .gn .gn-wrap.l2 {
-  width: clamp(42px,7.5vh,65px); height: clamp(42px,7.5vh,65px);
+  width: clamp(52px,9vh,78px); height: clamp(52px,9vh,78px);
   background: radial-gradient(circle at 35% 35%, #5b8ce0 0%, #4565c8 50%, #3550b0 100%);
-  box-shadow: 0 4px 16px rgba(60,80,200,.3), 0 0 0 2px rgba(255,255,255,.12);
+  box-shadow: 0 4px 16px rgba(60,80,200,.3), 0 0 0 2.5px #FFD700, 0 0 12px rgba(255,215,0,.25);
 }
 .gn .gn-pic { border-radius: 50%; object-fit: cover; width: 88%; height: 88%; }
 .gn .gn-name {
@@ -1837,14 +1839,26 @@ html, body {
 }
 #sGold .gold-result.visible { opacity: 1; transform: scale(1); }
 #sGold .gold-result .g-amount {
-  font-family: 'Montserrat', sans-serif; font-size: clamp(28px, 4vw, 56px); font-weight: 900;
+  font-family: 'Montserrat', sans-serif; font-size: clamp(40px, 6vw, 80px); font-weight: 900;
   background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  filter: drop-shadow(0 0 12px rgba(255,215,0,.4));
+  filter: drop-shadow(0 0 20px rgba(255,215,0,.5));
 }
 #sGold .gold-result .g-sublabel {
-  font-family: 'Montserrat', sans-serif; font-size: clamp(10px, 1.2vw, 15px);
+  font-family: 'Montserrat', sans-serif; font-size: clamp(12px, 1.5vw, 18px);
   font-weight: 600; color: var(--white-50); letter-spacing: 2px; text-transform: uppercase;
+}
+/* Confetti */
+#sGold .confetti-container {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100;
+}
+#sGold .confetti-piece {
+  position: absolute; top: -20px;
+  width: 10px; height: 10px; opacity: 0;
+}
+@keyframes confetti-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
 }
 
 </style>
@@ -2415,6 +2429,7 @@ html, body {
         </div>
       </div>
     </div>
+    <div class="confetti-container" id="goldConfetti"></div>
   </div>
 
 </div>
@@ -2794,8 +2809,27 @@ html, body {
       }
       if (goldStep === 3) {
         document.getElementById('goldResult').classList.add('visible');
+        launchConfetti();
       }
     });
+  }
+  function launchConfetti() {
+    const container = document.getElementById('goldConfetti');
+    if (!container) return;
+    const colors = ['#FFD700','#FFA500','#FF6347','#00E5CC','#7c3aed','#1E5BFF','#FF69B4','#00FF88'];
+    for (let i = 0; i < 80; i++) {
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      const left = Math.random() * 100;
+      const size = Math.random() * 8 + 6;
+      const dur = Math.random() * 2 + 2;
+      const delay = Math.random() * 1.5;
+      const shape = Math.random() > 0.5 ? '50%' : '0';
+      piece.style.cssText = 'left:'+left+'%;width:'+size+'px;height:'+size+'px;background:'+color+';border-radius:'+shape+';animation:confetti-fall '+dur+'s ease-out '+delay+'s forwards;';
+      container.appendChild(piece);
+    }
+    setTimeout(() => { container.innerHTML = ''; }, 5000);
   }
   function resetGold() {
     goldStep = 0;
@@ -2807,6 +2841,8 @@ html, body {
     document.getElementById('ringInner').classList.remove('visible');
     document.getElementById('ringOuter').classList.remove('visible');
     document.getElementById('goldResult').classList.remove('visible');
+    const cc = document.getElementById('goldConfetti');
+    if (cc) cc.innerHTML = '';
   }
 
   /* ── Touch / Swipe ── */
