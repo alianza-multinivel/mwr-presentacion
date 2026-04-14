@@ -1849,16 +1849,17 @@ html, body {
   font-weight: 600; color: var(--white-50); letter-spacing: 2px; text-transform: uppercase;
 }
 /* Confetti */
-#sGold .confetti-container {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100;
+.confetti-overlay {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none; z-index: 9999; overflow: hidden;
 }
-#sGold .confetti-piece {
-  position: absolute; top: -20px;
-  width: 10px; height: 10px; opacity: 0;
+.confetti-overlay .cp {
+  position: absolute; top: -20px; opacity: 0;
 }
 @keyframes confetti-fall {
-  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  0% { transform: translateY(-10px) rotate(0deg) scale(1); opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(105vh) rotate(720deg) scale(0.5); opacity: 0; }
 }
 
 </style>
@@ -2429,7 +2430,6 @@ html, body {
         </div>
       </div>
     </div>
-    <div class="confetti-container" id="goldConfetti"></div>
   </div>
 
 </div>
@@ -2814,22 +2814,24 @@ html, body {
     });
   }
   function launchConfetti() {
-    const container = document.getElementById('goldConfetti');
-    if (!container) return;
+    const overlay = document.createElement('div');
+    overlay.className = 'confetti-overlay';
+    overlay.id = 'confettiOverlay';
+    document.body.appendChild(overlay);
     const colors = ['#FFD700','#FFA500','#FF6347','#00E5CC','#7c3aed','#1E5BFF','#FF69B4','#00FF88'];
-    for (let i = 0; i < 80; i++) {
-      const piece = document.createElement('div');
-      piece.className = 'confetti-piece';
+    for (let i = 0; i < 100; i++) {
+      const p = document.createElement('div');
+      p.className = 'cp';
       const color = colors[Math.floor(Math.random() * colors.length)];
       const left = Math.random() * 100;
-      const size = Math.random() * 8 + 6;
-      const dur = Math.random() * 2 + 2;
-      const delay = Math.random() * 1.5;
-      const shape = Math.random() > 0.5 ? '50%' : '0';
-      piece.style.cssText = 'left:'+left+'%;width:'+size+'px;height:'+size+'px;background:'+color+';border-radius:'+shape+';animation:confetti-fall '+dur+'s ease-out '+delay+'s forwards;';
-      container.appendChild(piece);
+      const size = Math.random() * 10 + 6;
+      const dur = Math.random() * 2 + 2.5;
+      const delay = Math.random() * 1.2;
+      const shape = Math.random() > 0.5 ? '50%' : '2px';
+      p.style.cssText = 'left:'+left+'%;width:'+size+'px;height:'+(size * (Math.random()*0.6+0.6))+'px;background:'+color+';border-radius:'+shape+';animation:confetti-fall '+dur+'s ease-out '+delay+'s forwards;';
+      overlay.appendChild(p);
     }
-    setTimeout(() => { container.innerHTML = ''; }, 5000);
+    setTimeout(() => { overlay.remove(); }, 6000);
   }
   function resetGold() {
     goldStep = 0;
@@ -2841,8 +2843,8 @@ html, body {
     document.getElementById('ringInner').classList.remove('visible');
     document.getElementById('ringOuter').classList.remove('visible');
     document.getElementById('goldResult').classList.remove('visible');
-    const cc = document.getElementById('goldConfetti');
-    if (cc) cc.innerHTML = '';
+    const cc = document.getElementById('confettiOverlay');
+    if (cc) cc.remove();
   }
 
   /* ── Touch / Swipe ── */
