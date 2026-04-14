@@ -1010,37 +1010,14 @@ html, body {
 /* ═══════════════════════════════════════════════════════════════════════
    SLIDE 12 — PRO OFFER (LIGHT BG)
    ═══════════════════════════════════════════════════════════════════════ */
-#s12 { background: var(--navy); overflow: hidden; position: relative; }
-#s12 .offer-bg-plane {
+#s12 { background: #000; overflow: hidden; position: relative; }
+#s12 .offer-video {
   position: absolute;
   inset: 0;
-  background: url('https://images.unsplash.com/photo-1436491865332-7a61a109db05?w=1920&q=80&auto=format&fit=crop') center center / cover no-repeat;
-  opacity: .12;
-  pointer-events: none;
-}
-#s12 .content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(30px, 5vw, 60px);
+  width: 100%;
   height: 100%;
-  max-width: 100%;
-  position: relative;
-  z-index: 2;
-}
-#s12 .offer-img {
-  max-width: 92%;
-  max-height: 88%;
-  object-fit: contain;
-  border-radius: 14px;
-  filter: drop-shadow(0 8px 30px rgba(0,0,0,.4));
-  opacity: 0;
-  transform: scale(.95);
-  transition: opacity .8s ease, transform .8s ease;
-}
-#s12.active .offer-img {
-  opacity: 1;
-  transform: scale(1);
+  object-fit: cover;
+  z-index: 1;
 }
 /* ── Single airplane tracing full border ── */
 #s12 .border-plane {
@@ -1383,6 +1360,24 @@ html, body {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
+   SLIDE PREG — LA VERDADERA PREGUNTA (NEW YORK NIGHT)
+   ═══════════════════════════════════════════════════════════════════════ */
+#sPreg { position: relative; overflow: hidden; }
+#sPreg .ny-bg {
+  position: absolute;
+  inset: 0;
+  background: url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1920&q=80&auto=format&fit=crop') center center / cover no-repeat;
+  z-index: 0;
+}
+#sPreg .ny-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6,11,36,.7) 0%, rgba(6,11,36,.55) 40%, rgba(6,11,36,.8) 100%);
+}
+#sPreg .content { position: relative; z-index: 2; }
+
+/* ═══════════════════════════════════════════════════════════════════════
    SLIDE 14 — 80% FIDELIZACIÓN (NEON)
    ═══════════════════════════════════════════════════════════════════════ */
 #s14 { background: var(--grad-hero); }
@@ -1400,32 +1395,32 @@ html, body {
   font-family: 'Montserrat', sans-serif;
   font-size: clamp(120px, 20vw, 320px);
   font-weight: 900;
-  color: #FFD700;
+  color: #39FF14;
   line-height: 1;
   text-shadow:
-    0 0 10px rgba(255,215,0,.8),
-    0 0 20px rgba(255,215,0,.6),
-    0 0 40px rgba(255,215,0,.4),
-    0 0 80px rgba(255,215,0,.3),
-    0 0 120px rgba(255,215,0,.2);
+    0 0 10px rgba(57,255,20,.8),
+    0 0 20px rgba(57,255,20,.6),
+    0 0 40px rgba(57,255,20,.4),
+    0 0 80px rgba(57,255,20,.3),
+    0 0 120px rgba(57,255,20,.2);
   animation: neon-pulse 2s ease-in-out infinite;
 }
 @keyframes neon-pulse {
   0%, 100% {
     text-shadow:
-      0 0 10px rgba(255,215,0,.8),
-      0 0 20px rgba(255,215,0,.6),
-      0 0 40px rgba(255,215,0,.4),
-      0 0 80px rgba(255,215,0,.3),
-      0 0 120px rgba(255,215,0,.2);
+      0 0 10px rgba(57,255,20,.8),
+      0 0 20px rgba(57,255,20,.6),
+      0 0 40px rgba(57,255,20,.4),
+      0 0 80px rgba(57,255,20,.3),
+      0 0 120px rgba(57,255,20,.2);
   }
   50% {
     text-shadow:
-      0 0 20px rgba(255,215,0,1),
-      0 0 40px rgba(255,215,0,.8),
-      0 0 80px rgba(255,215,0,.6),
-      0 0 120px rgba(255,215,0,.5),
-      0 0 200px rgba(255,215,0,.3);
+      0 0 20px rgba(57,255,20,1),
+      0 0 40px rgba(57,255,20,.8),
+      0 0 80px rgba(57,255,20,.6),
+      0 0 120px rgba(57,255,20,.5),
+      0 0 200px rgba(57,255,20,.3);
   }
 }
 #s14 .neon-label {
@@ -1613,6 +1608,36 @@ html, body {
   color: var(--white-50);
   padding: 0 12px;
 }
+.commission-eq {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: 12px;
+}
+.eq-sign {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 700;
+  color: var(--gold);
+}
+.eq-amount {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(22px, 2.8vw, 36px);
+  font-weight: 800;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--gold), #FFD700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.eq-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(12px, 1.4vw, 18px);
+  font-weight: 500;
+  color: var(--white-70);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
 #s15 .result-box {
   display: flex;
   align-items: center;
@@ -1659,6 +1684,59 @@ html, body {
   letter-spacing: 2px;
   z-index: 100;
   font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDE DIST — MWR 55-80% DISTRIBUCIÓN (CRUISE PANELS)
+   ═══════════════════════════════════════════════════════════════════════ */
+#sDist { background: var(--navy); }
+#sDist .dist-layout {
+  display: flex;
+  align-items: stretch;
+  width: 100%; height: 100%;
+  padding: 0;
+  max-width: none;
+}
+#sDist .cruise-panel {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+#sDist .cruise-panel .cruise-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 1.2s ease, transform 7s ease-out;
+}
+#sDist .cruise-panel .cruise-img.active {
+  opacity: 1;
+  transform: scale(1);
+}
+#sDist .cruise-panel::after {
+  content: '';
+  position: absolute; inset: 0;
+  z-index: 1;
+}
+#sDist .cruise-panel.left::after {
+  background: linear-gradient(270deg, rgba(10,16,53,.85) 0%, rgba(10,16,53,.3) 60%, transparent 100%);
+}
+#sDist .cruise-panel.right::after {
+  background: linear-gradient(90deg, rgba(10,16,53,.85) 0%, rgba(10,16,53,.3) 60%, transparent 100%);
+}
+#sDist .dist-center {
+  flex: 1.6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
+  padding: 30px 20px;
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(135deg, rgba(10,16,53,.95) 0%, rgba(15,26,74,.9) 50%, rgba(19,31,92,.95) 100%);
 }
 
 </style>
@@ -1885,11 +1963,8 @@ html, body {
 
   <!-- ────────── SLIDE 12: PRO OFFER (PRECIOS IMAGE) ────────── -->
   <div class="slide" id="s12">
-    <div class="offer-bg-plane"></div>
+    <img class="offer-video" src="precios 2.png" alt="Paquetes de Inscripción — MWR Life">
     <div class="border-plane">✈</div>
-    <div class="content">
-      <img src="precios.png" alt="Paquetes de Inscripción — MWR Life" class="offer-img">
-    </div>
   </div>
 
   <!-- ────────── SLIDE 9: COMPARACIÓN MIAMI ────────── -->
@@ -2077,6 +2152,11 @@ html, body {
           <div class="person-avatar team"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80&auto=format&fit=crop" alt="Sofía"></div>
           <span class="person-name">Sofía</span>
         </div>
+        <div class="commission-eq net-step" data-step="4" style="opacity:0;transform:scale(0);">
+          <span class="eq-sign">=</span>
+          <span class="eq-amount">$120 USD</span>
+          <span class="eq-label">mensuales de comisión</span>
+        </div>
       </div>
       <div class="result-box net-step" data-step="4" id="resultBox" style="opacity:0;transform:translateY(20px);">
         <iconify-icon icon="ph:check-circle-duotone"></iconify-icon>
@@ -2094,7 +2174,7 @@ html, body {
 
   <!-- ────────── SLIDE NEW: LA VERDADERA PREGUNTA ────────── -->
   <div class="slide" id="sPreg">
-    <div class="slide-bg"></div>
+    <div class="ny-bg"></div>
     <div class="content" style="display:flex;align-items:center;justify-content:center;text-align:center;">
       <h2 class="h2 reveal" style="font-size:clamp(24px,3.5vw,48px);line-height:1.4;">La verdadera pregunta es:<br><span class="gold" style="font-size:clamp(28px,4.5vw,64px);">¿Solo quieres viajar gratis<br>o ganar dinero al mismo tiempo?</span></h2>
     </div>
@@ -2102,10 +2182,10 @@ html, body {
 
   <!-- ────────── SLIDE 14: 80% FIDELIZACIÓN + TESTIMONIOS ────────── -->
   <div class="slide" id="s14">
-    <div class="content" style="flex-direction:column;gap:10px;padding:20px 0;max-width:100%;overflow:hidden;">
+    <div class="content" style="flex-direction:column;gap:6px;padding:10px 0;max-width:100%;overflow:hidden;">
       <div style="text-align:center;">
-        <div class="neon-number reveal" style="font-size:clamp(40px,6vw,80px);">80%</div>
-        <div class="neon-label reveal d1">de fidelización</div>
+        <div class="neon-number reveal" style="font-size:clamp(80px,14vw,200px);">80%</div>
+        <div class="neon-label reveal d1" style="font-size:clamp(22px,3.5vw,44px);">de fidelización</div>
       </div>
       <!-- Testimonial rows -->
       <div class="testimonial-section reveal d2">
@@ -2152,27 +2232,31 @@ html, body {
           </div>
         </div>
       </div>
+      <p class="testimonial-cta reveal d3" style="text-align:center;font-family:'Montserrat',sans-serif;font-size:clamp(14px,1.8vw,22px);font-weight:600;color:var(--white-70);margin-top:8px;letter-spacing:.5px;line-height:1.4;">Créele a personas como tú que decidieron ser parte de nuestro club</p>
     </div>
   </div>
 
   <!-- ────────── SLIDE NEW: MWR 55-80% DISTRIBUCIÓN ────────── -->
   <div class="slide" id="sDist">
-    <div class="slide-bg"></div>
-    <div class="content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;text-align:center;max-width:1000px;">
-      <img src="logo-mwr-official.svg" alt="MWR Life" class="reveal" style="height:clamp(50px,6vw,80px);filter:drop-shadow(0 4px 12px rgba(0,0,0,.5));">
-      <h2 class="h2 reveal d1" style="font-size:clamp(24px,3.5vw,48px);line-height:1.3;">Reparte del<br><span class="gold" style="font-size:clamp(48px,7vw,100px);">55% al 80%</span></h2>
-      <p class="reveal d2" style="font-size:clamp(16px,2vw,26px);color:var(--white-70);font-weight:600;max-width:700px;">con sus socios club por<br><span style="color:#fff;font-weight:800;">Marketing de Experiencia</span></p>
-      <div class="reveal d3" style="display:flex;gap:20px;margin-top:10px;">
-        <div style="background:rgba(245,166,35,.15);border:2px solid var(--gold);border-radius:16px;padding:20px 28px;text-align:center;">
-          <div style="font-family:'Montserrat',sans-serif;font-size:clamp(28px,3.5vw,48px);font-weight:900;color:var(--gold);">55%</div>
-          <div style="font-size:13px;color:var(--white-70);font-weight:600;margin-top:4px;">Mínimo</div>
-        </div>
-        <div style="display:flex;align-items:center;font-size:28px;color:var(--gold);">→</div>
-        <div style="background:rgba(245,166,35,.15);border:2px solid var(--gold);border-radius:16px;padding:20px 28px;text-align:center;">
-          <div style="font-family:'Montserrat',sans-serif;font-size:clamp(28px,3.5vw,48px);font-weight:900;color:var(--gold);">80%</div>
-          <div style="font-size:13px;color:var(--white-70);font-weight:600;margin-top:4px;">Máximo</div>
+    <div class="dist-layout">
+      <div class="cruise-panel left" id="cruiseLeft"></div>
+      <div class="dist-center">
+        <img src="logo-mwr-official.svg" alt="MWR Life" class="reveal" style="height:clamp(50px,6vw,80px);filter:drop-shadow(0 4px 12px rgba(0,0,0,.5));">
+        <h2 class="h2 reveal d1" style="font-size:clamp(24px,3.5vw,48px);line-height:1.3;">Reparte del<br><span class="gold" style="font-size:clamp(48px,7vw,100px);">55% al 80%</span></h2>
+        <p class="reveal d2" style="font-size:clamp(16px,2vw,26px);color:var(--white-70);font-weight:600;max-width:700px;">con sus socios club por<br><span style="color:#fff;font-weight:800;">Marketing de Experiencia</span></p>
+        <div class="reveal d3" style="display:flex;gap:20px;margin-top:10px;">
+          <div style="background:rgba(245,166,35,.15);border:2px solid var(--gold);border-radius:16px;padding:20px 28px;text-align:center;">
+            <div style="font-family:'Montserrat',sans-serif;font-size:clamp(28px,3.5vw,48px);font-weight:900;color:var(--gold);">55%</div>
+            <div style="font-size:13px;color:var(--white-70);font-weight:600;margin-top:4px;">Mínimo</div>
+          </div>
+          <div style="display:flex;align-items:center;font-size:28px;color:var(--gold);">→</div>
+          <div style="background:rgba(245,166,35,.15);border:2px solid var(--gold);border-radius:16px;padding:20px 28px;text-align:center;">
+            <div style="font-family:'Montserrat',sans-serif;font-size:clamp(28px,3.5vw,48px);font-weight:900;color:var(--gold);">80%</div>
+            <div style="font-size:13px;color:var(--white-70);font-weight:600;margin-top:4px;">Máximo</div>
+          </div>
         </div>
       </div>
+      <div class="cruise-panel right" id="cruiseRight"></div>
     </div>
   </div>
 
@@ -2233,6 +2317,8 @@ html, body {
     else stopDestLoop();
     if (idx === 5) startHQLoop();
     else stopHQLoop();
+    if (idx === 21) startCruiseLoop();
+    else stopCruiseLoop();
 
     // Timeline: trigger on enter, reset on leave
     if (idx === 16) {
@@ -2383,6 +2469,52 @@ html, body {
     hqTimer = setInterval(() => showHQ((hqIdx + 1) % hqCities.length), 4000);
   }
   function stopHQLoop() { clearInterval(hqTimer); hqTimer = null; }
+
+  /* ── CRUISE PANELS (sDist) ── */
+  const cruiseImgsLeft = [
+    'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1599640842225-85d111c60e6b?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1580541631950-7282082b02f6?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1562281302-809108fd533c?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1519451241324-20b4ea2c4220?w=1200&q=80&auto=format&fit=crop',
+  ];
+  const cruiseImgsRight = [
+    'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1530089711124-9ca31fb9e863?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1559599746-8823b38544c6?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1436491865332-7a61a109db05?w=1200&q=80&auto=format&fit=crop',
+  ];
+  const $cruiseL = document.getElementById('cruiseLeft');
+  const $cruiseR = document.getElementById('cruiseRight');
+  let cruiseLIdx = 0, cruiseRIdx = 0, cruiseTimer = null;
+  const cruiseLEls = cruiseImgsLeft.map((src, i) => {
+    const img = document.createElement('img');
+    img.className = 'cruise-img'; img.src = src; img.alt = 'Crucero';
+    if (i === 0) img.classList.add('active');
+    $cruiseL.appendChild(img);
+    return img;
+  });
+  const cruiseREls = cruiseImgsRight.map((src, i) => {
+    const img = document.createElement('img');
+    img.className = 'cruise-img'; img.src = src; img.alt = 'Crucero';
+    if (i === 0) img.classList.add('active');
+    $cruiseR.appendChild(img);
+    return img;
+  });
+  function showCruise() {
+    cruiseLIdx = (cruiseLIdx + 1) % cruiseLEls.length;
+    cruiseRIdx = (cruiseRIdx + 1) % cruiseREls.length;
+    cruiseLEls.forEach((img, j) => img.classList.toggle('active', j === cruiseLIdx));
+    cruiseREls.forEach((img, j) => img.classList.toggle('active', j === cruiseRIdx));
+  }
+  function startCruiseLoop() {
+    cruiseLEls.forEach((img, j) => img.classList.toggle('active', j === 0));
+    cruiseREls.forEach((img, j) => img.classList.toggle('active', j === 0));
+    cruiseLIdx = 0; cruiseRIdx = 0;
+    cruiseTimer = setInterval(showCruise, 4000);
+  }
+  function stopCruiseLoop() { clearInterval(cruiseTimer); cruiseTimer = null; }
 
   /* ── TIMELINE ANIMATION ── */
   let tlAnimId = null;

@@ -21,7 +21,7 @@ const MIME = {
 
 http.createServer((req, res) => {
   let url = decodeURIComponent(req.url.split('?')[0]);
-  if (url === '/') url = '/presentacion.html';
+  if (url === '/') url = '/fresh.html';
   const filePath = path.join(ROOT, url);
   fs.readFile(filePath, (err, data) => {
     if (err) { res.writeHead(404); res.end('Not found'); return; }
