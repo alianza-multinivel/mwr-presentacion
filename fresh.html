@@ -1010,14 +1010,15 @@ html, body {
 /* ═══════════════════════════════════════════════════════════════════════
    SLIDE 12 — PRO OFFER (LIGHT BG)
    ═══════════════════════════════════════════════════════════════════════ */
-#s12 { background: #000; overflow: hidden; }
+#s12 { background: #2D1B8E; overflow: hidden; }
 #s12 .offer-video {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  inset: 20px;
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
+  object-fit: contain;
   z-index: 1;
+  border-radius: 12px;
 }
 /* ── Single airplane tracing full border ── */
 #s12 .border-plane {
@@ -1366,7 +1367,7 @@ html, body {
 #sPreg .ny-bg {
   position: absolute;
   inset: 0;
-  background: url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1920&q=80&auto=format&fit=crop') center center / cover no-repeat;
+  background: url('https://images.unsplash.com/photo-1503174971373-b1f69850bded?w=1920&q=80&auto=format&fit=crop') center center / cover no-repeat;
   z-index: 0;
 }
 #sPreg .ny-bg::after {
@@ -1437,8 +1438,9 @@ html, body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 6px;
+  gap: 12px;
+  margin-top: 10px;
+  flex: 1;
 }
 .testimonial-row {
   width: 100%;
@@ -1473,7 +1475,7 @@ html, body {
 /* ── WhatsApp cards ── */
 .t-whatsapp {
   background: #075E54;
-  width: 280px;
+  width: 300px;
   color: #fff;
 }
 .t-wa-header { display: flex; justify-content: space-between; margin-bottom: 4px; }
@@ -1491,17 +1493,17 @@ html, body {
 .t-trustpilot {
   background: #1a1a2e;
   border: 1px solid rgba(0,182,122,.3);
-  width: 270px;
+  width: 290px;
 }
 .t-tp-stars { color: #00B67A; font-size: 15px; letter-spacing: 2px; margin-bottom: 6px; }
 .t-tp-title { font-size: 13px; font-weight: 800; color: #fff; margin-bottom: 4px; }
 .t-tp-text { font-size: 12px; color: rgba(255,255,255,.7); line-height: 1.4; margin-bottom: 5px; }
 .t-tp-author { font-size: 11px; color: #00B67A; font-weight: 600; }
 /* ── YouTube cards ── */
-.t-youtube { background: #1a1a2e; width: 260px; padding: 0; overflow: hidden; }
+.t-youtube { background: #1a1a2e; width: 280px; padding: 0; overflow: hidden; }
 .t-yt-thumb {
   width: 100%;
-  height: 130px;
+  height: 140px;
   background-size: cover;
   background-position: center;
   position: relative;
@@ -2184,8 +2186,8 @@ html, body {
   <div class="slide" id="s14">
     <div class="content" style="flex-direction:column;gap:6px;padding:10px 0;max-width:100%;overflow:hidden;">
       <div style="text-align:center;">
-        <div class="neon-number reveal" style="font-size:clamp(80px,14vw,200px);">80%</div>
-        <div class="neon-label reveal d1" style="font-size:clamp(22px,3.5vw,44px);">de fidelización</div>
+        <div class="neon-number reveal" style="font-size:clamp(48px,8vw,120px);">80%</div>
+        <div class="neon-label reveal d1" style="font-size:clamp(16px,2vw,28px);">de fidelización</div>
       </div>
       <!-- Testimonial rows -->
       <div class="testimonial-section reveal d2">
@@ -2474,20 +2476,20 @@ html, body {
   const cruiseImgsLeft = [
     'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1200&q=80&auto=format&fit=crop',
     'https://images.unsplash.com/photo-1599640842225-85d111c60e6b?w=1200&q=80&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1599640822605-f46907e18538?w=1200&q=80&auto=format&fit=crop',
     'https://images.unsplash.com/photo-1562281302-809108fd533c?w=1200&q=80&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1519451241324-20b4ea2c4220?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1580541832626-2a7131ee809f?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1589519160732-57fc498494f8?w=1200&q=80&auto=format&fit=crop',
   ];
   const cruiseImgsRight = [
     'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&q=80&auto=format&fit=crop',
     'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1200&q=80&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1530089711124-9ca31fb9e863?w=1200&q=80&auto=format&fit=crop',
     'https://images.unsplash.com/photo-1559599746-8823b38544c6?w=1200&q=80&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1606567595334-d39972c85dbe?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1578255321055-40178279fbb1?w=1200&q=80&auto=format&fit=crop',
   ];
   const $cruiseL = document.getElementById('cruiseLeft');
   const $cruiseR = document.getElementById('cruiseRight');
-  let cruiseLIdx = 0, cruiseRIdx = 0, cruiseTimer = null;
+  let cruiseLIdx = 0, cruiseRIdx = 0;
   const cruiseLEls = cruiseImgsLeft.map((src, i) => {
     const img = document.createElement('img');
     img.className = 'cruise-img'; img.src = src; img.alt = 'Crucero';
@@ -2502,25 +2504,21 @@ html, body {
     $cruiseR.appendChild(img);
     return img;
   });
-  let cruiseTimerL = null, cruiseTimerR = null;
-  function showCruiseL() {
+  let cruiseTimer = null;
+  function showCruise() {
     cruiseLIdx = (cruiseLIdx + 1) % cruiseLEls.length;
-    cruiseLEls.forEach((img, j) => img.classList.toggle('active', j === cruiseLIdx));
-  }
-  function showCruiseR() {
     cruiseRIdx = (cruiseRIdx + 1) % cruiseREls.length;
+    cruiseLEls.forEach((img, j) => img.classList.toggle('active', j === cruiseLIdx));
     cruiseREls.forEach((img, j) => img.classList.toggle('active', j === cruiseRIdx));
   }
   function startCruiseLoop() {
     cruiseLEls.forEach((img, j) => img.classList.toggle('active', j === 0));
     cruiseREls.forEach((img, j) => img.classList.toggle('active', j === 0));
     cruiseLIdx = 0; cruiseRIdx = 0;
-    cruiseTimerL = setInterval(showCruiseL, 4000);
-    setTimeout(() => { cruiseTimerR = setInterval(showCruiseR, 4500); }, 2000);
+    cruiseTimer = setInterval(showCruise, 4000);
   }
   function stopCruiseLoop() {
-    clearInterval(cruiseTimerL); cruiseTimerL = null;
-    clearInterval(cruiseTimerR); cruiseTimerR = null;
+    clearInterval(cruiseTimer); cruiseTimer = null;
   }
 
   /* ── TIMELINE ANIMATION ── */
