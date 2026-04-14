@@ -1741,6 +1741,134 @@ html, body {
   background: linear-gradient(135deg, rgba(10,16,53,.95) 0%, rgba(15,26,74,.9) 50%, rgba(19,31,92,.95) 100%);
 }
 
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDE GOLD — ESTRATEGIA GOLD ACCESS
+   ═══════════════════════════════════════════════════════════════════════ */
+#sGold { background: linear-gradient(135deg, #0a0a1a 0%, #1a0f3c 50%, #0d0b2e 100%); }
+#sGold .content {
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  gap: 10px; padding: 20px 20px 10px; height: 100%; max-width: none; width: 100%;
+}
+#sGold .gold-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(20px, 3vw, 38px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+}
+#sGold .gold-tree {
+  display: flex; flex-direction: column; align-items: center; gap: 0;
+  flex: 1; width: 100%; max-width: 900px; position: relative;
+}
+/* Main person */
+#sGold .gold-main {
+  display: flex; flex-direction: column; align-items: center; cursor: pointer; z-index: 5;
+}
+#sGold .gold-main .g-avatar {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; color: #1a0f3c;
+  box-shadow: 0 0 20px rgba(255,215,0,.5);
+  transition: transform .3s, box-shadow .3s;
+}
+#sGold .gold-main:hover .g-avatar { transform: scale(1.1); box-shadow: 0 0 30px rgba(255,215,0,.8); }
+#sGold .gold-main .g-label {
+  font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 800;
+  color: var(--gold); margin-top: 4px; text-transform: uppercase; letter-spacing: 2px;
+}
+#sGold .gold-hint {
+  font-size: 10px; color: var(--white-50); letter-spacing: 1px; text-transform: uppercase;
+  animation: float 2s ease-in-out infinite; margin-top: 2px;
+}
+/* Connector lines */
+#sGold .g-connector {
+  width: 2px; height: 20px;
+  background: linear-gradient(180deg, var(--gold), var(--blue));
+  opacity: 0; transition: opacity .5s, height .5s;
+}
+#sGold .g-connector.visible { opacity: 1; }
+#sGold .g-branch-lines {
+  display: flex; justify-content: center; align-items: flex-start;
+  width: 80%; height: 20px; position: relative; opacity: 0; transition: opacity .5s;
+}
+#sGold .g-branch-lines.visible { opacity: 1; }
+#sGold .g-branch-lines::before {
+  content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--blue), var(--gold));
+}
+#sGold .g-branch-lines::after {
+  content: ''; position: absolute; top: 0; width: 100%; height: 20px;
+  background: repeating-linear-gradient(90deg,
+    transparent 0%, transparent calc(10% - 1px),
+    var(--gold) calc(10%), var(--gold) calc(10% + 1px),
+    transparent calc(10% + 2px), transparent calc(23.33% - 1px),
+    var(--gold) 23.33%, var(--gold) calc(23.33% + 1px),
+    transparent calc(23.33% + 2px), transparent calc(36.66% - 1px),
+    var(--gold) 36.66%, var(--gold) calc(36.66% + 1px),
+    transparent calc(36.66% + 2px), transparent calc(50% - 1px),
+    transparent 50%
+  );
+}
+/* Level rows */
+#sGold .g-level {
+  display: flex; justify-content: center; gap: clamp(12px, 3vw, 40px);
+  width: 100%; opacity: 0; transform: translateY(15px);
+  transition: opacity .6s, transform .6s;
+}
+#sGold .g-level.visible { opacity: 1; transform: translateY(0); }
+#sGold .g-node {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+}
+#sGold .g-node .g-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; color: #fff;
+}
+#sGold .g-node .g-avatar.blue { background: var(--blue); border: 2px solid var(--blue-2); }
+#sGold .g-node .g-avatar.teal { background: #0d7377; border: 2px solid #14b8a6; }
+#sGold .g-node .g-name {
+  font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 700;
+  color: var(--white-70); text-transform: uppercase; letter-spacing: 1px;
+}
+/* Sub connectors */
+#sGold .g-sub-connectors {
+  display: flex; justify-content: center; gap: clamp(12px, 3vw, 40px);
+  width: 100%; opacity: 0; transition: opacity .5s;
+}
+#sGold .g-sub-connectors.visible { opacity: 1; }
+#sGold .g-sub-conn {
+  width: 2px; height: 16px;
+  background: linear-gradient(180deg, var(--blue), #14b8a6);
+}
+/* Result */
+#sGold .gold-result {
+  margin-top: 8px; text-align: center;
+  opacity: 0; transform: scale(.8); transition: opacity .6s, transform .6s;
+}
+#sGold .gold-result.visible { opacity: 1; transform: scale(1); }
+#sGold .gold-result .g-amount {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 900;
+  background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: neon-pulse-gold 2s ease-in-out infinite;
+}
+@keyframes neon-pulse-gold {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(255,215,0,.4)); }
+  50% { filter: drop-shadow(0 0 20px rgba(255,215,0,.8)); }
+}
+#sGold .gold-result .g-sublabel {
+  font-family: 'Montserrat', sans-serif; font-size: clamp(12px, 1.5vw, 18px);
+  font-weight: 600; color: var(--white-70); letter-spacing: 2px; text-transform: uppercase;
+}
+
 </style>
 </head>
 <body>
@@ -2262,10 +2390,50 @@ html, body {
     </div>
   </div>
 
+  <!-- ────────── SLIDE GOLD: ESTRATEGIA GOLD ACCESS ────────── -->
+  <div class="slide" id="sGold">
+    <div class="content">
+      <div class="gold-title reveal">Estrategia Gold Access</div>
+      <div class="gold-tree">
+        <div class="gold-main" id="goldMain">
+          <div class="g-avatar"><iconify-icon icon="ph:crown-simple-fill"></iconify-icon></div>
+          <span class="g-label">Tú</span>
+          <div class="gold-hint" id="goldHint">Toca para avanzar</div>
+        </div>
+        <div class="g-connector" id="goldConn1"></div>
+        <div class="g-branch-lines" id="goldBranch1"></div>
+        <div class="g-level" id="goldL1">
+          <div class="g-node"><div class="g-avatar blue"><iconify-icon icon="ph:user-fill"></iconify-icon></div><span class="g-name">Ref 1</span></div>
+          <div class="g-node"><div class="g-avatar blue"><iconify-icon icon="ph:user-fill"></iconify-icon></div><span class="g-name">Ref 2</span></div>
+          <div class="g-node"><div class="g-avatar blue"><iconify-icon icon="ph:user-fill"></iconify-icon></div><span class="g-name">Ref 3</span></div>
+          <div class="g-node"><div class="g-avatar blue"><iconify-icon icon="ph:user-fill"></iconify-icon></div><span class="g-name">Ref 4</span></div>
+          <div class="g-node"><div class="g-avatar blue"><iconify-icon icon="ph:user-fill"></iconify-icon></div><span class="g-name">Ref 5</span></div>
+          <div class="g-node"><div class="g-avatar blue"><iconify-icon icon="ph:user-fill"></iconify-icon></div><span class="g-name">Ref 6</span></div>
+        </div>
+        <div class="g-sub-connectors" id="goldSubConns">
+          <div class="g-sub-conn"></div><div class="g-sub-conn"></div><div class="g-sub-conn"></div>
+          <div class="g-sub-conn"></div><div class="g-sub-conn"></div><div class="g-sub-conn"></div>
+        </div>
+        <div class="g-level" id="goldL2">
+          <div class="g-node"><div class="g-avatar teal"><iconify-icon icon="ph:user-fill"></iconify-icon></div><span class="g-name">Sub 1</span></div>
+          <div class="g-node"><div class="g-avatar teal"><iconify-icon icon="ph:user-fill"></iconify-icon></div><span class="g-name">Sub 2</span></div>
+          <div class="g-node"><div class="g-avatar teal"><iconify-icon icon="ph:user-fill"></iconify-icon></div><span class="g-name">Sub 3</span></div>
+          <div class="g-node"><div class="g-avatar teal"><iconify-icon icon="ph:user-fill"></iconify-icon></div><span class="g-name">Sub 4</span></div>
+          <div class="g-node"><div class="g-avatar teal"><iconify-icon icon="ph:user-fill"></iconify-icon></div><span class="g-name">Sub 5</span></div>
+          <div class="g-node"><div class="g-avatar teal"><iconify-icon icon="ph:user-fill"></iconify-icon></div><span class="g-name">Sub 6</span></div>
+        </div>
+        <div class="gold-result" id="goldResult">
+          <div class="g-amount">Comisiones de $1,500</div>
+          <div class="g-sublabel">Mensuales con Gold Access</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- ═══════════ NAVIGATION ═══════════ -->
-<div class="counter"><b id="currSlide">01</b> / <span id="totalSlides">22</span></div>
+<div class="counter"><b id="currSlide">01</b> / <span id="totalSlides">23</span></div>
 <div class="nav">
   <button id="prevBtn" aria-label="Anterior"><iconify-icon icon="ph:arrow-left-bold"></iconify-icon></button>
   <button id="nextBtn" aria-label="Siguiente"><iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
@@ -2335,6 +2503,10 @@ html, body {
     // Network: reset on leave (s15 is at index 18)
     if (idx !== 18) {
       resetNetwork();
+    }
+    // Gold Access: reset on leave (sGold is at index 22)
+    if (idx !== 22) {
+      resetGold();
     }
   }
 
@@ -2609,6 +2781,39 @@ html, body {
       el.classList.remove('visible');
     });
     const hint = document.querySelector('#netCrown div:last-child');
+    if (hint) hint.style.display = '';
+  }
+
+  /* ── GOLD ACCESS INTERACTIVE ── */
+  let goldStep = 0;
+  const goldSlide = document.getElementById('sGold');
+  if (goldSlide) {
+    goldSlide.addEventListener('click', (e) => {
+      if (e.target.closest('.nav') || e.target.closest('.counter')) return;
+      goldStep++;
+      if (goldStep > 3) return;
+      if (goldStep === 1) {
+        document.getElementById('goldConn1').classList.add('visible');
+        document.getElementById('goldBranch1').classList.add('visible');
+        document.getElementById('goldL1').classList.add('visible');
+        document.getElementById('goldHint').style.display = 'none';
+      }
+      if (goldStep === 2) {
+        document.getElementById('goldSubConns').classList.add('visible');
+        document.getElementById('goldL2').classList.add('visible');
+      }
+      if (goldStep === 3) {
+        document.getElementById('goldResult').classList.add('visible');
+      }
+    });
+  }
+  function resetGold() {
+    goldStep = 0;
+    ['goldConn1','goldBranch1','goldL1','goldSubConns','goldL2','goldResult'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('visible');
+    });
+    const hint = document.getElementById('goldHint');
     if (hint) hint.style.display = '';
   }
 
