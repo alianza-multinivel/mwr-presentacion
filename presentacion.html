@@ -1367,23 +1367,24 @@ html, body {
 #sPreg .ny-bg {
   position: absolute;
   inset: 0;
-  background: url('https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=1920&q=80&auto=format&fit=crop') center center / cover no-repeat;
+  background: url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1920&q=80&auto=format&fit=crop') center center / cover no-repeat;
   z-index: 0;
 }
 #sPreg .ny-bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(6,11,36,.6);
+  background: rgba(0,0,0,.55);
 }
 #sPreg .content { position: relative; z-index: 2; }
 #sPreg .h2 {
+  color: #FFFFFF;
   text-shadow: 0 4px 30px rgba(0,0,0,.9), 0 2px 10px rgba(0,0,0,.7);
-  background: rgba(6,11,36,.45);
-  padding: 30px 50px;
+  background: rgba(6,11,36,.35);
+  padding: 40px 60px;
   border-radius: 20px;
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.1);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -1777,9 +1778,9 @@ html, body {
   transform: translate(-50%, -50%); z-index: 5; transition: opacity .5s, transform .5s; }
 .gn.hidden { opacity: 0; transform: translate(-50%, -50%) scale(0); }
 .gn .gn-pic { border-radius: 50%; object-fit: cover; box-shadow: 0 0 12px rgba(124,58,237,.5); }
-.gn .gn-pic.main { width: 90px; height: 90px; border: 4px solid #FFD700; box-shadow: 0 0 25px rgba(255,215,0,.6); }
-.gn .gn-pic.l1 { width: 60px; height: 60px; border: 3px solid #7c3aed; }
-.gn .gn-pic.l2 { width: 48px; height: 48px; border: 3px solid #14b8a6; box-shadow: 0 0 12px rgba(20,184,166,.5); }
+.gn .gn-pic.main { width: 110px; height: 110px; border: 4px solid #FFD700; box-shadow: 0 0 30px rgba(255,215,0,.6); }
+.gn .gn-pic.l1 { width: 72px; height: 72px; border: 3px solid #7c3aed; }
+.gn .gn-pic.l2 { width: 56px; height: 56px; border: 3px solid #14b8a6; box-shadow: 0 0 12px rgba(20,184,166,.5); }
 .gn .gn-name {
   font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
   color: var(--white-80); margin-top: 4px; text-transform: uppercase; letter-spacing: 1px;
@@ -2245,7 +2246,7 @@ html, body {
   <div class="slide" id="sPreg">
     <div class="ny-bg"></div>
     <div class="content" style="display:flex;align-items:center;justify-content:center;text-align:center;">
-      <h2 class="h2 reveal" style="font-size:clamp(24px,3.5vw,48px);line-height:1.4;">La verdadera pregunta es:<br><span class="gold" style="font-size:clamp(28px,4.5vw,64px);">¿Solo quieres viajar gratis<br>o ganar dinero al mismo tiempo?</span></h2>
+      <h2 class="h2 reveal" style="font-size:clamp(28px,4.5vw,60px);line-height:1.4;color:#fff;">¿Solo quieres viajar gratis<br>o ganar dinero al mismo tiempo?</h2>
     </div>
   </div>
 
@@ -2335,40 +2336,40 @@ html, body {
     <div class="gold-arena" id="goldArena">
       <svg class="gold-lines" id="goldSVG" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet">
         <!-- L1 lines (center→L1) -->
-        <line id="gl0" x1="500" y1="270" x2="500" y2="120" class="electric"/>
-        <line id="gl1" x1="500" y1="270" x2="670" y2="150" class="electric"/>
-        <line id="gl2" x1="500" y1="270" x2="670" y2="390" class="electric"/>
-        <line id="gl3" x1="500" y1="270" x2="500" y2="420" class="electric"/>
-        <line id="gl4" x1="500" y1="270" x2="330" y2="390" class="electric"/>
-        <line id="gl5" x1="500" y1="270" x2="330" y2="150" class="electric"/>
+        <line id="gl0" x1="500" y1="300" x2="500" y2="170" class="electric"/>
+        <line id="gl1" x1="500" y1="300" x2="625" y2="228" class="electric"/>
+        <line id="gl2" x1="500" y1="300" x2="625" y2="372" class="electric"/>
+        <line id="gl3" x1="500" y1="300" x2="500" y2="430" class="electric"/>
+        <line id="gl4" x1="500" y1="300" x2="375" y2="372" class="electric"/>
+        <line id="gl5" x1="500" y1="300" x2="375" y2="228" class="electric"/>
         <!-- L2 lines (L1→L2) -->
-        <line id="gl6"  x1="500" y1="120" x2="500" y2="30"  class="electric"/>
-        <line id="gl7"  x1="670" y1="150" x2="790" y2="80"  class="electric"/>
-        <line id="gl8"  x1="670" y1="390" x2="790" y2="460" class="electric"/>
-        <line id="gl9"  x1="500" y1="420" x2="500" y2="520" class="electric"/>
-        <line id="gl10" x1="330" y1="390" x2="210" y2="460" class="electric"/>
-        <line id="gl11" x1="330" y1="150" x2="210" y2="80"  class="electric"/>
+        <line id="gl6"  x1="500" y1="170" x2="500" y2="65"  class="electric"/>
+        <line id="gl7"  x1="625" y1="228" x2="740" y2="150" class="electric"/>
+        <line id="gl8"  x1="625" y1="372" x2="740" y2="450" class="electric"/>
+        <line id="gl9"  x1="500" y1="430" x2="500" y2="535" class="electric"/>
+        <line id="gl10" x1="375" y1="372" x2="260" y2="450" class="electric"/>
+        <line id="gl11" x1="375" y1="228" x2="260" y2="150" class="electric"/>
       </svg>
       <!-- Center node -->
-      <div class="gn" id="gn-main" style="left:50%;top:45%;">
+      <div class="gn" id="gn-main" style="left:50%;top:50%;">
         <img class="gn-pic main" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80&auto=format&fit=crop&crop=face" alt="Tú">
         <span class="gn-name gold">Tú</span>
       </div>
-      <div class="gold-hint" id="goldHint" style="left:50%;top:58%;transform:translateX(-50%);">Toca para avanzar</div>
+      <div class="gold-hint" id="goldHint" style="left:50%;top:62%;transform:translateX(-50%);">Toca para avanzar</div>
       <!-- L1: 6 around center -->
-      <div class="gn hidden" id="gn-l1-0" style="left:50%;top:20%;"><img class="gn-pic l1" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80&auto=format&fit=crop&crop=face" alt="María"><span class="gn-name">María</span></div>
-      <div class="gn hidden" id="gn-l1-1" style="left:67%;top:25%;"><img class="gn-pic l1" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80&auto=format&fit=crop&crop=face" alt="Carlos"><span class="gn-name">Carlos</span></div>
-      <div class="gn hidden" id="gn-l1-2" style="left:67%;top:65%;"><img class="gn-pic l1" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80&auto=format&fit=crop&crop=face" alt="Ana"><span class="gn-name">Ana</span></div>
-      <div class="gn hidden" id="gn-l1-3" style="left:50%;top:70%;"><img class="gn-pic l1" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80&auto=format&fit=crop&crop=face" alt="Diego"><span class="gn-name">Diego</span></div>
-      <div class="gn hidden" id="gn-l1-4" style="left:33%;top:65%;"><img class="gn-pic l1" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80&auto=format&fit=crop&crop=face" alt="Laura"><span class="gn-name">Laura</span></div>
-      <div class="gn hidden" id="gn-l1-5" style="left:33%;top:25%;"><img class="gn-pic l1" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80&auto=format&fit=crop&crop=face" alt="Roberto"><span class="gn-name">Roberto</span></div>
+      <div class="gn hidden" id="gn-l1-0" style="left:50%;top:28%;"><img class="gn-pic l1" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80&auto=format&fit=crop&crop=face" alt="María"><span class="gn-name">María</span></div>
+      <div class="gn hidden" id="gn-l1-1" style="left:63%;top:38%;"><img class="gn-pic l1" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80&auto=format&fit=crop&crop=face" alt="Carlos"><span class="gn-name">Carlos</span></div>
+      <div class="gn hidden" id="gn-l1-2" style="left:63%;top:62%;"><img class="gn-pic l1" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80&auto=format&fit=crop&crop=face" alt="Ana"><span class="gn-name">Ana</span></div>
+      <div class="gn hidden" id="gn-l1-3" style="left:50%;top:72%;"><img class="gn-pic l1" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80&auto=format&fit=crop&crop=face" alt="Diego"><span class="gn-name">Diego</span></div>
+      <div class="gn hidden" id="gn-l1-4" style="left:37%;top:62%;"><img class="gn-pic l1" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80&auto=format&fit=crop&crop=face" alt="Laura"><span class="gn-name">Laura</span></div>
+      <div class="gn hidden" id="gn-l1-5" style="left:37%;top:38%;"><img class="gn-pic l1" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80&auto=format&fit=crop&crop=face" alt="Roberto"><span class="gn-name">Roberto</span></div>
       <!-- L2: 1 per L1 (outer ring) -->
-      <div class="gn hidden" id="gn-l2-0" style="left:50%;top:5%;"><img class="gn-pic l2" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80&auto=format&fit=crop&crop=face" alt="Sofía"><span class="gn-name">Sofía</span></div>
-      <div class="gn hidden" id="gn-l2-1" style="left:79%;top:13%;"><img class="gn-pic l2" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80&auto=format&fit=crop&crop=face" alt="Miguel"><span class="gn-name">Miguel</span></div>
-      <div class="gn hidden" id="gn-l2-2" style="left:79%;top:77%;"><img class="gn-pic l2" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&q=80&auto=format&fit=crop&crop=face" alt="Valentina"><span class="gn-name">Valentina</span></div>
-      <div class="gn hidden" id="gn-l2-3" style="left:50%;top:87%;"><img class="gn-pic l2" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&q=80&auto=format&fit=crop&crop=face" alt="Andrés"><span class="gn-name">Andrés</span></div>
-      <div class="gn hidden" id="gn-l2-4" style="left:21%;top:77%;"><img class="gn-pic l2" src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&q=80&auto=format&fit=crop&crop=face" alt="Camila"><span class="gn-name">Camila</span></div>
-      <div class="gn hidden" id="gn-l2-5" style="left:21%;top:13%;"><img class="gn-pic l2" src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=200&q=80&auto=format&fit=crop&crop=face" alt="Fernando"><span class="gn-name">Fernando</span></div>
+      <div class="gn hidden" id="gn-l2-0" style="left:50%;top:11%;"><img class="gn-pic l2" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80&auto=format&fit=crop&crop=face" alt="Sofía"><span class="gn-name">Sofía</span></div>
+      <div class="gn hidden" id="gn-l2-1" style="left:74%;top:25%;"><img class="gn-pic l2" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80&auto=format&fit=crop&crop=face" alt="Miguel"><span class="gn-name">Miguel</span></div>
+      <div class="gn hidden" id="gn-l2-2" style="left:74%;top:75%;"><img class="gn-pic l2" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&q=80&auto=format&fit=crop&crop=face" alt="Valentina"><span class="gn-name">Valentina</span></div>
+      <div class="gn hidden" id="gn-l2-3" style="left:50%;top:89%;"><img class="gn-pic l2" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&q=80&auto=format&fit=crop&crop=face" alt="Andrés"><span class="gn-name">Andrés</span></div>
+      <div class="gn hidden" id="gn-l2-4" style="left:26%;top:75%;"><img class="gn-pic l2" src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&q=80&auto=format&fit=crop&crop=face" alt="Camila"><span class="gn-name">Camila</span></div>
+      <div class="gn hidden" id="gn-l2-5" style="left:26%;top:25%;"><img class="gn-pic l2" src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=200&q=80&auto=format&fit=crop&crop=face" alt="Fernando"><span class="gn-name">Fernando</span></div>
     </div>
     <div class="gold-result" id="goldResult">
       <div class="g-amount">Comisiones de $1,500</div>
@@ -2593,17 +2594,17 @@ html, body {
   /* ── CRUISE PANELS (sDist) ── */
   const cruiseImgsLeft = [
     'https://images.unsplash.com/photo-1599640842225-85d111c60e6b?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1580541631950-7282082b53ce?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1562281302-809108fd533c?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&q=80&auto=format&fit=crop',
     'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1200&q=80&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1200&q=80&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=1200&q=80&auto=format&fit=crop',
   ];
   const cruiseImgsRight = [
-    'https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=1200&q=80&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=1200&q=80&auto=format&fit=crop',
     'https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?w=1200&q=80&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1518684079-3c830dcef090?w=1200&q=80&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1504150558240-0b4fd8946624?w=1200&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?w=1200&q=80&auto=format&fit=crop',
   ];
   const $cruiseL = document.getElementById('cruiseLeft');
   const $cruiseR = document.getElementById('cruiseRight');
