@@ -964,7 +964,7 @@ html, body {
   height: 100%;
   display: flex;
   align-items: center;
-  padding: 40px 60px;
+  padding: 40px 30px 40px 60px;
   gap: 40px;
 }
 #sFormas .formas-left {
@@ -1230,10 +1230,32 @@ html, body {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 1.05fr 1.1fr;
-  gap: 32px;
-  padding: 42px 56px;
+  grid-template-columns: 0.85fr 1.4fr 0.85fr;
+  gap: 28px;
+  padding: 42px 48px;
   align-items: stretch;
+}
+#sPrecios .precios-center {
+  justify-content: center !important;
+  gap: 18px !important;
+}
+#sPrecios .precios-center .precios-benefits-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(20px, 2.1vw, 30px);
+  font-weight: 900;
+  color: var(--white);
+  text-align: center;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 14px rgba(0,0,0,.5);
+  margin-bottom: 2px;
+}
+#sPrecios .precios-center .precios-benefits-grid {
+  width: 100%;
+  max-width: 560px;
+}
+#sPrecios .precios-center .precios-breakdown {
+  width: 100%;
+  max-width: 560px;
 }
 
 /* LEFT COLUMN */
@@ -1942,7 +1964,7 @@ html, body {
 #sPreg .ny-bg {
   position: absolute;
   inset: 0;
-  background: url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=1920&q=85&auto=format&fit=crop') center center / cover no-repeat;
+  background: url('https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=1920&q=85&auto=format&fit=crop') center center / cover no-repeat;
   z-index: 0;
 }
 #sPreg .ny-bg::after {
@@ -2744,44 +2766,27 @@ html, body {
     <div class="precios-bg"></div>
     <div class="precios-overlay"></div>
     <div class="precios-layout">
-      <!-- LEFT: Cards + Pricing breakdown -->
+      <!-- LEFT: Cards + Title + Coins -->
       <div class="precios-left">
         <div class="precios-cards reveal">
           <img src="tarjeta elite.png" alt="Elite" class="pc-card pc-card-elite">
           <img src="tarjeta turbo.png" alt="Turbo" class="pc-card pc-card-turbo">
         </div>
-        <div class="precios-breakdown reveal d1">
-          <div class="pb-row"><span class="pb-label">Suscripción Elite</span><span class="pb-val">$120</span></div>
-          <div class="pb-row"><span class="pb-label">Activación</span><span class="pb-val">$120</span></div>
-          <div class="pb-row"><span class="pb-label" style="color:#FFA500;">Turbo</span><span class="pb-val" style="color:#FFA500;">$250</span></div>
-          <div class="pb-row"><span class="pb-label">Negocio</span><span class="pb-val">$99</span></div>
-          <div class="pb-divider"></div>
-          <div class="pb-total">
-            <span class="pb-total-label">TOTAL</span>
-            <span class="pb-total-val">$590</span>
-          </div>
-          <div class="pb-refund">Obtendrás <span class="gold-strong">$490</span> en puntos</div>
-        </div>
-      </div>
-
-      <!-- CENTER: Points flow -->
-      <div class="precios-center">
-        <div class="precios-title reveal">
+        <div class="precios-title reveal d1" style="text-align:center;align-items:center;">
           <div class="pt-eyebrow">Paquete de Inscripción</div>
           <div class="pt-main"><span class="gold">Loyalty</span> Points</div>
         </div>
-        <div class="precios-coins reveal d1">
+        <div class="precios-coins reveal d2">
           <img src="120 puntos.png" alt="120 puntos" class="pcoin pcoin-1">
           <iconify-icon icon="ph:caret-double-right-duotone" class="pcoin-arrow"></iconify-icon>
           <img src="240 puntos.png" alt="240 puntos" class="pcoin pcoin-2">
           <div class="pcoin-plus">+</div>
           <img src="250 puntos.png" alt="250 puntos" class="pcoin pcoin-3">
         </div>
-        <div class="precios-coin-note reveal d2">Los puntos mensuales evolucionan de 120 → 240 + 250 puntos extra</div>
       </div>
 
-      <!-- RIGHT: Benefits -->
-      <div class="precios-right">
+      <!-- CENTER: Benefits (top) + Value/Pricing (bottom), centered stacked -->
+      <div class="precios-center">
         <div class="precios-benefits-title reveal">BENEFICIOS</div>
         <div class="precios-benefits-grid reveal d1">
           <div class="pb-item"><iconify-icon icon="ph:buildings-duotone"></iconify-icon>Hoteles</div>
@@ -2798,7 +2803,23 @@ html, body {
           <div class="pb-item"><iconify-icon icon="ph:lightning-duotone"></iconify-icon>Ofertas última hora</div>
           <div class="pb-item pb-item-wide"><iconify-icon icon="ph:robot-duotone"></iconify-icon>Planificador de viajes con IA</div>
         </div>
-        <div class="precios-perks reveal d2">
+        <div class="precios-breakdown reveal d2">
+          <div class="pb-row"><span class="pb-label">Suscripción Elite</span><span class="pb-val">$120</span></div>
+          <div class="pb-row"><span class="pb-label">Activación</span><span class="pb-val">$120</span></div>
+          <div class="pb-row"><span class="pb-label" style="color:#FFA500;">Turbo</span><span class="pb-val" style="color:#FFA500;">$250</span></div>
+          <div class="pb-row"><span class="pb-label">Negocio</span><span class="pb-val">$99</span></div>
+          <div class="pb-divider"></div>
+          <div class="pb-total">
+            <span class="pb-total-label">TOTAL</span>
+            <span class="pb-total-val">$590</span>
+          </div>
+          <div class="pb-refund">Obtendrás <span class="gold-strong">$490</span> en puntos</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Perks + Note -->
+      <div class="precios-right">
+        <div class="precios-perks reveal" style="grid-template-columns:1fr;gap:14px;">
           <div class="pp-card">
             <iconify-icon icon="ph:ticket-duotone"></iconify-icon>
             <div class="pp-num">1500+</div>
@@ -2815,6 +2836,7 @@ html, body {
             <div class="pp-lbl">Traveler cada 6 meses</div>
           </div>
         </div>
+        <div class="precios-coin-note reveal d2" style="text-align:center;margin-top:6px;">Los puntos mensuales evolucionan de 120 → 240 + 250 puntos extra</div>
       </div>
     </div>
   </div>
@@ -2964,7 +2986,7 @@ html, body {
 
   <!-- ────────── SLIDE NEW: ¿TE GUSTARÍA VIVIR ESTAS EXPERIENCIAS? ────────── -->
   <div class="slide" id="sExp">
-    <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1920&q=80&auto=format&fit=crop" alt="Amigos viajando en helicóptero" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+    <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=1920&q=80&auto=format&fit=crop" alt="Sunset en la montaña" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
     <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,.3) 50%,rgba(0,0,0,.6) 100%);"></div>
     <div class="content" style="position:relative;z-index:2;display:flex;align-items:center;justify-content:center;text-align:center;">
       <h2 class="h2 reveal" style="font-size:clamp(32px,5vw,72px);line-height:1.2;text-shadow:0 4px 30px rgba(0,0,0,.8);">¿Te gustaría vivir estas<br><span style="color:#B565FF;text-shadow:0 4px 30px rgba(0,0,0,.8),0 0 40px rgba(181,101,255,.5);">experiencias gratis?</span></h2>
@@ -3266,8 +3288,8 @@ html, body {
     { name: 'ESPAÑA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=1920&q=80&auto=format&fit=crop' },
     { name: 'DISNEY', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1551762142-0e2c05535197?w=1920&q=80&auto=format&fit=crop' },
     { name: 'JAPÓN', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1920&q=80&auto=format&fit=crop' },
-    { name: 'TULUM', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1510097467424-192d713fd8b2?w=1920&q=80&auto=format&fit=crop' },
-    { name: 'PARÍS', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'MÉXICO', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1510097467424-192d713fd8b2?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'PARÍS', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1549144511-f099e773c147?w=1920&q=80&auto=format&fit=crop' },
     { name: 'ROMA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1920&q=80&auto=format&fit=crop' },
     { name: 'TAILANDIA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1537956965359-7573183d1f57?w=1920&q=80&auto=format&fit=crop' },
     { name: 'ÁFRICA', tag: 'Explora el mundo', img: 'https://images.unsplash.com/photo-1594555249447-1f8e0143fa6f?w=1920&q=80&auto=format&fit=crop' },
@@ -3345,8 +3367,8 @@ html, body {
 
   /* ── SLIDE 6: HQ PHOTOS LOOP ── */
   const hqCities = [
-    { name: 'MIAMI', img: 'https://images.unsplash.com/photo-1605723517503-3cadb5818a0c?w=1920&q=80&auto=format&fit=crop' },
-    { name: 'FRANCIA', img: 'https://images.unsplash.com/photo-1509439581363-152cc1f0733a?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'MIAMI', img: 'https://images.unsplash.com/photo-1535498730771-e735b998cd64?w=1920&q=80&auto=format&fit=crop' },
+    { name: 'FRANCIA', img: 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1920&q=80&auto=format&fit=crop' },
     { name: 'LONDRES', img: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1920&q=80&auto=format&fit=crop' },
     { name: 'HONG KONG', img: 'https://images.unsplash.com/photo-1536599018102-9f803c140fc1?w=1920&q=80&auto=format&fit=crop' },
     { name: 'DUBAI', img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1920&q=80&auto=format&fit=crop' },
